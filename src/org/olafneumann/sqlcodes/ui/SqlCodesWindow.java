@@ -6,6 +6,7 @@ import java.net.URI;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ForkJoinPool;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.olafneumann.sqlcodes.ErrorCodeType;
@@ -118,11 +119,8 @@ public class SqlCodesWindow extends AbstractWindowController {
 			if (text.startsWith("-")) {
 				text = text.substring(1);
 			}
-			while (text.length() < getType().codeMinLength) {
-				text = "0" + text;
-			}
 			String tx = text;
-			List<String> list = lstCodes.getItems().stream().filter(t -> t.startsWith(tx)).collect(Collectors.toList());
+			List<String> list = lstCodes.getItems().stream().filter(t -> t.matches("^-?0*"+Pattern.quote(tx)+"[^\\d]*$")).collect(Collectors.toList());
 			if (list.size() == 1) {
 				lstCodes.getSelectionModel().select(list.get(0));
 			}
