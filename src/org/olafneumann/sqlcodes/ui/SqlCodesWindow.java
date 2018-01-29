@@ -65,7 +65,7 @@ public class SqlCodesWindow extends AbstractWindowController {
 	@Override
 	protected void onShowing(WindowEvent event) {
 		chbType.setItems(FXCollections.observableArrayList(ErrorCodeType.values()));
-		chbType.getSelectionModel().select(ErrorCodeType.SQL);
+		chbType.getSelectionModel().select(ErrorCodeType.DB2_ZOS);
 		chbType.getSelectionModel().selectedItemProperty().addListener((v, o, n) -> {
 			o.getRetriever().setUrlConsumer(null);
 			fetchCodes();
@@ -115,14 +115,17 @@ public class SqlCodesWindow extends AbstractWindowController {
 		txtSearch.setOnAction(e -> txtSearch.selectAll());
 		txtSearch.setOnKeyReleased(e -> {
 			String text = txtSearch.getText();
-			if (text.startsWith("-"))
+			if (text.startsWith("-")) {
 				text = text.substring(1);
-			while (text.length() < getType().codeMinLength)
+			}
+			while (text.length() < getType().codeMinLength) {
 				text = "0" + text;
+			}
 			String tx = text;
 			List<String> list = lstCodes.getItems().stream().filter(t -> t.startsWith(tx)).collect(Collectors.toList());
-			if (list.size() == 1)
+			if (list.size() == 1) {
 				lstCodes.getSelectionModel().select(list.get(0));
+			}
 		});
 	}
 
@@ -149,8 +152,9 @@ public class SqlCodesWindow extends AbstractWindowController {
 	private static final String URL_CUT_OFF = "?view=embed";
 
 	private void setNewUrl(String url) {
-		if (url.endsWith(URL_CUT_OFF))
+		if (url.endsWith(URL_CUT_OFF)) {
 			url = url.substring(0, url.length() - URL_CUT_OFF.length());
+		}
 		String text = url;
 		Platform.runLater(() -> hliPage.setText(text));
 	}

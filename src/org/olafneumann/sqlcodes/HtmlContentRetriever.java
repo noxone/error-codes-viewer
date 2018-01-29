@@ -5,6 +5,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.text.MessageFormat;
@@ -17,6 +19,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class HtmlContentRetriever {
+
 	private final String pre;
 
 	private final String webSources;
@@ -31,7 +34,8 @@ public class HtmlContentRetriever {
 	private Consumer<String> urlConsumer = url -> {
 	};
 
-	HtmlContentRetriever(String pre,
+	HtmlContentRetriever(
+			String pre,
 			String webSources,
 			int pages,
 			String webPageBase,
@@ -54,14 +58,17 @@ public class HtmlContentRetriever {
 		if (url == null) {
 			String n = code.substring(0, code.length() - 1);
 			String c = code.substring(code.length() - 1).toLowerCase();
-			return format.format(new Object[] { webPageBase, webPagePrefix, Math.abs(Integer.parseInt(n)), c, webPagePostfix });
+			return format
+					.format(new Object[] { webPageBase, webPagePrefix, Math.abs(Integer.parseInt(n)), c, webPagePostfix });
 		} else {
 			return webPageBase + webPagePrefix + url + webPagePostfix;
 		}
 	}
 
 	public String getContent(String code) throws IOException {
-		return get(code, () -> read(getUrl(code), true), true);
+		String path = getUrl(code);
+		urlConsumer.accept(path);
+		return get(code, () -> read(path));
 	}
 
 	public String getExternalUrl(String relative) {
@@ -86,7 +93,7 @@ public class HtmlContentRetriever {
 
 	private Map<String, String> getCodes(String path) {
 		try {
-			String content = get(path, () -> read(path, false), false);
+			String content = get(path, () -> read(path));
 			Matcher matcher = pattern.matcher(content);
 			Map<String, String> codes = new TreeMap<>();
 			while (matcher.find()) {
@@ -103,26 +110,20 @@ public class HtmlContentRetriever {
 		}
 	}
 
-	private String get(String key, IoSupplier<String> supplier, boolean notify) throws IOException {
+	private String get(String key, IoSupplier<String> supplier) throws IOException {
 		String content = HtmlContentBuffer.getContent(pre + key);
 		if (content != null) {
-			if (notify) {
-				if (!key.startsWith("http"))
-					key = getUrl(key);
-				urlConsumer.accept(key);
-			}
 			return content;
 		}
 		content = supplier.get();
-		if (content != null && content.trim().length() > 0)
+		if (content != null && content.trim().length() > 0) {
 			HtmlContentBuffer.setContent(pre + key, content);
+		}
 		return content;
 	}
 
-	private String read(String path, boolean notify) throws IOException {
+	private String read(String path) throws IOException {
 		System.out.println(path);
-		if (notify)
-			urlConsumer.accept(path);
 		boolean ok = false;
 		IOException ex = null;
 		for (int i = 0; !ok && i < 10; ++i) {
@@ -130,8 +131,12 @@ public class HtmlContentRetriever {
 				URL url = new URL(path);
 				String out = read(url);
 				out = out.replace(
-					"<head>",
-					"<head><base href=\"" + url.getProtocol() + "://" + url.getHost() + url.getPath() + "\"/>");
+						"<head>",
+						"<head><base href=\"" + url.getProtocol() + "://" + url.getHost() + url.getPath() + "\"/>");
+
+				// Removing CSS (link) and JS (script) tags for plain HTML design
+				out = out.replaceAll("(<link(\\s[^>]*)?\\srel=\"stylesheet\"(\\s[^>]*)?>|<script(\\s[^>]*)?>.*?</script>)", "");
+
 				ok = true;
 				return out;
 			} catch (IOException e) {
@@ -144,10 +149,10 @@ public class HtmlContentRetriever {
 	}
 
 	private String read(URL url) throws IOException {
-		//		Proxy proxy = new Proxy(
-		//			Proxy.Type.HTTP,
-		//			new InetSocketAddress("ipv4.194.9.141.15.webdefence.global.blackspider.com", 8081));
-		try (InputStream in = new BufferedInputStream(url.openConnection(/* proxy */).getInputStream())) {
+		Proxy proxy = new Proxy(
+				Proxy.Type.HTTP,
+				new InetSocketAddress("ipv4.194.9.141.15.webdefence.global.blackspider.com", 8081));
+		try (InputStream in = new BufferedInputStream(url.openConnection(proxy).getInputStream())) {
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
 			copy(in, bos);
 			return new String(bos.toByteArray(), Charset.forName("UTF-8"));
