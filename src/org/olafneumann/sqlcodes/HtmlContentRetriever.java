@@ -11,6 +11,7 @@ import java.text.MessageFormat;
 import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.function.Consumer;
 import java.util.function.DoubleConsumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,6 +27,9 @@ public class HtmlContentRetriever {
 
 	private final Pattern pattern;
 	private final MessageFormat format;
+
+	private Consumer<String> urlConsumer = url -> {
+	};
 
 	HtmlContentRetriever(String pre,
 			String webSources,
@@ -46,7 +50,7 @@ public class HtmlContentRetriever {
 	}
 
 	private String getUrl(String code) {
-		String url = codes.get(code);
+		String url = codes != null ? codes.get(code) : null;
 		if (url == null) {
 			String n = code.substring(0, code.length() - 1);
 			String c = code.substring(code.length() - 1).toLowerCase();
@@ -57,7 +61,7 @@ public class HtmlContentRetriever {
 	}
 
 	public String getContent(String code) throws IOException {
-		return get(code, () -> read(getUrl(code)));
+		return get(code, () -> read(getUrl(code), true), true);
 	}
 
 	public String getExternalUrl(String relative) {
@@ -75,9 +79,14 @@ public class HtmlContentRetriever {
 		return this.codes = codes;
 	}
 
+	public void setUrlConsumer(Consumer<String> urlConsumer) {
+		this.urlConsumer = urlConsumer != null ? urlConsumer : url -> {
+		};
+	}
+
 	private Map<String, String> getCodes(String path) {
 		try {
-			String content = get(path, () -> read(path));
+			String content = get(path, () -> read(path, false), false);
 			Matcher matcher = pattern.matcher(content);
 			Map<String, String> codes = new TreeMap<>();
 			while (matcher.find()) {
@@ -94,18 +103,26 @@ public class HtmlContentRetriever {
 		}
 	}
 
-	private String get(String key, IoSupplier<String> supplier) throws IOException {
+	private String get(String key, IoSupplier<String> supplier, boolean notify) throws IOException {
 		String content = HtmlContentBuffer.getContent(pre + key);
-		if (content != null)
+		if (content != null) {
+			if (notify) {
+				if (!key.startsWith("http"))
+					key = getUrl(key);
+				urlConsumer.accept(key);
+			}
 			return content;
+		}
 		content = supplier.get();
 		if (content != null && content.trim().length() > 0)
 			HtmlContentBuffer.setContent(pre + key, content);
 		return content;
 	}
 
-	private String read(String path) throws IOException {
+	private String read(String path, boolean notify) throws IOException {
 		System.out.println(path);
+		if (notify)
+			urlConsumer.accept(path);
 		boolean ok = false;
 		IOException ex = null;
 		for (int i = 0; !ok && i < 10; ++i) {

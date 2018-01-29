@@ -1,6 +1,7 @@
 package org.olafneumann.sqlcodes.ui;
 
 import java.awt.Desktop;
+import java.io.IOException;
 import java.net.URI;
 import java.util.Collection;
 import java.util.List;
@@ -14,10 +15,14 @@ import org.olafneumann.sqlcodes.ui.Utils.EventType;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.Pane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -43,8 +48,12 @@ public class SqlCodesWindow extends AbstractWindowController {
 	private ChoiceBox<ErrorCodeType> chbType;
 	@FXML
 	private WebView webView;
+	@FXML
+	private Hyperlink hliPage;
+	@FXML
+	private Button btnCopyLinkToClipboard;
 	private WebEngine engine;
-	
+
 	private ErrorCodeType getType() {
 		return chbType.getSelectionModel().getSelectedItem();
 	}
@@ -58,9 +67,13 @@ public class SqlCodesWindow extends AbstractWindowController {
 		chbType.setItems(FXCollections.observableArrayList(ErrorCodeType.values()));
 		chbType.getSelectionModel().select(ErrorCodeType.SQL);
 		chbType.getSelectionModel().selectedItemProperty().addListener((v, o, n) -> {
+			o.getRetriever().setUrlConsumer(null);
 			fetchCodes();
 			txtSearch.setText("");
+			hliPage.setText("");
+			n.getRetriever().setUrlConsumer(this::setNewUrl);
 		});
+		getType().getRetriever().setUrlConsumer(this::setNewUrl);
 
 		engine = webView.getEngine();
 
@@ -86,6 +99,19 @@ public class SqlCodesWindow extends AbstractWindowController {
 			}
 		});
 
+		hliPage.setOnAction(e -> {
+			try {
+				Desktop.getDesktop().browse(URI.create(hliPage.getText()));
+			} catch (IOException ignore) {
+				ignore.printStackTrace();
+			}
+		});
+		btnCopyLinkToClipboard.setOnAction(e -> {
+			ClipboardContent content = new ClipboardContent();
+			content.putString(hliPage.getText());
+			Clipboard.getSystemClipboard().setContent(content);
+		});
+
 		txtSearch.setOnAction(e -> txtSearch.selectAll());
 		txtSearch.setOnKeyReleased(e -> {
 			String text = txtSearch.getText();
@@ -109,7 +135,8 @@ public class SqlCodesWindow extends AbstractWindowController {
 		pnlLoader.setVisible(true);
 		ForkJoinPool.commonPool().execute(() -> {
 			Collection<String> codes = getHtmlContentRetriever()
-				.getAvailableCodes(d -> Platform.runLater(() -> pgbProgress.setProgress(d))).keySet();
+				.getAvailableCodes(d -> Platform.runLater(() -> pgbProgress.setProgress(d)))
+				.keySet();
 			Platform.runLater(() -> {
 				lstCodes.setItems(FXCollections.observableArrayList(codes));
 				pnlLoader.setVisible(false);
@@ -119,4 +146,12 @@ public class SqlCodesWindow extends AbstractWindowController {
 		txtSearch.requestFocus();
 	}
 
+	private static final String URL_CUT_OFF = "?view=embed";
+
+	private void setNewUrl(String url) {
+		if (url.endsWith(URL_CUT_OFF))
+			url = url.substring(0, url.length() - URL_CUT_OFF.length());
+		String text = url;
+		Platform.runLater(() -> hliPage.setText(text));
+	}
 }

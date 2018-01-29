@@ -6,14 +6,28 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.olafneumann.sqlcodes.ui.SqlCodesWindow">
+<StackPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.151" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.olafneumann.sqlcodes.ui.SqlCodesWindow">
    <children>
       <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity">
          <center>
             <SplitPane dividerPositions="0.2719298245614035" BorderPane.alignment="CENTER">
                <items>
                   <ListView fx:id="lstCodes" prefHeight="358.0" prefWidth="238.0" SplitPane.resizableWithParent="false" />
-                  <WebView fx:id="webView" prefHeight="200.0" prefWidth="200.0" />
+                  <GridPane>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
+                        <RowConstraints valignment="CENTER" vgrow="NEVER" />
+                     </rowConstraints>
+                     <children>
+                        <WebView fx:id="webView" minHeight="200.0" minWidth="200.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" />
+                        <Hyperlink fx:id="hliPage" maxWidth="1.7976931348623157E308" prefWidth="200.0" text="https://www.ibm.com/support/knowledgecenter/" textOverrun="CENTER_ELLIPSIS" underline="true" GridPane.rowIndex="1" />
+                        <Button fx:id="btnCopyLinkToClipboard" mnemonicParsing="false" text="📋" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                     </children>
+                  </GridPane>
                </items>
             </SplitPane>
          </center>
