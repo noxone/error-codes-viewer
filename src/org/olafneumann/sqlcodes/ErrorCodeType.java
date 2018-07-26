@@ -12,18 +12,18 @@ public enum ErrorCodeType {
 			, ".html?view=embed"//
 			, Pattern.compile("<span class=\"ulchildlinktext\"><a [^>]*>(-[0-9]+)</a>")//
 			, new MessageFormat("{0}{1}{2,number,00}{3}{4}")),
-	DB2_LUW("DB2 (LUW)", //
-			"http://www.ibm.com/support/knowledgecenter/en/SSEPGG_10.5.0/com.ibm.db2.luw.messages.sql.doc/com.ibm.db2.luw.messages.sql.doc-gentopic{}.html?view=embed"//
-			, 28, //
-			"http://www.ibm.com/support/knowledgecenter/en/SSEPGG_10.5.0/com.ibm.db2.luw.messages.sql.doc/doc/"//
-			, "msql"//
-			, ".html?view=embed"//
-			, Pattern.compile("<span class=\"ulchildlinktext\"><a [^>]*>SQL([0-9]+[A-Z])</a")//
-			, new MessageFormat("{0}{1}{2,number,00000}{3}{4}")),
+//	DB2_LUW("DB2 (LUW)", //
+//			"http://www.ibm.com/support/knowledgecenter/en/SSEPGG_10.5.0/com.ibm.db2.luw.messages.sql.doc/com.ibm.db2.luw.messages.sql.doc-gentopic{}.html?view=embed"//
+//			, 28, // 
+//			"http://www.ibm.com/support/knowledgecenter/en/SSEPGG_10.5.0/com.ibm.db2.luw.messages.sql.doc/doc/"//
+//			, "msql"//
+//			, ".html?view=embed"//
+//			, Pattern.compile("<span class=\"ulchildlinktext\"><a [^>]*>SQL([0-9]+[A-Z])</a")//
+//			, new MessageFormat("{0}{1}{2,number,00000}{3}{4}")),
 	MQ("MQ", //
-			"http://www.ibm.com/support/knowledgecenter/en/SSFKSJ_7.0.1/com.ibm.mq.amqzao.doc/fm12040_.htm?view=embed"//
+			"https://www.ibm.com/support/knowledgecenter/SSFKSJ_8.0.0/com.ibm.mq.tro.doc/q040710_.htm?view=embed"//
 			, 1,//
-			"http://www.ibm.com/support/knowledgecenter/en/SSFKSJ_7.0.1/com.ibm.mq.amqzao.doc/"//
+			"https://www.ibm.com/support/knowledgecenter/SSFKSJ_8.0.0/com.ibm.mq.tro.doc/"//
 			, ""//
 			, "?view=embed"//
 			, Pattern.compile("<span class=\"ulchildlinktext\"><a href=\"([^\"]+)\"[^>]*>([0-9]+)[^<]*</a")//
