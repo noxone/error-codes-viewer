@@ -1,5 +1,6 @@
 package org.olafneumann.errorcodes
 
+import org.olafneumann.errorcodes.codes.CodeDescriptionLoader
 import org.olafneumann.errorcodes.ui.UiController
 import kotlin.browser.window
 
@@ -19,4 +20,5 @@ private fun initErroCodes() {
     // store information, that we were already here
     ApplicationSettings.storeUserLastInfo()
 
+    CodeDescriptionLoader.getLocations()
 }
