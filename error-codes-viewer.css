@@ -1,0 +1,8 @@
+#ck_container_cookie {
+	background-color: #000000aa;
+}
+
+#ck_container_cookie + div {
+	filter: blur(5px);
+}
+
