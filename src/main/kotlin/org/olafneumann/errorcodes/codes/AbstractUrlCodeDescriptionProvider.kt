@@ -21,19 +21,27 @@ abstract class AbstractUrlCodeDescriptionProvider(
             .map { convertMatchToCodeDescriptionLocation(it) }
             .toList()
     }
+
+    override val comparator: Comparator<CodeDescriptionLocation> =
+        Comparator { a, b -> String.CASE_INSENSITIVE_ORDER.compare(a.code, b.code) }
 }
 
 class Db2ZosCodeDescriptionProvider : AbstractUrlCodeDescriptionProvider("IBM Db2 for z/OS 10.0.0") {
-    private val detailBaseUrlString = "https://www.ibm.com/support/knowledgecenter/SSEPEK_10.0.0/codes/src/tpc/"
     override val indexUrl =
         Url("https://www.ibm.com/support/knowledgecenter/SSEPEK_10.0.0/codes/src/tpc/db2z_n.html?view=embed")
     override val codeDescriptionRegex =
         Regex("<span class=\"ulchildlinktext\"><a [^>]*href=\"([^\"]+)\"[^>]*>(-[0-9]+)</a>")
 
+    private val detailBaseUrlString = "https://www.ibm.com/support/knowledgecenter/SSEPEK_10.0.0/codes/src/tpc/"
+
     override fun convertMatchToCodeDescriptionLocation(matchResult: MatchResult): CodeDescriptionLocation {
         val href = matchResult.groups[1]?.value ?: "NO HREF"
         val text = matchResult.groups[2]?.value ?: "NO TEXT"
-        return CodeDescriptionLocation(provider = this, code = text, url = /*Url(*/"$detailBaseUrlString$href?view=embed"/*)*/)
+        return CodeDescriptionLocation(
+            provider = this,
+            code = text,
+            url = /*Url(*/"$detailBaseUrlString$href?view=embed"/*)*/
+        )
     }
 
     override suspend fun loadCodeDescription(location: CodeDescriptionLocation): CodeDescription {
@@ -45,18 +53,22 @@ class Db2ZosCodeDescriptionProvider : AbstractUrlCodeDescriptionProvider("IBM Db
 }
 
 
-
 class MQCodeDescriptionProvider : AbstractUrlCodeDescriptionProvider("IBM MQ 8.0.0") {
-    private val detailBaseUrlString = "https://www.ibm.com/support/knowledgecenter/SSFKSJ_8.0.0/com.ibm.mq.tro.doc/"
     override val indexUrl =
         Url("https://www.ibm.com/support/knowledgecenter/SSFKSJ_8.0.0/com.ibm.mq.tro.doc/q040710_.htm?view=embed")
     override val codeDescriptionRegex =
         Regex("<li class=\"ulchildlink\".*?<a href=\"([^\"]+)\"[^>]*>([0-9]+)[^<]*</a")
 
+    private val detailBaseUrlString = "https://www.ibm.com/support/knowledgecenter/SSFKSJ_8.0.0/com.ibm.mq.tro.doc/"
+
     override fun convertMatchToCodeDescriptionLocation(matchResult: MatchResult): CodeDescriptionLocation {
         val href = matchResult.groups[1]?.value ?: "NO HREF"
         val text = matchResult.groups[2]?.value ?: "NO TEXT"
-        return CodeDescriptionLocation(provider = this, code = text, url = /*Url(*/"$detailBaseUrlString$href?view=embed"/*)*/)
+        return CodeDescriptionLocation(
+            provider = this,
+            code = text,
+            url = /*Url(*/"$detailBaseUrlString$href?view=embed"/*)*/
+        )
     }
 
     override suspend fun loadCodeDescription(location: CodeDescriptionLocation): CodeDescription {
