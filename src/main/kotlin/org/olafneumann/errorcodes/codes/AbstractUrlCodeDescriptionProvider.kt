@@ -23,7 +23,7 @@ abstract class AbstractUrlCodeDescriptionProvider(
     }
 }
 
-class Db2ZosCodeDescriptionProvider : AbstractUrlCodeDescriptionProvider("DB2 z/OS") {
+class Db2ZosCodeDescriptionProvider : AbstractUrlCodeDescriptionProvider("IBM Db2 for z/OS 10.0.0") {
     private val detailBaseUrlString = "https://www.ibm.com/support/knowledgecenter/SSEPEK_10.0.0/codes/src/tpc/"
     override val indexUrl =
         Url("https://www.ibm.com/support/knowledgecenter/SSEPEK_10.0.0/codes/src/tpc/db2z_n.html?view=embed")
@@ -46,7 +46,7 @@ class Db2ZosCodeDescriptionProvider : AbstractUrlCodeDescriptionProvider("DB2 z/
 
 
 
-class MQCodeDescriptionProvider : AbstractUrlCodeDescriptionProvider("MQ") {
+class MQCodeDescriptionProvider : AbstractUrlCodeDescriptionProvider("IBM MQ 8.0.0") {
     private val detailBaseUrlString = "https://www.ibm.com/support/knowledgecenter/SSFKSJ_8.0.0/com.ibm.mq.tro.doc/"
     override val indexUrl =
         Url("https://www.ibm.com/support/knowledgecenter/SSFKSJ_8.0.0/com.ibm.mq.tro.doc/q040710_.htm?view=embed")
