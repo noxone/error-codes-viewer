@@ -22,25 +22,25 @@
 
     <link rel="stylesheet" href="error-codes-viewer.css">
 
-    <title>Error Codes</title>
+    <title>Error Codes Viewer</title>
 </head>
 
 <body class="bg-dark">
-	<div id="ck_container_cookie" class="fixed-top fixed-bottom">
-		<div class="alert alert-danger fixed-top m-2" role="alert">
-			<div class="d-flex justify-content-between">
-				<p class="m-0">This site uses cookies to improve your user experience.</p>
-				<div class="btn-group btn-group-sm" role="group">
-					<button id="ck_btn_reject" type="button" class="btn btn-danger">Reject</button>
-					<button id="ck_btn_accept" type="button" class="btn btn-success">Accept</button>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div id="ck_container_cookie" class="fixed-top fixed-bottom">
+        <div class="alert alert-danger fixed-top m-2" role="alert">
+            <div class="d-flex justify-content-between">
+                <p class="m-0">This site uses cookies to improve your user experience.</p>
+                <div class="btn-group btn-group-sm" role="group">
+                    <button id="ck_btn_reject" type="button" class="btn btn-danger">Reject</button>
+                    <button id="ck_btn_accept" type="button" class="btn btn-success">Accept</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="container-fluid py-3">
         <div class="jumbotron bg-info">
-            <h1 class="display-4"><span id="rg-title">Group Randomizer</span></h1>
+            <h1 class="display-4"><span id="rg-title">Error Code Viewer</span></h1>
         </div>
 
         <div class="row no-gutters bg-light mt-3 pr-4 rounded position-relative" id="rg_input_container">
@@ -48,154 +48,23 @@
                 <h3 class="display-3 text-secondary">1</h3>
             </div>
             <div class="col-12 col-md-11 py-4 pl-4">
-                <div class="d-flex justify-content-between">
-                    <h5>Select a group.</h5>
-                    <div>
-                        <button class="btn btn-primary gr-copy-button"
-                            title="Copy randomized data to clipboard">&#128203;</button>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-4 col-lg-5 col-md-6 mt-2">
-                        <h6>Groups</h6>
-                        <div class="list-group" id="gr_existing_groups">
-                            <div class="list-group-item">
-                                There are currently no groups
-                            </div>
-                            <form action="#" id="gr_add_group_form" class="list-group-item list-group-item-action bg-secondary text-light gr-always-there" method="GET" onsubmit="return false;">
-                                <div class="form-row">
-                                    <div class="col-xl-9 col-lg-8 col-md-7 col-7">
-                                        <input id="gr_new_group_name" type="text" placeholder="Group name"
-                                            class="form-control"></div>
-                                    <div class="col-xl-3 col-lg-4 col-md-5 col-5">
-                                        <button id="gr_create_new_group" class="btn btn-info" type="button"
-                                            style="width:100%">Create</button></div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="col-xl-8 col-lg-7 col-md-6 mt-2">
-                        <h6>Group members</h6>
-                        <div class="list-group">
-                            <div class="list-group-item">
-                                <div id="gr_existing_members" class="row"> </div>
-                            </div>
-                            <form action="#" id="gr_add_member_form" class="list-group-item list-group-item-action bg-secondary text-light gr-always-there" method="GET" onsubmit="return false;">
-                                <div class="form-row">
-                                    <div class="col-xl-10 col-lg-9 col-md-7 col-7">
-                                        <input id="gr_new_member_name" type="text" placeholder="Member name"
-                                            class="form-control">
-                                    </div>
-                                    <div class="col-xl-2 col-lg-3 col-md-5 col-5">
-                                        <button id="gr_add_group_member" type="button" class="btn btn-info"
-                                            style="width:100%">Add</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                <h5>This content will be changed.</h5>
             </div>
         </div>
-
-        <div class="row no-gutters bg-light mt-3 pr-4 rounded position-relative" id="rg_input_container">
-            <div class="col-sm-1 p-4 d-none d-sm-none d-md-block text-center">
-                <h3 class="display-3 text-secondary">2</h3>
-            </div>
-            <div class="col-12 col-md-11 py-4 pl-4">
-                <div class="d-flex justify-content-between">
-                    <h5>Choose text additions.</h5>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 mt-2">
-                        <h6>Beginning</h6>
-                        <div id="gr_div_list_prefixes" class="list-group">
-                            <form action="#" class="list-group-item list-group-item-action bg-secondary text-light gr-always-there" method="GET" onsubmit="return false;">
-                                <div class="form-row">
-                                    <div class="col-xl-9 col-lg-8 col-md-7 col-7">
-                                        <input id="gr_input_prefix" type="text" placeholder="Custom prefix"
-                                            class="form-control"></div>
-                                    <div class="col-xl-3 col-lg-4 col-md-5 col-5">
-                                        <button id="gr_create_new_prefix" class="btn btn-info" type="button"
-                                            style="width:100%">Add</button></div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mt-2">
-                        <h6>Separator</h6>
-                        <div id="gr_div_list_separators" class="list-group">
-                            <form action="#" class="list-group-item list-group-item-action bg-secondary text-light gr-always-there" method="GET" onsubmit="return false;">
-                                <div class="form-row">
-                                    <div class="col-xl-9 col-lg-8 col-md-7 col-7">
-                                        <input id="gr_input_separator" type="text" placeholder="Custom separator"
-                                            class="form-control"></div>
-                                    <div class="col-xl-3 col-lg-4 col-md-5 col-5">
-                                        <button id="gr_create_new_separator" class="btn btn-info" type="button"
-                                            style="width:100%">Add</button></div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mt-2">
-                        <h6>Ending</h6>
-                        <div id="gr_div_list_postfixes" class="list-group">
-                            <form action="#" class="list-group-item list-group-item-action bg-secondary text-light gr-always-there" method="GET" onsubmit="return false;">
-                                <div class="form-row">
-                                    <div class="col-xl-9 col-lg-8 col-md-7 col-7">
-                                        <input id="gr_input_postfix" type="text" placeholder="Custom postfix"
-                                            class="form-control"></div>
-                                    <div class="col-xl-3 col-lg-4 col-md-5 col-5">
-                                        <button id="gr_create_new_postfix" class="btn btn-info" type="button"
-                                            style="width:100%">Add</button></div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="row no-gutters bg-light mt-3 pr-4 rounded position-relative" id="rg_input_container">
-            <div class="col-sm-1 p-4 d-none d-sm-none d-md-block text-center">
-                <h3 class="display-3 text-secondary">3</h3>
-            </div>
-            <div class="col-12 col-md-11 py-4 pl-4">
-                <div class="d-flex justify-content-between">
-                    <h5>Have your group.</h5>
-                    <div>
-                        <button id="gr_btn_regenerate" class="btn btn-primary"
-                            title="Regenerate a random order">&#128472;</button>
-                        <button class="btn btn-primary gr-copy-button"
-                            title="Copy randomized data to clipboard">&#128203;</button>
-                    </div>
-                </div>
-                <div class="d-flex justify-content-between">
-                    <div id="gr_result_text" class="p-3 rounded border bg-white text-dark">
-                        This should be your result.
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-
-
-
 
         <!-- Footer -->
         <footer
             class="page-footer font-small row no-gutters bg-dark text-muted border border-secondary mt-4 p-4 rounded">
-            <h5 class="text-uppercase" style="width: 100%">Group Randomizer</h5>
+            <h5 class="text-uppercase" style="width: 100%">Error Code Viewer</h5>
             <div class="text-center text-md-left collapse show" id="footerContent">
                 <div class="row">
                     <div class="col-md-7 mt-md-0 mt-3">
-                        <p>This page is intended to provide a very simple randomizer to find a sort order for your daily
-                            stand up meeting.
+                        <p>This project is inteded to simplify the life of developers that need to search for error
+                            codes. This page aims to bundle all error codes of as many applications as possible at one
+                            point so all the developers don't need to search the whole internet how to solve their
+                            problems.
                         </p>
-                        <p>Find the project sources at <a href="https://github.com/noxone/group-randomizer"
+                        <p>Find the project sources at <a href="https://github.com/noxone/error-codes-viewer"
                                 target="_blank">GitHub</a>
                         </p>
                     </div>
