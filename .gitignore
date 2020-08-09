@@ -6,6 +6,8 @@
 .project
 .classpath
 
+gh-pages/
+
 
 # Created by https://www.toptal.com/developers/gitignore/api/java,maven,kotlin,eclipse,intellij,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,maven,kotlin,eclipse,intellij,visualstudiocode
@@ -81,11 +83,13 @@ local.properties
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff
+.idea/
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
+*.iml
 
 # Generated files
 .idea/**/contentModel.xml
