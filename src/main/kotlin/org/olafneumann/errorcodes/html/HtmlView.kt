@@ -14,7 +14,7 @@ import org.w3c.dom.*
 import kotlin.browser.document
 
 class HtmlView(
-        private val controller: DisplayContract.Controller
+    private val controller: DisplayContract.Controller
 ) : DisplayContract.View {
     private val divLabelProducts = HtmlHelper.getElementById<HTMLAnchorElement>(ID_LABEL_PRODUCTS)
     private val divListProducts = HtmlHelper.getElementById<HTMLDivElement>(ID_LIST_PRODUCTS)
@@ -33,7 +33,10 @@ class HtmlView(
         })
     }
 
-    private val listProducts = ListMaintainer<CodeDescriptionProvider>(divListProducts, { createProductLink(it) }, Comparator { a, b -> String.CASE_INSENSITIVE_ORDER.compare(a.name, b.name) })
+    private val listProducts = ListMaintainer<CodeDescriptionProvider>(
+        divListProducts,
+        { createProductLink(it) },
+        Comparator { a, b -> String.CASE_INSENSITIVE_ORDER.compare(a.name, b.name) })
     private val listCodes = ListMaintainer<CodeDescriptionLocation>(divListCodes, { createCodeLink(it) })
 
     override fun selectCodeDescriptionProvider(provider: CodeDescriptionProvider) {
@@ -46,52 +49,55 @@ class HtmlView(
         listCodes.toggleActive(location)
     }
 
-    override fun showCodeDescriptionProviders(providers: List<CodeDescriptionProvider>) = listProducts.showItems(providers)
-    override fun showCodeDescriptionLocations(provider: CodeDescriptionProvider, locations: List<CodeDescriptionLocation>) = listCodes.showItems(locations, provider.comparator)
+    override fun showCodeDescriptionProviders(providers: List<CodeDescriptionProvider>) =
+        listProducts.showItems(providers)
+
+    override fun showCodeDescriptionLocations(
+        provider: CodeDescriptionProvider,
+        locations: List<CodeDescriptionLocation>
+    ) = listCodes.showItems(locations, provider.comparator)
 
     override fun setContent(location: CodeDescriptionLocation, content: String) {
-        divContentCode.innerHTML = content
+        // divContentCode.innerHTML = content
 
         divContentHeader.childElementCount
-                .downTo(0)
-                .mapNotNull { divContentHeader.children[it] }
-                .forEach { divContentHeader.removeChild(it) }
-        divContentHeader.appendChild(document.create.div {
-            span { +location.provider.name }
-            +": "
-            span (classes = "font-weight-bold") { +location.code }
-        })
+            .downTo(0)
+            .mapNotNull { divContentHeader.children[it] }
+            .forEach { divContentHeader.removeChild(it) }
+        divContentHeader.appendChild(document.create.span { +location.provider.name })
+        divContentHeader.appendChild(document.create.span { +": " })
+        divContentHeader.appendChild(document.create.span(classes = "font-weight-bold") { +location.code })
         divContentSource.href = location.url.toString()
         divContentSource.innerText = location.url.toString()
-        // divContentFrame.src = location.url.toString()
+        divContentFrame.src = location.url.toString()
     }
 
     private fun createProductLink(provider: CodeDescriptionProvider): HTMLElement =
-            document.create.a(href = "#", classes = "dropdown-item") {
-                onClickFunction = {
-                    it.stopPropagation()
-                    jQuery(divListProducts.parentNode!!).dropdown("toggle")
-                    controller.selectCodeDescriptionProvider(provider)
-                }
-                span("ec-product-producer") {
-                    +provider.producer
-                }
-                span("ec-product-title") {
-                    +provider.title
-                }
-                span("ec-product-version") {
-                    +provider.version
-                }
+        document.create.a(href = "#", classes = "dropdown-item") {
+            onClickFunction = {
+                it.stopPropagation()
+                jQuery(divListProducts.parentNode!!).dropdown("toggle")
+                controller.selectCodeDescriptionProvider(provider)
             }
+            span("ec-product-producer") {
+                +provider.producer
+            }
+            span("ec-product-title") {
+                +provider.title
+            }
+            span("ec-product-version") {
+                +provider.version
+            }
+        }
 
     private fun createCodeLink(location: CodeDescriptionLocation): HTMLElement =
-            document.create.a(href = "#", classes = "list-group-item list-group-item-action") {
-                onClickFunction = {
-                    it.stopPropagation()
-                    controller.selectCodeDescriptionLocation(location)
-                }
-                +location.code
+        document.create.a(href = "#", classes = "list-group-item list-group-item-action") {
+            onClickFunction = {
+                it.stopPropagation()
+                controller.selectCodeDescriptionLocation(location)
             }
+            +location.code
+        }
 
     companion object {
         const val ID_LABEL_PRODUCTS = "ec_label_products"
