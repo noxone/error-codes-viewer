@@ -5,12 +5,10 @@ import kotlinx.coroutines.launch
 import org.olafneumann.errorcodes.DisplayContract
 import org.olafneumann.errorcodes.codes.CodeDescriptionLocation
 import org.olafneumann.errorcodes.codes.CodeDescriptionProvider
-import org.olafneumann.errorcodes.codes.Db2ZosCodeDescriptionProvider
-import org.olafneumann.errorcodes.codes.MQCodeDescriptionProvider
 import org.olafneumann.errorcodes.html.HtmlView
 
 class UiController(
-        private val codeDescriptionProviders: List<CodeDescriptionProvider>
+        codeDescriptionProviders: List<CodeDescriptionProvider>
 ) : DisplayContract.Controller {
     private val view: DisplayContract.View = HtmlView(this)
 

@@ -28,7 +28,17 @@ iframe.ec-borderless {
 	border: none;
 }
 
+.ec-full-body {
+	height: 100%;
+	padding-top: 4.5em !important;
+	padding-bottom: 4.5em !important;
+}
+
 .ec-full-size {
 	width: 100%;
+	height: 100%;
+}
+
+html, body {
 	height: 100%;
 }
