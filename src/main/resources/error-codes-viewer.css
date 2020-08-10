@@ -6,3 +6,16 @@
 	filter: blur(5px);
 }
 
+.product-producer {
+	color: #666;
+	margin-right: 0.5em;
+}
+
+.product-title {
+	font-weight: bold;
+	margin-right: 0.5em;
+}
+
+.product-version {
+	font-style: italic;
+}

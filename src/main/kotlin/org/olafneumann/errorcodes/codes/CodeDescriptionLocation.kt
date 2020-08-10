@@ -5,5 +5,5 @@ import io.ktor.http.Url
 data class CodeDescriptionLocation(
     val provider: CodeDescriptionProvider,
     val code: String,
-    val url: String
+    val url: Url
 )

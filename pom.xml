@@ -213,7 +213,6 @@
                             <sourceMap>true</sourceMap> <!-- source map is useful for debugging in tools that support source maps -->
                             <outputFile>${project.build.outputDirectory}/${project.artifactId}.js</outputFile>
                             <sourceDirs>
-                                <source>src/main/java</source>
                                 <source>src/main/kotlin</source>
                             </sourceDirs>
                         </configuration>

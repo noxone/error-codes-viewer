@@ -4,10 +4,13 @@ import io.ktor.client.HttpClient
 import io.ktor.client.engine.js.Js
 import io.ktor.client.request.get
 import io.ktor.http.Url
+import kotlin.js.Date
 import kotlin.math.absoluteValue
 
 abstract class AbstractUrlCodeDescriptionProvider(
-    override val name: String
+        override val producer: String,
+        override val title: String,
+        override val version: String
 ) : CodeDescriptionProvider {
     private val client = HttpClient(Js)
 
@@ -22,11 +25,16 @@ abstract class AbstractUrlCodeDescriptionProvider(
             .toList()
     }
 
+    override suspend fun loadCodeDescription(location: CodeDescriptionLocation): CodeDescription {
+        val siteContent = client.get<String>(location.url)
+        return CodeDescription(siteContent, Date())
+    }
+
     override val comparator: Comparator<CodeDescriptionLocation> =
         Comparator { a, b -> String.CASE_INSENSITIVE_ORDER.compare(a.code, b.code) }
 }
 
-class Db2ZosCodeDescriptionProvider : AbstractUrlCodeDescriptionProvider("IBM Db2 for z/OS 10.0.0") {
+class Db2ZosCodeDescriptionProvider : AbstractUrlCodeDescriptionProvider("IBM", "Db2 for z/OS", "10.0.0") {
     override val indexUrl =
         Url("https://www.ibm.com/support/knowledgecenter/SSEPEK_10.0.0/codes/src/tpc/db2z_n.html?view=embed")
     override val codeDescriptionRegex =
@@ -40,12 +48,8 @@ class Db2ZosCodeDescriptionProvider : AbstractUrlCodeDescriptionProvider("IBM Db
         return CodeDescriptionLocation(
             provider = this,
             code = text,
-            url = /*Url(*/"$detailBaseUrlString$href?view=embed"/*)*/
+            url = Url("$detailBaseUrlString$href?view=embed")
         )
-    }
-
-    override suspend fun loadCodeDescription(location: CodeDescriptionLocation): CodeDescription {
-        TODO("Not yet implemented")
     }
 
     override val comparator: Comparator<CodeDescriptionLocation> =
@@ -53,7 +57,7 @@ class Db2ZosCodeDescriptionProvider : AbstractUrlCodeDescriptionProvider("IBM Db
 }
 
 
-class MQCodeDescriptionProvider : AbstractUrlCodeDescriptionProvider("IBM MQ 8.0.0") {
+class MQCodeDescriptionProvider : AbstractUrlCodeDescriptionProvider("IBM", "MQ", "8.0.0") {
     override val indexUrl =
         Url("https://www.ibm.com/support/knowledgecenter/SSFKSJ_8.0.0/com.ibm.mq.tro.doc/q040710_.htm?view=embed")
     override val codeDescriptionRegex =
@@ -67,12 +71,8 @@ class MQCodeDescriptionProvider : AbstractUrlCodeDescriptionProvider("IBM MQ 8.0
         return CodeDescriptionLocation(
             provider = this,
             code = text,
-            url = /*Url(*/"$detailBaseUrlString$href?view=embed"/*)*/
+            url = Url("$detailBaseUrlString$href?view=embed")
         )
-    }
-
-    override suspend fun loadCodeDescription(location: CodeDescriptionLocation): CodeDescription {
-        TODO("Not yet implemented")
     }
 
     override val comparator: Comparator<CodeDescriptionLocation> =

@@ -38,8 +38,8 @@
         </div>
     </div>-->
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <span class="navbar-brand mb-0 h1">Error Codes Viewer</span>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <span class="navbar-brand mb-0 h1 pr-3">Error Codes Viewer</span>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,48 +47,36 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <form class="form-inline" action="#" method="GET">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    </form>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown
+                        Product
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="ec_list_products">
                     </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
                 </li>
             </ul>
         </div>
     </nav>
 
-    <div class="container-fluid py-3 px-0">
-        <h1>abc</h1>
-        <div class="jumbotron bg-warning">
-            <h1 class="display-4"><span id="rg-title">Error Code Viewer</span></h1>
-        </div>
-
-        <div class="row no-gutters bg-light mt-3 pr-4 rounded position-relative" id="rg_input_container">
-            <div class="col-sm-1 p-4 d-none d-sm-none d-md-block text-center">
-                <h3 class="display-3 text-secondary">1</h3>
+    <div class="container-fluid py-3 fill">
+        <div class="row mb-3">
+            <div class="col-3 panel-body">
+                <div class="list-group" id="ec_list_codes">
+                </div>
             </div>
-            <div class="col-12 col-md-11 py-4 pl-4">
-                <h5>This content will be changed.</h5>
+            <div class="col-9">
+                <div class="card">
+                    <div class="card-body" id="ec_content_code">
+                        This is some text within a card body.
+                    </div>
+            </div>
             </div>
         </div>
 
