@@ -57,13 +57,11 @@ if (typeof kotlin === 'undefined') {
   var contains = Kotlin.kotlin.text.contains_li3zpu$;
   var RuntimeException_init = Kotlin.kotlin.RuntimeException;
   var ClassCastException = Kotlin.kotlin.ClassCastException;
+  var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_287e2$;
   var attributesMapOf = $module$kotlinx_html_js.kotlinx.html.attributesMapOf_jyasbz$;
   var SPAN_init = $module$kotlinx_html_js.kotlinx.html.SPAN;
-  var visitTag = $module$kotlinx_html_js.kotlinx.html.visitTag_xwv8ym$;
-  var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_287e2$;
-  var DIV_init = $module$kotlinx_html_js.kotlinx.html.DIV;
-  var HTMLDivElement_0 = HTMLDivElement;
   var visitTagAndFinalize = $module$kotlinx_html_js.kotlinx.html.visitTagAndFinalize_g9qte5$;
+  var visitTag = $module$kotlinx_html_js.kotlinx.html.visitTag_xwv8ym$;
   var attributesMapOf_0 = $module$kotlinx_html_js.kotlinx.html.attributesMapOf_alerag$;
   var A_init = $module$kotlinx_html_js.kotlinx.html.A;
   var HTMLAnchorElement_0 = HTMLAnchorElement;
@@ -703,7 +701,7 @@ if (typeof kotlin === 'undefined') {
     return this.closure$comparison(a, b);
   };
   Comparator$ObjectLiteral_0.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
-  function visit$lambda(closure$block) {
+  function visitAndFinalize$lambda(closure$block) {
     return function ($receiver) {
       closure$block($receiver);
       return Unit;
@@ -712,13 +710,13 @@ if (typeof kotlin === 'undefined') {
   function span$lambda($receiver) {
     return Unit;
   }
-  function visitAndFinalize$lambda(closure$block) {
+  function visit$lambda(closure$block) {
     return function ($receiver) {
       closure$block($receiver);
       return Unit;
     };
   }
-  function div$lambda($receiver) {
+  function span$lambda_0($receiver) {
     return Unit;
   }
   function visitAndFinalize$lambda_0(closure$block) {
@@ -847,31 +845,23 @@ if (typeof kotlin === 'undefined') {
   HtmlView.prototype.showCodeDescriptionLocations_lqsjkd$ = function (provider, locations) {
     this.listCodes_0.showItems_rmogi$(locations, provider.comparator);
   };
-  function HtmlView$setContent$lambda$lambda(closure$location) {
+  function HtmlView$setContent$lambda(closure$location) {
     return function ($receiver) {
       $receiver.unaryPlus_pdl1vz$(closure$location.provider.name);
       return Unit;
     };
   }
-  function HtmlView$setContent$lambda$lambda_0(closure$location) {
+  function HtmlView$setContent$lambda_0($receiver) {
+    $receiver.unaryPlus_pdl1vz$(': ');
+    return Unit;
+  }
+  function HtmlView$setContent$lambda_1(closure$location) {
     return function ($receiver) {
       $receiver.unaryPlus_pdl1vz$(closure$location.code);
       return Unit;
     };
   }
-  function HtmlView$setContent$lambda(closure$location) {
-    return function ($receiver) {
-      var block = HtmlView$setContent$lambda$lambda(closure$location);
-      visitTag(new SPAN_init(attributesMapOf('class', null), $receiver.consumer), visit$lambda(block));
-      $receiver.unaryPlus_pdl1vz$(': ');
-      var classes = 'font-weight-bold';
-      var block_0 = HtmlView$setContent$lambda$lambda_0(closure$location);
-      visitTag(new SPAN_init(attributesMapOf('class', classes), $receiver.consumer), visit$lambda(block_0));
-      return Unit;
-    };
-  }
   HtmlView.prototype.setContent_lkph52$ = function (location, content) {
-    this.divContentCode_0.innerHTML = content;
     var $receiver = downTo(this.divContentHeader_0.childElementCount, 0);
     var destination = ArrayList_init();
     var tmp$;
@@ -890,10 +880,16 @@ if (typeof kotlin === 'undefined') {
     }
     var tmp$_2 = this.divContentHeader_0;
     var $receiver_0 = get_create(document);
-    var tmp$_3;
-    tmp$_2.appendChild(Kotlin.isType(tmp$_3 = visitTagAndFinalize(new DIV_init(attributesMapOf('class', null), $receiver_0), $receiver_0, visitAndFinalize$lambda(HtmlView$setContent$lambda(location))), HTMLDivElement_0) ? tmp$_3 : throwCCE());
+    tmp$_2.appendChild(visitTagAndFinalize(new SPAN_init(attributesMapOf('class', null), $receiver_0), $receiver_0, visitAndFinalize$lambda(HtmlView$setContent$lambda(location))));
+    var tmp$_3 = this.divContentHeader_0;
+    var $receiver_1 = get_create(document);
+    tmp$_3.appendChild(visitTagAndFinalize(new SPAN_init(attributesMapOf('class', null), $receiver_1), $receiver_1, visitAndFinalize$lambda(HtmlView$setContent$lambda_0)));
+    var tmp$_4 = this.divContentHeader_0;
+    var $receiver_2 = get_create(document);
+    tmp$_4.appendChild(visitTagAndFinalize(new SPAN_init(attributesMapOf('class', 'font-weight-bold'), $receiver_2), $receiver_2, visitAndFinalize$lambda(HtmlView$setContent$lambda_1(location))));
     this.divContentSource_0.href = location.url.toString();
     this.divContentSource_0.innerText = location.url.toString();
+    this.divContentFrame_0.src = location.url.toString();
   };
   function HtmlView$createProductLink$lambda$lambda(this$HtmlView, closure$provider) {
     return function (it) {
@@ -1396,61 +1392,9 @@ if (typeof kotlin === 'undefined') {
     this.view_0.selectCodeDescriptionProvider_ecttm8$(provider);
     launch(coroutines.GlobalScope, void 0, void 0, UiController$selectCodeDescriptionProvider$lambda(this, provider));
   };
-  function Coroutine$UiController$selectCodeDescriptionLocation$lambda(closure$location_0, this$UiController_0, $receiver_0, controller, continuation_0) {
-    CoroutineImpl.call(this, continuation_0);
-    this.$controller = controller;
-    this.exceptionState_0 = 1;
-    this.local$closure$location = closure$location_0;
-    this.local$this$UiController = this$UiController_0;
-  }
-  Coroutine$UiController$selectCodeDescriptionLocation$lambda.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: null,
-    interfaces: [CoroutineImpl]
-  };
-  Coroutine$UiController$selectCodeDescriptionLocation$lambda.prototype = Object.create(CoroutineImpl.prototype);
-  Coroutine$UiController$selectCodeDescriptionLocation$lambda.prototype.constructor = Coroutine$UiController$selectCodeDescriptionLocation$lambda;
-  Coroutine$UiController$selectCodeDescriptionLocation$lambda.prototype.doResume = function () {
-    do
-      try {
-        switch (this.state_0) {
-          case 0:
-            this.state_0 = 2;
-            this.result_0 = this.local$closure$location.provider.loadCodeDescription_8witqk$(this.local$closure$location, this);
-            if (this.result_0 === COROUTINE_SUSPENDED)
-              return COROUTINE_SUSPENDED;
-            continue;
-          case 1:
-            throw this.exception_0;
-          case 2:
-            var description = this.result_0;
-            return this.local$this$UiController.view_0.setContent_lkph52$(this.local$closure$location, description.content), Unit;
-          default:this.state_0 = 1;
-            throw new Error('State Machine Unreachable execution');
-        }
-      } catch (e) {
-        if (this.state_0 === 1) {
-          this.exceptionState_0 = this.state_0;
-          throw e;
-        } else {
-          this.state_0 = this.exceptionState_0;
-          this.exception_0 = e;
-        }
-      }
-     while (true);
-  };
-  function UiController$selectCodeDescriptionLocation$lambda(closure$location_0, this$UiController_0) {
-    return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$UiController$selectCodeDescriptionLocation$lambda(closure$location_0, this$UiController_0, $receiver_0, this, continuation_0);
-      if (suspended)
-        return instance;
-      else
-        return instance.doResume(null);
-    };
-  }
   UiController.prototype.selectCodeDescriptionLocation_8witqk$ = function (location) {
     this.view_0.selectCodeDescriptionLocation_8witqk$(location);
-    launch(coroutines.GlobalScope, void 0, void 0, UiController$selectCodeDescriptionLocation$lambda(location, this));
+    this.view_0.setContent_lkph52$(location, '');
   };
   UiController.$metadata$ = {
     kind: Kind_CLASS,
