@@ -2,6 +2,7 @@ package org.olafneumann.errorcodes.html
 
 import kotlinx.html.dom.create
 import kotlinx.html.js.a
+import kotlinx.html.js.div
 import kotlinx.html.js.onClickFunction
 import kotlinx.html.span
 import org.olafneumann.errorcodes.DisplayContract
@@ -10,7 +11,6 @@ import org.olafneumann.errorcodes.codes.CodeDescriptionProvider
 import org.olafneumann.errorcodes.html.browser.HtmlHelper
 import org.olafneumann.errorcodes.html.browser.jQuery
 import org.w3c.dom.*
-import org.w3c.dom.events.Event
 import kotlin.browser.document
 
 class HtmlView(
@@ -22,6 +22,8 @@ class HtmlView(
     private val inputSearch = HtmlHelper.getElementById<HTMLInputElement>(ID_INPUT_SEARCH)
     private val divContentCode = HtmlHelper.getElementById<HTMLDivElement>(ID_CONTENT_CODE)
     private val divContentFrame = HtmlHelper.getElementById<HTMLIFrameElement>(ID_CONTENT_FRAME)
+    private val divContentHeader = HtmlHelper.getElementById<HTMLHeadingElement>(ID_CONTENT_HEADER)
+    private val divContentSource = HtmlHelper.getElementById<HTMLAnchorElement>(ID_CONTENT_SOURCE)
 
     init {
         inputSearch.addEventListener("input", {
@@ -35,6 +37,7 @@ class HtmlView(
     private val listCodes = ListMaintainer<CodeDescriptionLocation>(divListCodes, { createCodeLink(it) })
 
     override fun selectCodeDescriptionProvider(provider: CodeDescriptionProvider) {
+        inputSearch.value = ""
         divLabelProducts.innerText = provider.name
         listProducts.toggleActive(provider)
     }
@@ -47,8 +50,20 @@ class HtmlView(
     override fun showCodeDescriptionLocations(provider: CodeDescriptionProvider, locations: List<CodeDescriptionLocation>) = listCodes.showItems(locations, provider.comparator)
 
     override fun setContent(location: CodeDescriptionLocation, content: String) {
-        // divContentCode.innerHTML = content
-        divContentFrame.src = location.url.toString()
+        divContentCode.innerHTML = content
+
+        divContentHeader.childElementCount
+                .downTo(0)
+                .mapNotNull { divContentHeader.children[it] }
+                .forEach { divContentHeader.removeChild(it) }
+        divContentHeader.appendChild(document.create.div {
+            span { +location.provider.name }
+            +": "
+            span (classes = "font-weight-bold") { +location.code }
+        })
+        divContentSource.href = location.url.toString()
+        divContentSource.innerText = location.url.toString()
+        // divContentFrame.src = location.url.toString()
     }
 
     private fun createProductLink(provider: CodeDescriptionProvider): HTMLElement =
@@ -85,5 +100,7 @@ class HtmlView(
         const val ID_INPUT_SEARCH = "ec_input_search"
         const val ID_CONTENT_CODE = "ec_content_code"
         const val ID_CONTENT_FRAME = "ec_content_frame"
+        const val ID_CONTENT_HEADER = "ec_source_header"
+        const val ID_CONTENT_SOURCE = "ec_source_link"
     }
 }

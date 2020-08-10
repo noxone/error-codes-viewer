@@ -66,17 +66,19 @@
         </div>
     </nav>
 
-    <div class="container-fluid py-3 ec-full-body">
-        <div class="row mb-3">
-            <div class="col-3 panel-body">
-                <div class="list-group list-group-flush border rounded" id="ec_list_codes">
-                </div>
+    <div class="container-fluid py-3 ec-full-body row">
+        <div class="col-3 panel-body ec-full-height">
+            <div class="list-group list-group-flush border rounded ec-full-overflow" id="ec_list_codes">
             </div>
-            <div class="col-9">
-                <div class="card ec-full-height">
-                    <div class="card-body" id="ec_content_code">
-                        <iframe id="ec_content_frame" class="ec-borderless ec-full-size"></iframe>
-                    </div>
+        </div>
+        <div class="col-9">
+            <div class="card ec-full-height">
+                <h3 class="card-header" id="ec_source_header">&nbsp;</h3>
+                <div class="card-body ec-full-overflow" id="ec_content_code">
+                    <iframe id="ec_content_frame" class="ec-borderless ec-full-size"></iframe>
+                </div>
+                <div class="card-footer">
+                    <a id="ec_source_link" href="#" target="_blank">&nbsp;</a>
                 </div>
             </div>
         </div>

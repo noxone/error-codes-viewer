@@ -39,6 +39,16 @@ iframe.ec-borderless {
 	height: 100%;
 }
 
+.ec-full-height {
+	height: 100%;
+}
+
+.ec-full-overflow {
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
 html, body {
 	height: 100%;
 }

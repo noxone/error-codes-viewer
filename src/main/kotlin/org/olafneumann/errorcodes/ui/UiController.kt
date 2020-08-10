@@ -27,10 +27,10 @@ class UiController(
 
     override fun selectCodeDescriptionLocation(location: CodeDescriptionLocation) {
         view.selectCodeDescriptionLocation(location)
-        /*GlobalScope.launch {
+        GlobalScope.launch {
             val description = location.provider.loadCodeDescription(location)
-            view.setContent(description.content)
-        }*/
-        view.setContent(location, "")
+            view.setContent(location, description.content)
+        }
+        //view.setContent(location, "")
     }
 }
