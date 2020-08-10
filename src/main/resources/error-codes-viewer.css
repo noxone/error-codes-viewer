@@ -6,16 +6,29 @@
 	filter: blur(5px);
 }
 
-.product-producer {
-	color: #666;
+.ec-product-producer {
 	margin-right: 0.5em;
 }
 
-.product-title {
+.ec-product-title {
 	font-weight: bold;
 	margin-right: 0.5em;
 }
 
-.product-version {
+.ec-product-version {
 	font-style: italic;
+}
+
+.ec-full-height {
+	height: 100%;
+	min-height: 100%;
+}
+
+iframe.ec-borderless {
+	border: none;
+}
+
+.ec-full-size {
+	width: 100%;
+	height: 100%;
 }

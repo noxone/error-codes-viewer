@@ -38,7 +38,7 @@
         </div>
     </div>-->
 
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-nav">
         <span class="navbar-brand mb-0 h1 pr-3">Error Codes Viewer</span>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -50,15 +50,15 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     <form class="form-inline" action="#" method="GET">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <input id="ec_input_search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                     </form>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    <a class="nav-link dropdown-toggle" href="#" id="ec_label_products" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Product
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="ec_list_products">
+                    <div class="dropdown-menu" aria-labelledby="ec_label_products" id="ec_list_products">
                     </div>
                 </li>
             </ul>
@@ -68,13 +68,13 @@
     <div class="container-fluid py-3 fill">
         <div class="row mb-3">
             <div class="col-3 panel-body">
-                <div class="list-group" id="ec_list_codes">
+                <div class="list-group list-group-flush border rounded" id="ec_list_codes">
                 </div>
             </div>
             <div class="col-9">
-                <div class="card">
+                <div class="card ec-full-height">
                     <div class="card-body" id="ec_content_code">
-                        This is some text within a card body.
+                        <iframe id="ec_content_frame" class="ec-borderless ec-full-size"></iframe>
                     </div>
             </div>
             </div>

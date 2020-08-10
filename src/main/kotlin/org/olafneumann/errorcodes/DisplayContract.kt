@@ -7,7 +7,9 @@ interface DisplayContract {
     interface View {
         fun showCodeDescriptionProviders(providers: List<CodeDescriptionProvider>)
         fun showCodeDescriptionLocations(provider: CodeDescriptionProvider, locations: List<CodeDescriptionLocation>)
-        fun setContent(content: String)
+        fun selectCodeDescriptionProvider(provider: CodeDescriptionProvider)
+        fun selectCodeDescriptionLocation(location: CodeDescriptionLocation)
+        fun setContent(location: CodeDescriptionLocation, content: String)
     }
     interface Controller {
         fun selectCodeDescriptionProvider(provider: CodeDescriptionProvider)

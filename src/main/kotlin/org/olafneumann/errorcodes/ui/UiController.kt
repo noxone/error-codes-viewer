@@ -16,25 +16,23 @@ class UiController(
 
     init {
         view.showCodeDescriptionProviders(codeDescriptionProviders)
-    }
-
-    override fun selectCodeDescriptionLocation(location: CodeDescriptionLocation) {
-        // TODO("Not yet implemented")
-        println("selectCodeDescriptionLocation(${location.code})")
-
-        GlobalScope.launch {
-            val description = location.provider.loadCodeDescription(location)
-            view.setContent(description.content)
-        }
+        selectCodeDescriptionProvider(codeDescriptionProviders.first())
     }
 
     override fun selectCodeDescriptionProvider(provider: CodeDescriptionProvider) {
-        // TODO("Not yet implemented")
-        println("selectCodeDescriptionProvider(${provider.name})")
-
         // TODO show loading state
+        view.selectCodeDescriptionProvider(provider)
         GlobalScope.launch {
             view.showCodeDescriptionLocations(provider, provider.loadLocationList())
         }
+    }
+
+    override fun selectCodeDescriptionLocation(location: CodeDescriptionLocation) {
+        view.selectCodeDescriptionLocation(location)
+        /*GlobalScope.launch {
+            val description = location.provider.loadCodeDescription(location)
+            view.setContent(description.content)
+        }*/
+        view.setContent(location, "")
     }
 }
