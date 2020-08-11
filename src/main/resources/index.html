@@ -49,19 +49,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <form class="form-inline" action="#" method="GET">
-                        <input id="ec_input_search" class="form-control mr-sm-2" type="search" placeholder="Search"
-                            aria-label="Search">
-                    </form>
                 </li>
                 <li>
                     <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="ec_label_products" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Dropdown button
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="ec_label_products"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown button
                         </button>
                         <div id="ec_list_products" class="dropdown-menu" aria-labelledby="ec_label_products">
                         </div>
-                      </div>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -69,7 +66,12 @@
 
     <div class="container-fluid py-3 ec-full-body row">
         <div class="col-3 panel-body ec-full-height">
-            <div class="list-group list-group-flush border rounded ec-full-overflow" id="ec_list_codes">
+            <div class="border rounded ec-full-height">
+                <input id="ec_input_search" class="form-control mr-sm-2 border-secondary rounded-0 ec-code-search"
+                     type="search" placeholder="Search"
+                    aria-label="Search">
+                <div class="list-group list-group-flush rounded ec-code-list" id="ec_list_codes">
+                </div>
             </div>
         </div>
         <div class="col-9">
