@@ -32,8 +32,8 @@ if (typeof kotlin === 'undefined') {
   var get_CASE_INSENSITIVE_ORDER = Kotlin.kotlin.text.get_CASE_INSENSITIVE_ORDER_6eet4j$;
   var Kind_CLASS = Kotlin.Kind.CLASS;
   var Url = $module$ktor_ktor_http.io.ktor.http.Url_61zpoe$;
-  var Regex_init = Kotlin.kotlin.text.Regex_init_61zpoe$;
   var toInt = Kotlin.kotlin.text.toInt_pdl1vz$;
+  var Regex_init = Kotlin.kotlin.text.Regex_init_61zpoe$;
   var Comparator = Kotlin.kotlin.Comparator;
   var Unit = Kotlin.kotlin.Unit;
   var takeFrom = $module$ktor_ktor_client_core.$$importsForInline$$['ktor-ktor-http'].io.ktor.http.takeFrom_wol2ee$;
@@ -85,10 +85,14 @@ if (typeof kotlin === 'undefined') {
   var launch = $module$kotlinx_coroutines_core.kotlinx.coroutines.launch_s496o7$;
   ApplicationSettings.prototype = Object.create(AbstractApplicationSettings.prototype);
   ApplicationSettings.prototype.constructor = ApplicationSettings;
-  Db2ZosCodeDescriptionProvider.prototype = Object.create(AbstractUrlCodeDescriptionProvider.prototype);
-  Db2ZosCodeDescriptionProvider.prototype.constructor = Db2ZosCodeDescriptionProvider;
-  MQCodeDescriptionProvider.prototype = Object.create(AbstractUrlCodeDescriptionProvider.prototype);
-  MQCodeDescriptionProvider.prototype.constructor = MQCodeDescriptionProvider;
+  AbstractIbmUrlCodeDescriptionProvider.prototype = Object.create(AbstractUrlCodeDescriptionProvider.prototype);
+  AbstractIbmUrlCodeDescriptionProvider.prototype.constructor = AbstractIbmUrlCodeDescriptionProvider;
+  Db2Zos10CodeDescriptionProvider.prototype = Object.create(AbstractIbmUrlCodeDescriptionProvider.prototype);
+  Db2Zos10CodeDescriptionProvider.prototype.constructor = Db2Zos10CodeDescriptionProvider;
+  Db2Zos11CodeDescriptionProvider.prototype = Object.create(AbstractIbmUrlCodeDescriptionProvider.prototype);
+  Db2Zos11CodeDescriptionProvider.prototype.constructor = Db2Zos11CodeDescriptionProvider;
+  MQ8CodeDescriptionProvider.prototype = Object.create(AbstractIbmUrlCodeDescriptionProvider.prototype);
+  MQ8CodeDescriptionProvider.prototype.constructor = MQ8CodeDescriptionProvider;
   function ApplicationSettings() {
     ApplicationSettings_instance = this;
     AbstractApplicationSettings.call(this);
@@ -563,77 +567,86 @@ if (typeof kotlin === 'undefined') {
     simpleName: 'AbstractUrlCodeDescriptionProvider',
     interfaces: [CodeDescriptionProvider]
   };
-  function Db2ZosCodeDescriptionProvider() {
-    AbstractUrlCodeDescriptionProvider.call(this, 'IBM', 'Db2 for z/OS', '10.0.0');
-    this.indexUrl_nqmyq3$_0 = Url('https://www.ibm.com/support/knowledgecenter/SSEPEK_10.0.0/codes/src/tpc/db2z_n.html?view=embed');
-    this.codeDescriptionRegex_7bid7q$_0 = Regex_init('<span class="ulchildlinktext"><a [^>]*href="([^"]+)"[^>]*>(-[0-9]+)<\/a>');
-    this.detailBaseUrlString_0 = 'https://www.ibm.com/support/knowledgecenter/SSEPEK_10.0.0/codes/src/tpc/';
-    this.comparator_rvdiyk$_0 = new Comparator$ObjectLiteral(Db2ZosCodeDescriptionProvider$comparator$lambda);
+  function AbstractIbmUrlCodeDescriptionProvider(producer, title, version, indexUrl, codeDescriptionRegex, detailBaseUrlString, contentUrlAddition) {
+    if (contentUrlAddition === void 0)
+      contentUrlAddition = '?view=embed';
+    AbstractUrlCodeDescriptionProvider.call(this, producer, title, version);
+    this.producer_ourmcz$_0 = producer;
+    this.title_z0ispp$_0 = title;
+    this.version_lm2nvn$_0 = version;
+    this.indexUrl_kta3pa$_0 = indexUrl;
+    this.codeDescriptionRegex_mgfvfd$_0 = codeDescriptionRegex;
+    this.detailBaseUrlString = detailBaseUrlString;
+    this.contentUrlAddition = contentUrlAddition;
+    this.comparator_wsjjr$_0 = new Comparator$ObjectLiteral(AbstractIbmUrlCodeDescriptionProvider$comparator$lambda);
   }
-  Object.defineProperty(Db2ZosCodeDescriptionProvider.prototype, 'indexUrl', {
+  Object.defineProperty(AbstractIbmUrlCodeDescriptionProvider.prototype, 'producer', {
     get: function () {
-      return this.indexUrl_nqmyq3$_0;
+      return this.producer_ourmcz$_0;
     }
   });
-  Object.defineProperty(Db2ZosCodeDescriptionProvider.prototype, 'codeDescriptionRegex', {
+  Object.defineProperty(AbstractIbmUrlCodeDescriptionProvider.prototype, 'title', {
     get: function () {
-      return this.codeDescriptionRegex_7bid7q$_0;
+      return this.title_z0ispp$_0;
     }
   });
-  Db2ZosCodeDescriptionProvider.prototype.convertMatchToCodeDescriptionLocation_bl4kwi$ = function (matchResult) {
+  Object.defineProperty(AbstractIbmUrlCodeDescriptionProvider.prototype, 'version', {
+    get: function () {
+      return this.version_lm2nvn$_0;
+    }
+  });
+  Object.defineProperty(AbstractIbmUrlCodeDescriptionProvider.prototype, 'indexUrl', {
+    get: function () {
+      return this.indexUrl_kta3pa$_0;
+    }
+  });
+  Object.defineProperty(AbstractIbmUrlCodeDescriptionProvider.prototype, 'codeDescriptionRegex', {
+    get: function () {
+      return this.codeDescriptionRegex_mgfvfd$_0;
+    }
+  });
+  AbstractIbmUrlCodeDescriptionProvider.prototype.convertMatchToCodeDescriptionLocation_bl4kwi$ = function (matchResult) {
     var tmp$, tmp$_0, tmp$_1, tmp$_2;
     var href = (tmp$_0 = (tmp$ = matchResult.groups.get_za3lpa$(1)) != null ? tmp$.value : null) != null ? tmp$_0 : 'NO HREF';
     var text = (tmp$_2 = (tmp$_1 = matchResult.groups.get_za3lpa$(2)) != null ? tmp$_1.value : null) != null ? tmp$_2 : 'NO TEXT';
-    return new CodeDescriptionLocation(this, text, Url(this.detailBaseUrlString_0 + href + '?view=embed'), Url(this.detailBaseUrlString_0 + href));
+    return new CodeDescriptionLocation(this, text, Url(this.detailBaseUrlString + href + this.contentUrlAddition), Url(this.detailBaseUrlString + href));
   };
-  Object.defineProperty(Db2ZosCodeDescriptionProvider.prototype, 'comparator', {
+  Object.defineProperty(AbstractIbmUrlCodeDescriptionProvider.prototype, 'comparator', {
     get: function () {
-      return this.comparator_rvdiyk$_0;
+      return this.comparator_wsjjr$_0;
     }
   });
-  function Db2ZosCodeDescriptionProvider$comparator$lambda(a, b) {
+  function AbstractIbmUrlCodeDescriptionProvider$comparator$lambda(a, b) {
     return Kotlin.primitiveCompareTo(abs(toInt(a.code)), abs(toInt(b.code)));
   }
-  Db2ZosCodeDescriptionProvider.$metadata$ = {
+  AbstractIbmUrlCodeDescriptionProvider.$metadata$ = {
     kind: Kind_CLASS,
-    simpleName: 'Db2ZosCodeDescriptionProvider',
+    simpleName: 'AbstractIbmUrlCodeDescriptionProvider',
     interfaces: [AbstractUrlCodeDescriptionProvider]
   };
-  function MQCodeDescriptionProvider() {
-    AbstractUrlCodeDescriptionProvider.call(this, 'IBM', 'MQ', '8.0.0');
-    this.indexUrl_w8kb7p$_0 = Url('https://www.ibm.com/support/knowledgecenter/SSFKSJ_8.0.0/com.ibm.mq.tro.doc/q040710_.htm?view=embed');
-    this.codeDescriptionRegex_qcdkps$_0 = Regex_init('<li class="ulchildlink".*?<a href="([^"]+)"[^>]*>([0-9]+)[^<]*<\/a');
-    this.detailBaseUrlString_0 = 'https://www.ibm.com/support/knowledgecenter/SSFKSJ_8.0.0/com.ibm.mq.tro.doc/';
-    this.comparator_tw5g02$_0 = new Comparator$ObjectLiteral(MQCodeDescriptionProvider$comparator$lambda);
+  function Db2Zos10CodeDescriptionProvider() {
+    AbstractIbmUrlCodeDescriptionProvider.call(this, 'IBM', 'Db2 for z/OS', '10.0.0', Url('https://www.ibm.com/support/knowledgecenter/SSEPEK_10.0.0/codes/src/tpc/db2z_n.html?view=embed'), Regex_init('<span class="ulchildlinktext"><a [^>]*href="([^"]+)"[^>]*>(-[0-9]+)<\/a>'), 'https://www.ibm.com/support/knowledgecenter/SSEPEK_10.0.0/codes/src/tpc/');
   }
-  Object.defineProperty(MQCodeDescriptionProvider.prototype, 'indexUrl', {
-    get: function () {
-      return this.indexUrl_w8kb7p$_0;
-    }
-  });
-  Object.defineProperty(MQCodeDescriptionProvider.prototype, 'codeDescriptionRegex', {
-    get: function () {
-      return this.codeDescriptionRegex_qcdkps$_0;
-    }
-  });
-  MQCodeDescriptionProvider.prototype.convertMatchToCodeDescriptionLocation_bl4kwi$ = function (matchResult) {
-    var tmp$, tmp$_0, tmp$_1, tmp$_2;
-    var href = (tmp$_0 = (tmp$ = matchResult.groups.get_za3lpa$(1)) != null ? tmp$.value : null) != null ? tmp$_0 : 'NO HREF';
-    var text = (tmp$_2 = (tmp$_1 = matchResult.groups.get_za3lpa$(2)) != null ? tmp$_1.value : null) != null ? tmp$_2 : 'NO TEXT';
-    return new CodeDescriptionLocation(this, text, Url(this.detailBaseUrlString_0 + href + '?view=embed'), Url(this.detailBaseUrlString_0 + href));
-  };
-  Object.defineProperty(MQCodeDescriptionProvider.prototype, 'comparator', {
-    get: function () {
-      return this.comparator_tw5g02$_0;
-    }
-  });
-  function MQCodeDescriptionProvider$comparator$lambda(a, b) {
-    return Kotlin.primitiveCompareTo(abs(toInt(a.code)), abs(toInt(b.code)));
-  }
-  MQCodeDescriptionProvider.$metadata$ = {
+  Db2Zos10CodeDescriptionProvider.$metadata$ = {
     kind: Kind_CLASS,
-    simpleName: 'MQCodeDescriptionProvider',
-    interfaces: [AbstractUrlCodeDescriptionProvider]
+    simpleName: 'Db2Zos10CodeDescriptionProvider',
+    interfaces: [AbstractIbmUrlCodeDescriptionProvider]
+  };
+  function Db2Zos11CodeDescriptionProvider() {
+    AbstractIbmUrlCodeDescriptionProvider.call(this, 'IBM', 'Db2 for z/OS', '11.0.0', Url('https://www.ibm.com/support/knowledgecenter/SSEPEK_11.0.0/codes/src/tpc/db2z_n.html?view=embed'), Regex_init('<span class="ulchildlinktext"><a [^>]*href="([^"]+)"[^>]*>(-[0-9]+)<\/a>'), 'https://www.ibm.com/support/knowledgecenter/SSEPEK_11.0.0/codes/src/tpc/');
+  }
+  Db2Zos11CodeDescriptionProvider.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Db2Zos11CodeDescriptionProvider',
+    interfaces: [AbstractIbmUrlCodeDescriptionProvider]
+  };
+  function MQ8CodeDescriptionProvider() {
+    AbstractIbmUrlCodeDescriptionProvider.call(this, 'IBM', 'MQ', '8.0.0', Url('https://www.ibm.com/support/knowledgecenter/SSFKSJ_8.0.0/com.ibm.mq.tro.doc/q040710_.htm?view=embed'), Regex_init('<li class="ulchildlink".*?<a href="([^"]+)"[^>]*>([0-9]+)[^<]*<\/a'), 'https://www.ibm.com/support/knowledgecenter/SSFKSJ_8.0.0/com.ibm.mq.tro.doc/');
+  }
+  MQ8CodeDescriptionProvider.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'MQ8CodeDescriptionProvider',
+    interfaces: [AbstractIbmUrlCodeDescriptionProvider]
   };
   function CodeDescription(content, dataOfLoading) {
     this.content = content;
@@ -867,6 +880,7 @@ if (typeof kotlin === 'undefined') {
   HtmlView.prototype.showCodeDescriptionLocations_koqndk$ = function (locations) {
     if (locations != null) {
       this.listCodes_0.showItems_rmogi$(locations, first(locations).provider.comparator);
+      this.inputSearch_0.focus();
     } else {
       this.listCodes_0.setLoading_8be2vx$();
     }
@@ -1521,8 +1535,10 @@ if (typeof kotlin === 'undefined') {
   $$importsForInline$$['ktor-ktor-client-core'] = $module$ktor_ktor_client_core;
   var package$codes = package$errorcodes.codes || (package$errorcodes.codes = {});
   package$codes.AbstractUrlCodeDescriptionProvider = AbstractUrlCodeDescriptionProvider;
-  package$codes.Db2ZosCodeDescriptionProvider = Db2ZosCodeDescriptionProvider;
-  package$codes.MQCodeDescriptionProvider = MQCodeDescriptionProvider;
+  package$codes.AbstractIbmUrlCodeDescriptionProvider = AbstractIbmUrlCodeDescriptionProvider;
+  package$codes.Db2Zos10CodeDescriptionProvider = Db2Zos10CodeDescriptionProvider;
+  package$codes.Db2Zos11CodeDescriptionProvider = Db2Zos11CodeDescriptionProvider;
+  package$codes.MQ8CodeDescriptionProvider = MQ8CodeDescriptionProvider;
   package$codes.CodeDescription = CodeDescription;
   package$codes.CodeDescriptionLocation = CodeDescriptionLocation;
   package$codes.CodeDescriptionProvider = CodeDescriptionProvider;
@@ -1548,7 +1564,7 @@ if (typeof kotlin === 'undefined') {
   var package$ui = package$errorcodes.ui || (package$errorcodes.ui = {});
   package$ui.UiController = UiController;
   Object.defineProperty(AbstractUrlCodeDescriptionProvider.prototype, 'name', Object.getOwnPropertyDescriptor(CodeDescriptionProvider.prototype, 'name'));
-  codeDescriptionProviders = listOf([new Db2ZosCodeDescriptionProvider(), new MQCodeDescriptionProvider()]);
+  codeDescriptionProviders = listOf([new Db2Zos10CodeDescriptionProvider(), new MQ8CodeDescriptionProvider()]);
   main();
   Kotlin.defineModule('error-codes-viewer', _);
   return _;
