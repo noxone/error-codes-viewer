@@ -15,7 +15,8 @@ fun main() {
 
 private val codeDescriptionProviders = listOf<CodeDescriptionProvider>(
     Db2Zos10CodeDescriptionProvider(),
-    //Db2Zos11CodeDescriptionProvider(),
+    Db2Zos11CodeDescriptionProvider(),
+    Db2Zos12CodeDescriptionProvider(),
     MQ8CodeDescriptionProvider()
 )
 
