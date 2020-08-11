@@ -12,7 +12,9 @@ abstract class AbstractUrlCodeDescriptionProvider(
         override val title: String,
         override val version: String
 ) : CodeDescriptionProvider {
-    private val client = HttpClient(Js)
+    companion object {
+        private val client = HttpClient(Js)
+    }
 
     protected abstract val indexUrl: Url
     protected abstract val codeDescriptionRegex: Regex
@@ -48,7 +50,8 @@ class Db2ZosCodeDescriptionProvider : AbstractUrlCodeDescriptionProvider("IBM", 
         return CodeDescriptionLocation(
             provider = this,
             code = text,
-            url = Url("$detailBaseUrlString$href?view=embed")
+            url = Url("$detailBaseUrlString$href?view=embed"),
+            displayUrl = Url("$detailBaseUrlString$href")
         )
     }
 
@@ -71,7 +74,8 @@ class MQCodeDescriptionProvider : AbstractUrlCodeDescriptionProvider("IBM", "MQ"
         return CodeDescriptionLocation(
             provider = this,
             code = text,
-            url = Url("$detailBaseUrlString$href?view=embed")
+            url = Url("$detailBaseUrlString$href?view=embed"),
+            displayUrl = Url("$detailBaseUrlString$href")
         )
     }
 

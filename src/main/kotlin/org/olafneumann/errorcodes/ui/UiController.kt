@@ -20,8 +20,10 @@ class UiController(
     override fun selectCodeDescriptionProvider(provider: CodeDescriptionProvider) {
         // TODO show loading state
         view.selectCodeDescriptionProvider(provider)
+        view.setContent(null)
+        view.showCodeDescriptionLocations(null)
         GlobalScope.launch {
-            view.showCodeDescriptionLocations(provider, provider.loadLocationList())
+            view.showCodeDescriptionLocations(provider.loadLocationList())
         }
     }
 
@@ -31,6 +33,6 @@ class UiController(
             val description = location.provider.loadCodeDescription(location)
             view.setContent(location, description.content)
         }*/
-        view.setContent(location, "")
+        view.setContent(location)
     }
 }
