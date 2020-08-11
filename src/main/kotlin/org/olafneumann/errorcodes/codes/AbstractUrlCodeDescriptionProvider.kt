@@ -12,7 +12,9 @@ abstract class AbstractUrlCodeDescriptionProvider(
         override val title: String,
         override val version: String
 ) : CodeDescriptionProvider {
-    private val client = HttpClient(Js)
+    companion object {
+        private val client = HttpClient(Js)
+    }
 
     protected abstract val indexUrl: Url
     protected abstract val codeDescriptionRegex: Regex

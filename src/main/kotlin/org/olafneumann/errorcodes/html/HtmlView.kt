@@ -16,7 +16,7 @@ import org.w3c.dom.*
 import kotlin.browser.document
 
 class HtmlView(
-    private val controller: DisplayContract.Controller
+        private val controller: DisplayContract.Controller
 ) : DisplayContract.View {
     private val divLabelProducts = HtmlHelper.getElementById<HTMLElement>(ID_LABEL_PRODUCTS)
     private val divListProducts = HtmlHelper.getElementById<HTMLDivElement>(ID_LIST_PRODUCTS)
@@ -36,13 +36,13 @@ class HtmlView(
     }
 
     private val listProducts = ListMaintainer<CodeDescriptionProvider>(
-        divListProducts,
-        { createProductLink(it) },
-        Comparator { a, b -> String.CASE_INSENSITIVE_ORDER.compare(a.name, b.name) })
+            divListProducts,
+            { createProductLink(it) },
+            Comparator { a, b -> String.CASE_INSENSITIVE_ORDER.compare(a.name, b.name) })
     private val listCodes = ListMaintainer<CodeDescriptionLocation>(divListCodes, { createCodeDescriptionLink(it) })
 
     override fun showCodeDescriptionProviders(providers: List<CodeDescriptionProvider>) =
-        listProducts.showItems(providers)
+            listProducts.showItems(providers)
 
     override fun selectCodeDescriptionProvider(provider: CodeDescriptionProvider) {
         inputSearch.value = ""
@@ -50,10 +50,12 @@ class HtmlView(
         listProducts.toggleActive(provider)
     }
 
-    override fun showCodeDescriptionLocations(
-        provider: CodeDescriptionProvider,
-        locations: List<CodeDescriptionLocation>
-    ) = listCodes.showItems(locations, provider.comparator)
+    override fun showCodeDescriptionLocations(locations: List<CodeDescriptionLocation>?) =
+            if (locations != null) {
+                listCodes.showItems(locations, locations.first().provider.comparator)
+            } else {
+                listCodes.setLoading()
+            }
 
     override fun selectCodeDescriptionLocation(location: CodeDescriptionLocation) {
         listCodes.toggleActive(location)
@@ -61,9 +63,9 @@ class HtmlView(
 
     override fun setContent(location: CodeDescriptionLocation?) {
         divContentHeader.childElementCount
-            .downTo(0)
-            .mapNotNull { divContentHeader.children[it] }
-            .forEach { divContentHeader.removeChild(it) }
+                .downTo(0)
+                .mapNotNull { divContentHeader.children[it] }
+                .forEach { divContentHeader.removeChild(it) }
         if (location != null) {
             divContentHeader.appendChild(document.create.span(classes = "ec-code-header") {
                 span(classes = "ec-product-producer") { +location.provider.producer }
@@ -83,25 +85,25 @@ class HtmlView(
     }
 
     private fun createProductLink(provider: CodeDescriptionProvider): HTMLElement =
-        document.create.button(classes = "dropdown-item", type = ButtonType.button) {
-            onClickFunction = {
-                it.stopPropagation()
-                jQuery(divListProducts.parentNode!!).dropdown("toggle")
-                controller.selectCodeDescriptionProvider(provider)
+            document.create.button(classes = "dropdown-item", type = ButtonType.button) {
+                onClickFunction = {
+                    it.stopPropagation()
+                    jQuery(divListProducts.parentNode!!).dropdown("toggle")
+                    controller.selectCodeDescriptionProvider(provider)
+                }
+                span("ec-product-producer") { +provider.producer }
+                span("ec-product-title") { +provider.title }
+                span("ec-product-version") { +provider.version }
             }
-            span("ec-product-producer") { +provider.producer }
-            span("ec-product-title") { +provider.title }
-            span("ec-product-version") { +provider.version }
-        }
 
     private fun createCodeDescriptionLink(location: CodeDescriptionLocation): HTMLElement =
-        document.create.button(classes = "list-group-item list-group-item-action") {
-            onClickFunction = {
-                it.stopPropagation()
-                controller.selectCodeDescriptionLocation(location)
+            document.create.button(classes = "list-group-item list-group-item-action") {
+                onClickFunction = {
+                    it.stopPropagation()
+                    controller.selectCodeDescriptionLocation(location)
+                }
+                +location.code
             }
-            +location.code
-        }
 
     companion object {
         const val ID_LABEL_PRODUCTS = "ec_label_products"

@@ -21,8 +21,9 @@ class UiController(
         // TODO show loading state
         view.selectCodeDescriptionProvider(provider)
         view.setContent(null)
+        view.showCodeDescriptionLocations(null)
         GlobalScope.launch {
-            view.showCodeDescriptionLocations(provider, provider.loadLocationList())
+            view.showCodeDescriptionLocations(provider.loadLocationList())
         }
     }
 

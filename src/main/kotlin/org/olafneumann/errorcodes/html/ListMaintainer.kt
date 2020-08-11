@@ -28,7 +28,7 @@ internal class ListMaintainer<T>(
         elements.forEach { parent.prepend(it.value) }
     }
 
-    fun setLoading() {
+    internal fun setLoading() {
         parent.removeChildren()
         parent.appendChild(createLoader())
     }
