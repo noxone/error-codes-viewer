@@ -1,6 +1,10 @@
 package org.olafneumann.errorcodes.html
 
+import kotlinx.html.div
+import kotlinx.html.dom.create
+import kotlinx.html.span
 import org.w3c.dom.*
+import kotlin.browser.document
 
 internal class ListMaintainer<T>(
     private val parent: HTMLDivElement,
@@ -24,9 +28,23 @@ internal class ListMaintainer<T>(
         elements.forEach { parent.prepend(it.value) }
     }
 
+    fun setLoading() {
+        parent.removeChildren()
+        parent.appendChild(createLoader())
+    }
+
     internal fun filter(filter: (T) -> Boolean) {
         elements.entries.forEach { it.value.classList.toggle("d-none", !filter.invoke(it.key)) }
     }
+
+    private fun createLoader(): HTMLElement =
+        document.create.div(classes="d-flex justify-content-center my-5") {
+            div(classes="spinner-grow") {
+                span(classes="sr-only") {
+                    +"Loading..."
+                }
+            }
+        }
 
     private fun Element.shouldBeRemoved(): Boolean =
         !(this is HTMLFormElement || this.classList.contains("gr-always-there"))

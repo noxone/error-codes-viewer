@@ -1,6 +1,7 @@
 package org.olafneumann.errorcodes.html
 
 import kotlinx.html.ButtonType
+import kotlinx.html.div
 import kotlinx.html.dom.create
 import kotlinx.html.js.a
 import kotlinx.html.js.button
@@ -58,23 +59,27 @@ class HtmlView(
         listCodes.toggleActive(location)
     }
 
-    override fun setContent(location: CodeDescriptionLocation, content: String) {
-        // divContentCode.innerHTML = content
-
+    override fun setContent(location: CodeDescriptionLocation?) {
         divContentHeader.childElementCount
             .downTo(0)
             .mapNotNull { divContentHeader.children[it] }
             .forEach { divContentHeader.removeChild(it) }
-        divContentHeader.appendChild(document.create.span(classes = "ec-code-header") {
-            span(classes = "ec-product-producer") { +location.provider.producer }
-            span(classes = "ec-product-title") { +location.provider.title }
-            span(classes = "ec-product-version") { +location.provider.version }
-            +": "
-            span(classes = "font-weight-bold") { +location.code }
-        })
-        divContentSource.href = location.displayUrl.toString()
-        divContentSource.innerText = location.displayUrl.toString()
-        divContentFrame.src = location.url.toString()
+        if (location != null) {
+            divContentHeader.appendChild(document.create.span(classes = "ec-code-header") {
+                span(classes = "ec-product-producer") { +location.provider.producer }
+                span(classes = "ec-product-title") { +location.provider.title }
+                span(classes = "ec-product-version") { +location.provider.version }
+                +": "
+                span(classes = "font-weight-bold") { +location.code }
+            })
+            divContentSource.href = location.displayUrl.toString()
+            divContentSource.innerText = location.displayUrl.toString()
+            divContentFrame.src = location.url.toString()
+        } else {
+            divContentSource.href = "#"
+            divContentSource.innerText = "\u00A0"
+            divContentFrame.src = ""
+        }
     }
 
     private fun createProductLink(provider: CodeDescriptionProvider): HTMLElement =
