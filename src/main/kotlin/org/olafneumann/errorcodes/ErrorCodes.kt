@@ -1,8 +1,6 @@
 package org.olafneumann.errorcodes
 
-import org.olafneumann.errorcodes.codes.CodeDescriptionProvider
-import org.olafneumann.errorcodes.codes.Db2ZosCodeDescriptionProvider
-import org.olafneumann.errorcodes.codes.MQCodeDescriptionProvider
+import org.olafneumann.errorcodes.codes.*
 import org.olafneumann.errorcodes.ui.UiController
 import kotlin.browser.window
 
@@ -15,7 +13,11 @@ fun main() {
     }
 }
 
-private val codeDescriptionProviders = listOf<CodeDescriptionProvider>(Db2ZosCodeDescriptionProvider(), MQCodeDescriptionProvider())
+private val codeDescriptionProviders = listOf<CodeDescriptionProvider>(
+    Db2Zos10CodeDescriptionProvider(),
+    //Db2Zos11CodeDescriptionProvider(),
+    MQ8CodeDescriptionProvider()
+)
 
 private fun initErrorCodes() {
     // initialize presentation code

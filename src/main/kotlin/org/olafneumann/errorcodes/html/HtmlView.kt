@@ -53,6 +53,7 @@ class HtmlView(
     override fun showCodeDescriptionLocations(locations: List<CodeDescriptionLocation>?) =
             if (locations != null) {
                 listCodes.showItems(locations, locations.first().provider.comparator)
+                inputSearch.focus()
             } else {
                 listCodes.setLoading()
             }
