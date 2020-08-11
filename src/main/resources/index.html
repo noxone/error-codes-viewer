@@ -54,13 +54,18 @@
                             aria-label="Search">
                     </form>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="ec_label_products" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Product
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="ec_label_products" id="ec_list_products">
-                    </div>
+                <li>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="ec_label_products" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Dropdown button
+                        </button>
+                        <div id="ec_list_products" class="dropdown-menu" aria-labelledby="ec_label_products">
+                          <a class="dropdown-item">Action</a>
+                          <button type="button" class="dropdown-item">abc</button>
+                          <a class="dropdown-item" href="#">Another action</a>
+                          <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                      </div>
                 </li>
             </ul>
         </div>
@@ -73,12 +78,12 @@
         </div>
         <div class="col-9">
             <div class="card ec-full-height">
-                <h3 class="card-header" id="ec_source_header">&nbsp;</h3>
-                <div class="card-body ec-full-overflow" id="ec_content_code">
+                <h3 class="card-header" id="ec_source_header"></h3>
+                <div class="card-body" id="ec_content_code">
                     <iframe id="ec_content_frame" class="ec-borderless ec-full-size"></iframe>
                 </div>
                 <div class="card-footer">
-                    <a id="ec_source_link" href="#" target="_blank">&nbsp;</a>
+                    <a id="ec_source_link" class="ec-overflow-link" href="#" target="_blank">&nbsp;</a>
                 </div>
             </div>
         </div>

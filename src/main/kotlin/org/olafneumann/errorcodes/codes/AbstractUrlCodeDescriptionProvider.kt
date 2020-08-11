@@ -48,7 +48,8 @@ class Db2ZosCodeDescriptionProvider : AbstractUrlCodeDescriptionProvider("IBM", 
         return CodeDescriptionLocation(
             provider = this,
             code = text,
-            url = Url("$detailBaseUrlString$href?view=embed")
+            url = Url("$detailBaseUrlString$href?view=embed"),
+            displayUrl = Url("$detailBaseUrlString$href")
         )
     }
 
@@ -71,7 +72,8 @@ class MQCodeDescriptionProvider : AbstractUrlCodeDescriptionProvider("IBM", "MQ"
         return CodeDescriptionLocation(
             provider = this,
             code = text,
-            url = Url("$detailBaseUrlString$href?view=embed")
+            url = Url("$detailBaseUrlString$href?view=embed"),
+            displayUrl = Url("$detailBaseUrlString$href")
         )
     }
 
