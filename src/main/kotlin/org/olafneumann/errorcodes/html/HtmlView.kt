@@ -60,7 +60,7 @@ class HtmlView(
         listCodes.toggleActive(location)
     }
 
-    override fun setContent(location: CodeDescriptionLocation?) {
+    override fun showCodeDescription(location: CodeDescriptionLocation?) {
         divContentHeader.childElementCount
                 .downTo(0)
                 .mapNotNull { divContentHeader.children[it] }
@@ -75,7 +75,17 @@ class HtmlView(
             })
             divContentSource.href = location.displayUrl.toString()
             divContentSource.innerText = location.displayUrl.toString()
-            divContentFrame.src = location.url.toString()
+            if (location.content != null) {
+                divContentFrame.classList.toggle("d-none", true)
+                divContentCode.classList.toggle("d-none", false)
+                divContentFrame.src = ""
+                divContentCode.innerHTML = location.content.content
+            } else {
+                divContentFrame.classList.toggle("d-none", false)
+                divContentCode.classList.toggle("d-none", true)
+                divContentFrame.src = location.url.toString()
+                divContentCode.innerHTML = ""
+            }
         } else {
             divContentSource.href = "#"
             divContentSource.innerText = "\u00A0"
@@ -90,7 +100,7 @@ class HtmlView(
                     jQuery(divListProducts.parentNode!!).dropdown("toggle")
                     controller.selectCodeDescriptionProvider(provider)
                 }
-                span("ec-product-producer") { +provider.product.version }
+                span("ec-product-vendor") { +provider.product.vendor }
                 span("ec-product-title") { +provider.product.title }
                 span("ec-product-version") { +provider.product.version }
             }

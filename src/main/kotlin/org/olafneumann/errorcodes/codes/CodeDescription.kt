@@ -4,5 +4,5 @@ import kotlin.js.Date
 
 data class CodeDescription (
     val content: String,
-    val dataOfLoading: Date
+    val dataOfLoading: Date = Date()
 )
