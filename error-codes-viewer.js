@@ -31,9 +31,6 @@ if (typeof kotlin === 'undefined') {
   var kotlin_js_internal_StringCompanionObject = Kotlin.kotlin.js.internal.StringCompanionObject;
   var get_CASE_INSENSITIVE_ORDER = Kotlin.kotlin.text.get_CASE_INSENSITIVE_ORDER_6eet4j$;
   var Kind_CLASS = Kotlin.Kind.CLASS;
-  var Url = $module$ktor_ktor_http.io.ktor.http.Url_61zpoe$;
-  var toInt = Kotlin.kotlin.text.toInt_pdl1vz$;
-  var Regex_init = Kotlin.kotlin.text.Regex_init_61zpoe$;
   var Comparator = Kotlin.kotlin.Comparator;
   var Unit = Kotlin.kotlin.Unit;
   var takeFrom = $module$ktor_ktor_client_core.$$importsForInline$$['ktor-ktor-http'].io.ktor.http.takeFrom_wol2ee$;
@@ -49,6 +46,13 @@ if (typeof kotlin === 'undefined') {
   var complete = $module$ktor_ktor_client_core.io.ktor.client.statement.complete_abn2de$;
   var call = $module$ktor_ktor_client_core.io.ktor.client.call;
   var TypeInfo_init = $module$ktor_ktor_client_core.io.ktor.client.call.TypeInfo;
+  var Url = $module$ktor_ktor_http.io.ktor.http.Url_61zpoe$;
+  var Regex_init = Kotlin.kotlin.text.Regex_init_61zpoe$;
+  var splitToSequence = Kotlin.kotlin.text.splitToSequence_o64adg$;
+  var capitalize = Kotlin.kotlin.text.capitalize_pdl1vz$;
+  var joinToString = Kotlin.kotlin.sequences.joinToString_853xkz$;
+  var toInt = Kotlin.kotlin.text.toInt_pdl1vz$;
+  var trim = Kotlin.kotlin.text.trim_gw00vp$;
   var abs = Kotlin.kotlin.math.abs_za3lpa$;
   var first = Kotlin.kotlin.collections.first_2p1efm$;
   var downTo = Kotlin.kotlin.ranges.downTo_dqglrj$;
@@ -68,6 +72,7 @@ if (typeof kotlin === 'undefined') {
   var attributesMapOf_0 = $module$kotlinx_html_js.kotlinx.html.attributesMapOf_alerag$;
   var BUTTON_init = $module$kotlinx_html_js.kotlinx.html.BUTTON;
   var HTMLButtonElement_0 = HTMLButtonElement;
+  var DIV_init = $module$kotlinx_html_js.kotlinx.html.DIV;
   var sortedWith = Kotlin.kotlin.collections.sortedWith_eknfly$;
   var reversed = Kotlin.kotlin.collections.reversed_7wnvza$;
   var to = Kotlin.kotlin.to_ujzrz7$;
@@ -75,7 +80,6 @@ if (typeof kotlin === 'undefined') {
   var emptyMap = Kotlin.kotlin.collections.emptyMap_q3lmfv$;
   var collectionSizeOrDefault = Kotlin.kotlin.collections.collectionSizeOrDefault_ba2ldo$;
   var ArrayList_init_0 = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
-  var DIV_init = $module$kotlinx_html_js.kotlinx.html.DIV;
   var mapNotNull = Kotlin.kotlin.sequences.mapNotNull_qpz9h9$;
   var toBoolean = Kotlin.kotlin.text.toBoolean_pdl1vz$;
   var LinkedHashMap_init = Kotlin.kotlin.collections.LinkedHashMap_init_q3lmfv$;
@@ -91,6 +95,8 @@ if (typeof kotlin === 'undefined') {
   Db2Zos10CodeDescriptionProvider.prototype.constructor = Db2Zos10CodeDescriptionProvider;
   Db2Zos11CodeDescriptionProvider.prototype = Object.create(AbstractIbmUrlCodeDescriptionProvider.prototype);
   Db2Zos11CodeDescriptionProvider.prototype.constructor = Db2Zos11CodeDescriptionProvider;
+  Db2Zos12CodeDescriptionProvider.prototype = Object.create(AbstractIbmUrlCodeDescriptionProvider.prototype);
+  Db2Zos12CodeDescriptionProvider.prototype.constructor = Db2Zos12CodeDescriptionProvider;
   MQ8CodeDescriptionProvider.prototype = Object.create(AbstractIbmUrlCodeDescriptionProvider.prototype);
   MQ8CodeDescriptionProvider.prototype.constructor = MQ8CodeDescriptionProvider;
   function ApplicationSettings() {
@@ -261,26 +267,14 @@ if (typeof kotlin === 'undefined') {
   function get$lambda($receiver) {
     return Unit;
   }
-  function AbstractUrlCodeDescriptionProvider(producer, title, version) {
+  function AbstractUrlCodeDescriptionProvider(product) {
     AbstractUrlCodeDescriptionProvider$Companion_getInstance();
-    this.producer_8at1gd$_0 = producer;
-    this.title_b1bhal$_0 = title;
-    this.version_kp7bpp$_0 = version;
+    this.product_y3o8q2$_0 = product;
     this.comparator_vztgfb$_0 = new Comparator$ObjectLiteral(AbstractUrlCodeDescriptionProvider$comparator$lambda);
   }
-  Object.defineProperty(AbstractUrlCodeDescriptionProvider.prototype, 'producer', {
+  Object.defineProperty(AbstractUrlCodeDescriptionProvider.prototype, 'product', {
     get: function () {
-      return this.producer_8at1gd$_0;
-    }
-  });
-  Object.defineProperty(AbstractUrlCodeDescriptionProvider.prototype, 'title', {
-    get: function () {
-      return this.title_b1bhal$_0;
-    }
-  });
-  Object.defineProperty(AbstractUrlCodeDescriptionProvider.prototype, 'version', {
-    get: function () {
-      return this.version_kp7bpp$_0;
+      return this.product_y3o8q2$_0;
     }
   });
   function AbstractUrlCodeDescriptionProvider$Companion() {
@@ -567,88 +561,9 @@ if (typeof kotlin === 'undefined') {
     simpleName: 'AbstractUrlCodeDescriptionProvider',
     interfaces: [CodeDescriptionProvider]
   };
-  function AbstractIbmUrlCodeDescriptionProvider(producer, title, version, indexUrl, codeDescriptionRegex, detailBaseUrlString, contentUrlAddition) {
-    if (contentUrlAddition === void 0)
-      contentUrlAddition = '?view=embed';
-    AbstractUrlCodeDescriptionProvider.call(this, producer, title, version);
-    this.producer_ourmcz$_0 = producer;
-    this.title_z0ispp$_0 = title;
-    this.version_lm2nvn$_0 = version;
-    this.indexUrl_kta3pa$_0 = indexUrl;
-    this.codeDescriptionRegex_mgfvfd$_0 = codeDescriptionRegex;
-    this.detailBaseUrlString = detailBaseUrlString;
-    this.contentUrlAddition = contentUrlAddition;
-    this.comparator_wsjjr$_0 = new Comparator$ObjectLiteral(AbstractIbmUrlCodeDescriptionProvider$comparator$lambda);
-  }
-  Object.defineProperty(AbstractIbmUrlCodeDescriptionProvider.prototype, 'producer', {
-    get: function () {
-      return this.producer_ourmcz$_0;
-    }
-  });
-  Object.defineProperty(AbstractIbmUrlCodeDescriptionProvider.prototype, 'title', {
-    get: function () {
-      return this.title_z0ispp$_0;
-    }
-  });
-  Object.defineProperty(AbstractIbmUrlCodeDescriptionProvider.prototype, 'version', {
-    get: function () {
-      return this.version_lm2nvn$_0;
-    }
-  });
-  Object.defineProperty(AbstractIbmUrlCodeDescriptionProvider.prototype, 'indexUrl', {
-    get: function () {
-      return this.indexUrl_kta3pa$_0;
-    }
-  });
-  Object.defineProperty(AbstractIbmUrlCodeDescriptionProvider.prototype, 'codeDescriptionRegex', {
-    get: function () {
-      return this.codeDescriptionRegex_mgfvfd$_0;
-    }
-  });
-  AbstractIbmUrlCodeDescriptionProvider.prototype.convertMatchToCodeDescriptionLocation_bl4kwi$ = function (matchResult) {
-    var tmp$, tmp$_0, tmp$_1, tmp$_2;
-    var href = (tmp$_0 = (tmp$ = matchResult.groups.get_za3lpa$(1)) != null ? tmp$.value : null) != null ? tmp$_0 : 'NO HREF';
-    var text = (tmp$_2 = (tmp$_1 = matchResult.groups.get_za3lpa$(2)) != null ? tmp$_1.value : null) != null ? tmp$_2 : 'NO TEXT';
-    return new CodeDescriptionLocation(this, text, Url(this.detailBaseUrlString + href + this.contentUrlAddition), Url(this.detailBaseUrlString + href));
-  };
-  Object.defineProperty(AbstractIbmUrlCodeDescriptionProvider.prototype, 'comparator', {
-    get: function () {
-      return this.comparator_wsjjr$_0;
-    }
-  });
-  function AbstractIbmUrlCodeDescriptionProvider$comparator$lambda(a, b) {
-    return Kotlin.primitiveCompareTo(abs(toInt(a.code)), abs(toInt(b.code)));
-  }
-  AbstractIbmUrlCodeDescriptionProvider.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'AbstractIbmUrlCodeDescriptionProvider',
-    interfaces: [AbstractUrlCodeDescriptionProvider]
-  };
-  function Db2Zos10CodeDescriptionProvider() {
-    AbstractIbmUrlCodeDescriptionProvider.call(this, 'IBM', 'Db2 for z/OS', '10.0.0', Url('https://www.ibm.com/support/knowledgecenter/SSEPEK_10.0.0/codes/src/tpc/db2z_n.html?view=embed'), Regex_init('<span class="ulchildlinktext"><a [^>]*href="([^"]+)"[^>]*>(-[0-9]+)<\/a>'), 'https://www.ibm.com/support/knowledgecenter/SSEPEK_10.0.0/codes/src/tpc/');
-  }
-  Db2Zos10CodeDescriptionProvider.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'Db2Zos10CodeDescriptionProvider',
-    interfaces: [AbstractIbmUrlCodeDescriptionProvider]
-  };
-  function Db2Zos11CodeDescriptionProvider() {
-    AbstractIbmUrlCodeDescriptionProvider.call(this, 'IBM', 'Db2 for z/OS', '11.0.0', Url('https://www.ibm.com/support/knowledgecenter/SSEPEK_11.0.0/codes/src/tpc/db2z_n.html?view=embed'), Regex_init('<span class="ulchildlinktext"><a [^>]*href="([^"]+)"[^>]*>(-[0-9]+)<\/a>'), 'https://www.ibm.com/support/knowledgecenter/SSEPEK_11.0.0/codes/src/tpc/');
-  }
-  Db2Zos11CodeDescriptionProvider.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'Db2Zos11CodeDescriptionProvider',
-    interfaces: [AbstractIbmUrlCodeDescriptionProvider]
-  };
-  function MQ8CodeDescriptionProvider() {
-    AbstractIbmUrlCodeDescriptionProvider.call(this, 'IBM', 'MQ', '8.0.0', Url('https://www.ibm.com/support/knowledgecenter/SSFKSJ_8.0.0/com.ibm.mq.tro.doc/q040710_.htm?view=embed'), Regex_init('<li class="ulchildlink".*?<a href="([^"]+)"[^>]*>([0-9]+)[^<]*<\/a'), 'https://www.ibm.com/support/knowledgecenter/SSFKSJ_8.0.0/com.ibm.mq.tro.doc/');
-  }
-  MQ8CodeDescriptionProvider.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'MQ8CodeDescriptionProvider',
-    interfaces: [AbstractIbmUrlCodeDescriptionProvider]
-  };
   function CodeDescription(content, dataOfLoading) {
+    if (dataOfLoading === void 0)
+      dataOfLoading = new Date();
     this.content = content;
     this.dataOfLoading = dataOfLoading;
   }
@@ -678,13 +593,19 @@ if (typeof kotlin === 'undefined') {
   CodeDescription.prototype.equals = function (other) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.content, other.content) && Kotlin.equals(this.dataOfLoading, other.dataOfLoading)))));
   };
-  function CodeDescriptionLocation(provider, code, url, displayUrl) {
+  function CodeDescriptionLocation(provider, code, summary, url, displayUrl, content) {
+    if (summary === void 0)
+      summary = null;
     if (displayUrl === void 0)
       displayUrl = url;
+    if (content === void 0)
+      content = null;
     this.provider = provider;
     this.code = code;
+    this.summary = summary;
     this.url = url;
     this.displayUrl = displayUrl;
+    this.content = content;
   }
   CodeDescriptionLocation.$metadata$ = {
     kind: Kind_CLASS,
@@ -698,35 +619,78 @@ if (typeof kotlin === 'undefined') {
     return this.code;
   };
   CodeDescriptionLocation.prototype.component3 = function () {
-    return this.url;
+    return this.summary;
   };
   CodeDescriptionLocation.prototype.component4 = function () {
+    return this.url;
+  };
+  CodeDescriptionLocation.prototype.component5 = function () {
     return this.displayUrl;
   };
-  CodeDescriptionLocation.prototype.copy_51z0rm$ = function (provider, code, url, displayUrl) {
-    return new CodeDescriptionLocation(provider === void 0 ? this.provider : provider, code === void 0 ? this.code : code, url === void 0 ? this.url : url, displayUrl === void 0 ? this.displayUrl : displayUrl);
+  CodeDescriptionLocation.prototype.component6 = function () {
+    return this.content;
+  };
+  CodeDescriptionLocation.prototype.copy_fbkti9$ = function (provider, code, summary, url, displayUrl, content) {
+    return new CodeDescriptionLocation(provider === void 0 ? this.provider : provider, code === void 0 ? this.code : code, summary === void 0 ? this.summary : summary, url === void 0 ? this.url : url, displayUrl === void 0 ? this.displayUrl : displayUrl, content === void 0 ? this.content : content);
   };
   CodeDescriptionLocation.prototype.toString = function () {
-    return 'CodeDescriptionLocation(provider=' + Kotlin.toString(this.provider) + (', code=' + Kotlin.toString(this.code)) + (', url=' + Kotlin.toString(this.url)) + (', displayUrl=' + Kotlin.toString(this.displayUrl)) + ')';
+    return 'CodeDescriptionLocation(provider=' + Kotlin.toString(this.provider) + (', code=' + Kotlin.toString(this.code)) + (', summary=' + Kotlin.toString(this.summary)) + (', url=' + Kotlin.toString(this.url)) + (', displayUrl=' + Kotlin.toString(this.displayUrl)) + (', content=' + Kotlin.toString(this.content)) + ')';
   };
   CodeDescriptionLocation.prototype.hashCode = function () {
     var result = 0;
     result = result * 31 + Kotlin.hashCode(this.provider) | 0;
     result = result * 31 + Kotlin.hashCode(this.code) | 0;
+    result = result * 31 + Kotlin.hashCode(this.summary) | 0;
     result = result * 31 + Kotlin.hashCode(this.url) | 0;
     result = result * 31 + Kotlin.hashCode(this.displayUrl) | 0;
+    result = result * 31 + Kotlin.hashCode(this.content) | 0;
     return result;
   };
   CodeDescriptionLocation.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.provider, other.provider) && Kotlin.equals(this.code, other.code) && Kotlin.equals(this.url, other.url) && Kotlin.equals(this.displayUrl, other.displayUrl)))));
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.provider, other.provider) && Kotlin.equals(this.code, other.code) && Kotlin.equals(this.summary, other.summary) && Kotlin.equals(this.url, other.url) && Kotlin.equals(this.displayUrl, other.displayUrl) && Kotlin.equals(this.content, other.content)))));
   };
   function CodeDescriptionProvider() {
   }
   Object.defineProperty(CodeDescriptionProvider.prototype, 'name', {
     get: function () {
-      return this.producer + ' ' + this.title + ' ' + this.version;
+      return this.product.vendor + ' ' + this.product.title + ' ' + this.product.version;
     }
   });
+  function CodeDescriptionProvider$Product(vendor, title, version) {
+    this.vendor = vendor;
+    this.title = title;
+    this.version = version;
+  }
+  CodeDescriptionProvider$Product.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Product',
+    interfaces: []
+  };
+  CodeDescriptionProvider$Product.prototype.component1 = function () {
+    return this.vendor;
+  };
+  CodeDescriptionProvider$Product.prototype.component2 = function () {
+    return this.title;
+  };
+  CodeDescriptionProvider$Product.prototype.component3 = function () {
+    return this.version;
+  };
+  CodeDescriptionProvider$Product.prototype.copy_6hosri$ = function (vendor, title, version) {
+    return new CodeDescriptionProvider$Product(vendor === void 0 ? this.vendor : vendor, title === void 0 ? this.title : title, version === void 0 ? this.version : version);
+  };
+  CodeDescriptionProvider$Product.prototype.toString = function () {
+    return 'Product(vendor=' + Kotlin.toString(this.vendor) + (', title=' + Kotlin.toString(this.title)) + (', version=' + Kotlin.toString(this.version)) + ')';
+  };
+  CodeDescriptionProvider$Product.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.vendor) | 0;
+    result = result * 31 + Kotlin.hashCode(this.title) | 0;
+    result = result * 31 + Kotlin.hashCode(this.version) | 0;
+    return result;
+  };
+  CodeDescriptionProvider$Product.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.vendor, other.vendor) && Kotlin.equals(this.title, other.title) && Kotlin.equals(this.version, other.version)))));
+  };
   CodeDescriptionProvider.$metadata$ = {
     kind: Kind_INTERFACE,
     simpleName: 'CodeDescriptionProvider',
@@ -739,6 +703,128 @@ if (typeof kotlin === 'undefined') {
     return this.closure$comparison(a, b);
   };
   Comparator$ObjectLiteral_0.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
+  function AbstractIbmUrlCodeDescriptionProvider(product, version, indexUrl, codeDescriptionRegex, detailBaseUrlString, contentUrlAddition) {
+    if (contentUrlAddition === void 0)
+      contentUrlAddition = '?view=embed';
+    AbstractUrlCodeDescriptionProvider.call(this, new CodeDescriptionProvider$Product('IBM', product, version));
+    this.indexUrl_kta3pa$_0 = indexUrl;
+    this.codeDescriptionRegex_mgfvfd$_0 = codeDescriptionRegex;
+    this.detailBaseUrlString = detailBaseUrlString;
+    this.contentUrlAddition = contentUrlAddition;
+    this.comparator_wsjjr$_0 = new Comparator$ObjectLiteral_0(AbstractIbmUrlCodeDescriptionProvider$comparator$lambda);
+  }
+  Object.defineProperty(AbstractIbmUrlCodeDescriptionProvider.prototype, 'indexUrl', {
+    get: function () {
+      return this.indexUrl_kta3pa$_0;
+    }
+  });
+  Object.defineProperty(AbstractIbmUrlCodeDescriptionProvider.prototype, 'codeDescriptionRegex', {
+    get: function () {
+      return this.codeDescriptionRegex_mgfvfd$_0;
+    }
+  });
+  AbstractIbmUrlCodeDescriptionProvider.prototype.convertMatchToCodeDescriptionLocation_bl4kwi$ = function (matchResult) {
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
+    var href = (tmp$_0 = (tmp$ = matchResult.groups.get_za3lpa$(1)) != null ? tmp$.value : null) != null ? tmp$_0 : 'NO HREF';
+    var text = (tmp$_2 = (tmp$_1 = matchResult.groups.get_za3lpa$(2)) != null ? tmp$_1.value : null) != null ? tmp$_2 : 'NO TEXT';
+    var summaryHtml = (tmp$_3 = matchResult.groups.get_za3lpa$(3)) != null ? tmp$_3.value : null;
+    return new CodeDescriptionLocation(this, text, this.editSummary_pdl1vj$(summaryHtml), Url(this.detailBaseUrlString + href + this.contentUrlAddition), Url(this.detailBaseUrlString + href));
+  };
+  function AbstractIbmUrlCodeDescriptionProvider$editSummary$lambda(it) {
+    return it.length > 3 ? capitalize(it) : it;
+  }
+  AbstractIbmUrlCodeDescriptionProvider.prototype.editSummary_pdl1vj$ = function (rawSummary) {
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4;
+    var tmp$_5;
+    if ((tmp$ = rawSummary != null ? Regex_init('<[^>]+>').replace_x2uqeu$(rawSummary, '') : null) != null) {
+      var tmp$_6;
+      tmp$_5 = trim(Kotlin.isCharSequence(tmp$_6 = tmp$) ? tmp$_6 : throwCCE()).toString();
+    } else
+      tmp$_5 = null;
+    return (tmp$_4 = (tmp$_3 = (tmp$_2 = (tmp$_1 = (tmp$_0 = tmp$_5) != null ? tmp$_0.toLowerCase() : null) != null ? splitToSequence(tmp$_1, Kotlin.charArrayOf(32)) : null) != null ? map(tmp$_2, AbstractIbmUrlCodeDescriptionProvider$editSummary$lambda) : null) != null ? joinToString(tmp$_3, ' ') : null) != null ? capitalize(tmp$_4) : null;
+  };
+  Object.defineProperty(AbstractIbmUrlCodeDescriptionProvider.prototype, 'comparator', {
+    get: function () {
+      return this.comparator_wsjjr$_0;
+    }
+  });
+  function AbstractIbmUrlCodeDescriptionProvider$comparator$lambda(a, b) {
+    return Kotlin.primitiveCompareTo(abs(toInt(a.code)), abs(toInt(b.code)));
+  }
+  AbstractIbmUrlCodeDescriptionProvider.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'AbstractIbmUrlCodeDescriptionProvider',
+    interfaces: [AbstractUrlCodeDescriptionProvider]
+  };
+  function Db2Zos10CodeDescriptionProvider() {
+    AbstractIbmUrlCodeDescriptionProvider.call(this, 'Db2 for z/OS', '10.0.0', Url('https://www.ibm.com/support/knowledgecenter/SSEPEK_10.0.0/codes/src/tpc/db2z_n.html?view=embed'), Regex_init('<li class="ulchildlink"[^>]*>.*?<a\\s[^>]*href="([^"]+)"[^>]*>(-?[0-9]+)<\/a>((?:[^<]|<(?!/li))*?)<\/li>'), 'https://www.ibm.com/support/knowledgecenter/SSEPEK_10.0.0/codes/src/tpc/');
+  }
+  Db2Zos10CodeDescriptionProvider.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Db2Zos10CodeDescriptionProvider',
+    interfaces: [AbstractIbmUrlCodeDescriptionProvider]
+  };
+  function Db2Zos11CodeDescriptionProvider() {
+    AbstractIbmUrlCodeDescriptionProvider.call(this, 'Db2 for z/OS', '11.0.0', Url('https://www.ibm.com/support/knowledgecenter/SSEPEK_11.0.0/codes/src/tpc/db2z_n.html?view=embed'), Regex_init('<li class="ulchildlink"[^>]*>.*?<a\\s[^>]*href="([^"]+)"[^>]*>(-?[0-9]+)<\/a>((?:[^<]|<(?!/li))*?)<\/li>'), 'https://www.ibm.com/support/knowledgecenter/SSEPEK_11.0.0/codes/src/tpc/');
+  }
+  Db2Zos11CodeDescriptionProvider.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Db2Zos11CodeDescriptionProvider',
+    interfaces: [AbstractIbmUrlCodeDescriptionProvider]
+  };
+  function Db2Zos12CodeDescriptionProvider() {
+    AbstractIbmUrlCodeDescriptionProvider.call(this, 'Db2 for z/OS', '12.0.0', Url('https://www.ibm.com/support/knowledgecenter/SSEPEK_12.0.0/codes/src/tpc/db2z_n.html?view=embed'), Regex_init('<li class="ulchildlink"[^>]*>.*?<a\\s[^>]*href="([^"]+)"[^>]*>(-?[0-9]+)<\/a>((?:[^<]|<(?!/li))*?)<\/li>'), 'https://www.ibm.com/support/knowledgecenter/SSEPEK_12.0.0/codes/src/tpc/');
+  }
+  Db2Zos12CodeDescriptionProvider.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Db2Zos12CodeDescriptionProvider',
+    interfaces: [AbstractIbmUrlCodeDescriptionProvider]
+  };
+  function MQ8CodeDescriptionProvider() {
+    MQ8CodeDescriptionProvider$Companion_getInstance();
+    AbstractIbmUrlCodeDescriptionProvider.call(this, 'MQ', '8.0.0', Url('https://www.ibm.com/support/knowledgecenter/SSFKSJ_8.0.0/com.ibm.mq.tro.doc/q040710_.htm?view=embed'), Regex_init('<li class="ulchildlink"[^>]*>.*?<a\\s[^>]*href="([^"]+)"[^>]*>(-?[0-9]+)[^:]*: ([^<]*)<\/a>'), 'https://www.ibm.com/support/knowledgecenter/SSFKSJ_8.0.0/com.ibm.mq.tro.doc/');
+  }
+  function MQ8CodeDescriptionProvider$Companion() {
+    MQ8CodeDescriptionProvider$Companion_instance = this;
+    this.REGEX_UNDERSCORE_0 = Regex_init('^MQRC_|_');
+    this.REGEX_Q_0 = Regex_init('\\b[q]\\b');
+    this.REGEX_Q_MGR_0 = Regex_init('\\bQ\\s+mgr\\b');
+    this.REGEX_MSG_0 = Regex_init('\\b[Mm]sg\\b');
+  }
+  MQ8CodeDescriptionProvider$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var MQ8CodeDescriptionProvider$Companion_instance = null;
+  function MQ8CodeDescriptionProvider$Companion_getInstance() {
+    if (MQ8CodeDescriptionProvider$Companion_instance === null) {
+      new MQ8CodeDescriptionProvider$Companion();
+    }return MQ8CodeDescriptionProvider$Companion_instance;
+  }
+  MQ8CodeDescriptionProvider.prototype.editSummary_pdl1vj$ = function (rawSummary) {
+    var tmp$, tmp$_0, tmp$_1;
+    var tmp$_2;
+    if ((tmp$_0 = (tmp$ = AbstractIbmUrlCodeDescriptionProvider.prototype.editSummary_pdl1vj$.call(this, rawSummary != null ? MQ8CodeDescriptionProvider$Companion_getInstance().REGEX_UNDERSCORE_0.replace_x2uqeu$(rawSummary, ' ') : null)) != null ? MQ8CodeDescriptionProvider$Companion_getInstance().REGEX_Q_0.replace_x2uqeu$(tmp$, 'Q') : null) != null) {
+      var regex = MQ8CodeDescriptionProvider$Companion_getInstance().REGEX_Q_MGR_0;
+      var replacement = 'Q-Manager';
+      tmp$_2 = regex.replace_x2uqeu$(tmp$_0, replacement);
+    } else
+      tmp$_2 = null;
+    return (tmp$_1 = tmp$_2) != null ? MQ8CodeDescriptionProvider$Companion_getInstance().REGEX_MSG_0.replace_x2uqeu$(tmp$_1, 'Message') : null;
+  };
+  MQ8CodeDescriptionProvider.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'MQ8CodeDescriptionProvider',
+    interfaces: [AbstractIbmUrlCodeDescriptionProvider]
+  };
+  function Comparator$ObjectLiteral_1(closure$comparison) {
+    this.closure$comparison = closure$comparison;
+  }
+  Comparator$ObjectLiteral_1.prototype.compare = function (a, b) {
+    return this.closure$comparison(a, b);
+  };
+  Comparator$ObjectLiteral_1.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
   function visit$lambda(closure$block) {
     return function ($receiver) {
       closure$block($receiver);
@@ -764,6 +850,15 @@ if (typeof kotlin === 'undefined') {
     };
   }
   function button$lambda($receiver) {
+    return Unit;
+  }
+  function visit$lambda_0(closure$block) {
+    return function ($receiver) {
+      closure$block($receiver);
+      return Unit;
+    };
+  }
+  function div$lambda($receiver) {
     return Unit;
   }
   function HtmlView(controller) {
@@ -866,7 +961,7 @@ if (typeof kotlin === 'undefined') {
     }
     this.divContentSource_0 = getElementById_359kph$result_6;
     this.inputSearch_0.addEventListener('input', HtmlView_init$lambda(this));
-    this.listProducts_0 = new ListMaintainer(this.divListProducts_0, HtmlView$listProducts$lambda(this), new Comparator$ObjectLiteral_0(HtmlView$listProducts$lambda_0));
+    this.listProducts_0 = new ListMaintainer(this.divListProducts_0, HtmlView$listProducts$lambda(this), new Comparator$ObjectLiteral_1(HtmlView$listProducts$lambda_0));
     this.listCodes_0 = new ListMaintainer(this.divListCodes_0, HtmlView$listCodes$lambda(this));
   }
   HtmlView.prototype.showCodeDescriptionProviders_up4njv$ = function (providers) {
@@ -888,49 +983,49 @@ if (typeof kotlin === 'undefined') {
   HtmlView.prototype.selectCodeDescriptionLocation_8witqk$ = function (location) {
     this.listCodes_0.toggleActive_11rb$(location);
   };
-  function HtmlView$setContent$lambda$lambda(closure$location) {
+  function HtmlView$showCodeDescription$lambda$lambda(closure$location) {
     return function ($receiver) {
-      $receiver.unaryPlus_pdl1vz$(closure$location.provider.producer);
+      $receiver.unaryPlus_pdl1vz$(closure$location.provider.product.vendor);
       return Unit;
     };
   }
-  function HtmlView$setContent$lambda$lambda_0(closure$location) {
+  function HtmlView$showCodeDescription$lambda$lambda_0(closure$location) {
     return function ($receiver) {
-      $receiver.unaryPlus_pdl1vz$(closure$location.provider.title);
+      $receiver.unaryPlus_pdl1vz$(closure$location.provider.product.title);
       return Unit;
     };
   }
-  function HtmlView$setContent$lambda$lambda_1(closure$location) {
+  function HtmlView$showCodeDescription$lambda$lambda_1(closure$location) {
     return function ($receiver) {
-      $receiver.unaryPlus_pdl1vz$(closure$location.provider.version);
+      $receiver.unaryPlus_pdl1vz$(closure$location.provider.product.version);
       return Unit;
     };
   }
-  function HtmlView$setContent$lambda$lambda_2(closure$location) {
+  function HtmlView$showCodeDescription$lambda$lambda_2(closure$location) {
     return function ($receiver) {
       $receiver.unaryPlus_pdl1vz$(closure$location.code);
       return Unit;
     };
   }
-  function HtmlView$setContent$lambda(closure$location) {
+  function HtmlView$showCodeDescription$lambda(closure$location) {
     return function ($receiver) {
-      var classes = 'ec-product-producer';
-      var block = HtmlView$setContent$lambda$lambda(closure$location);
+      var classes = 'ec-product-vendor';
+      var block = HtmlView$showCodeDescription$lambda$lambda(closure$location);
       visitTag(new SPAN_init(attributesMapOf('class', classes), $receiver.consumer), visit$lambda(block));
       var classes_0 = 'ec-product-title';
-      var block_0 = HtmlView$setContent$lambda$lambda_0(closure$location);
+      var block_0 = HtmlView$showCodeDescription$lambda$lambda_0(closure$location);
       visitTag(new SPAN_init(attributesMapOf('class', classes_0), $receiver.consumer), visit$lambda(block_0));
       var classes_1 = 'ec-product-version';
-      var block_1 = HtmlView$setContent$lambda$lambda_1(closure$location);
+      var block_1 = HtmlView$showCodeDescription$lambda$lambda_1(closure$location);
       visitTag(new SPAN_init(attributesMapOf('class', classes_1), $receiver.consumer), visit$lambda(block_1));
       $receiver.unaryPlus_pdl1vz$(': ');
       var classes_2 = 'font-weight-bold';
-      var block_2 = HtmlView$setContent$lambda$lambda_2(closure$location);
+      var block_2 = HtmlView$showCodeDescription$lambda$lambda_2(closure$location);
       visitTag(new SPAN_init(attributesMapOf('class', classes_2), $receiver.consumer), visit$lambda(block_2));
       return Unit;
     };
   }
-  HtmlView.prototype.setContent_848m2z$ = function (location) {
+  HtmlView.prototype.showCodeDescription_848m2z$ = function (location) {
     var $receiver = downTo(this.divContentHeader_0.childElementCount, 0);
     var destination = ArrayList_init();
     var tmp$;
@@ -950,10 +1045,20 @@ if (typeof kotlin === 'undefined') {
     if (location != null) {
       var tmp$_2 = this.divContentHeader_0;
       var $receiver_0 = get_create(document);
-      tmp$_2.appendChild(visitTagAndFinalize(new SPAN_init(attributesMapOf('class', 'ec-code-header'), $receiver_0), $receiver_0, visitAndFinalize$lambda(HtmlView$setContent$lambda(location))));
+      tmp$_2.appendChild(visitTagAndFinalize(new SPAN_init(attributesMapOf('class', 'ec-code-header'), $receiver_0), $receiver_0, visitAndFinalize$lambda(HtmlView$showCodeDescription$lambda(location))));
       this.divContentSource_0.href = location.displayUrl.toString();
       this.divContentSource_0.innerText = location.displayUrl.toString();
-      this.divContentFrame_0.src = location.url.toString();
+      if (location.content != null) {
+        this.divContentFrame_0.classList.toggle('d-none', true);
+        this.divContentCode_0.classList.toggle('d-none', false);
+        this.divContentFrame_0.src = '';
+        this.divContentCode_0.innerHTML = location.content.content;
+      } else {
+        this.divContentFrame_0.classList.toggle('d-none', false);
+        this.divContentCode_0.classList.toggle('d-none', true);
+        this.divContentFrame_0.src = location.url.toString();
+        this.divContentCode_0.innerHTML = '';
+      }
     } else {
       this.divContentSource_0.href = '#';
       this.divContentSource_0.innerText = '\xA0';
@@ -970,26 +1075,26 @@ if (typeof kotlin === 'undefined') {
   }
   function HtmlView$createProductLink$lambda$lambda_0(closure$provider) {
     return function ($receiver) {
-      $receiver.unaryPlus_pdl1vz$(closure$provider.producer);
+      $receiver.unaryPlus_pdl1vz$(closure$provider.product.vendor);
       return Unit;
     };
   }
   function HtmlView$createProductLink$lambda$lambda_1(closure$provider) {
     return function ($receiver) {
-      $receiver.unaryPlus_pdl1vz$(closure$provider.title);
+      $receiver.unaryPlus_pdl1vz$(closure$provider.product.title);
       return Unit;
     };
   }
   function HtmlView$createProductLink$lambda$lambda_2(closure$provider) {
     return function ($receiver) {
-      $receiver.unaryPlus_pdl1vz$(closure$provider.version);
+      $receiver.unaryPlus_pdl1vz$(closure$provider.product.version);
       return Unit;
     };
   }
   function HtmlView$createProductLink$lambda(this$HtmlView, closure$provider) {
     return function ($receiver) {
       set_onClickFunction($receiver, HtmlView$createProductLink$lambda$lambda(this$HtmlView, closure$provider));
-      var classes = 'ec-product-producer';
+      var classes = 'ec-product-vendor';
       var block = HtmlView$createProductLink$lambda$lambda_0(closure$provider);
       visitTag(new SPAN_init(attributesMapOf('class', classes), $receiver.consumer), visit$lambda(block));
       var classes_0 = 'ec-product-title';
@@ -1016,10 +1121,34 @@ if (typeof kotlin === 'undefined') {
       return Unit;
     };
   }
+  function HtmlView$createCodeDescriptionLink$lambda$lambda$lambda(closure$location) {
+    return function ($receiver) {
+      $receiver.unaryPlus_pdl1vz$(closure$location.code);
+      return Unit;
+    };
+  }
+  function HtmlView$createCodeDescriptionLink$lambda$lambda$lambda$lambda(closure$it) {
+    return function ($receiver) {
+      $receiver.unaryPlus_pdl1vz$(closure$it);
+      return Unit;
+    };
+  }
+  function HtmlView$createCodeDescriptionLink$lambda$lambda_0(closure$location) {
+    return function ($receiver) {
+      var tmp$;
+      var block = HtmlView$createCodeDescriptionLink$lambda$lambda$lambda(closure$location);
+      visitTag(new SPAN_init(attributesMapOf('class', 'ec-code'), $receiver.consumer), visit$lambda(block));
+      if ((tmp$ = closure$location.summary) != null) {
+        visitTag(new SPAN_init(attributesMapOf('class', 'ec-summary'), $receiver.consumer), visit$lambda(HtmlView$createCodeDescriptionLink$lambda$lambda$lambda$lambda(tmp$)));
+      }return Unit;
+    };
+  }
   function HtmlView$createCodeDescriptionLink$lambda(this$HtmlView, closure$location) {
     return function ($receiver) {
       set_onClickFunction($receiver, HtmlView$createCodeDescriptionLink$lambda$lambda(this$HtmlView, closure$location));
-      $receiver.unaryPlus_pdl1vz$(closure$location.code);
+      var classes = 'ec-location-link';
+      var block = HtmlView$createCodeDescriptionLink$lambda$lambda_0(closure$location);
+      visitTag(new DIV_init(attributesMapOf('class', classes), $receiver.consumer), visit$lambda_0(block));
       return Unit;
     };
   }
@@ -1057,8 +1186,8 @@ if (typeof kotlin === 'undefined') {
     };
   }
   function HtmlView_init$lambda(this$HtmlView) {
-    return function (it) {
-      it.stopPropagation();
+    return function (event) {
+      event.stopPropagation();
       var lowerCaseFilter = this$HtmlView.inputSearch_0.value.toLowerCase();
       this$HtmlView.listCodes_0.filter_ioxh9z$(HtmlView_init$lambda$lambda(lowerCaseFilter));
       return Unit;
@@ -1082,14 +1211,14 @@ if (typeof kotlin === 'undefined') {
     simpleName: 'HtmlView',
     interfaces: [DisplayContract$View]
   };
-  function Comparator$ObjectLiteral_1(closure$comparison) {
+  function Comparator$ObjectLiteral_2(closure$comparison) {
     this.closure$comparison = closure$comparison;
   }
-  Comparator$ObjectLiteral_1.prototype.compare = function (a, b) {
+  Comparator$ObjectLiteral_2.prototype.compare = function (a, b) {
     return this.closure$comparison(a, b);
   };
-  Comparator$ObjectLiteral_1.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
-  function visit$lambda_0(closure$block) {
+  Comparator$ObjectLiteral_2.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
+  function visit$lambda_1(closure$block) {
     return function ($receiver) {
       closure$block($receiver);
       return Unit;
@@ -1098,16 +1227,7 @@ if (typeof kotlin === 'undefined') {
   function span$lambda_1($receiver) {
     return Unit;
   }
-  function visit$lambda_1(closure$block) {
-    return function ($receiver) {
-      closure$block($receiver);
-      return Unit;
-    };
-  }
-  function div$lambda($receiver) {
-    return Unit;
-  }
-  function visitAndFinalize$lambda_1(closure$block) {
+  function visit$lambda_2(closure$block) {
     return function ($receiver) {
       closure$block($receiver);
       return Unit;
@@ -1116,9 +1236,18 @@ if (typeof kotlin === 'undefined') {
   function div$lambda_0($receiver) {
     return Unit;
   }
+  function visitAndFinalize$lambda_1(closure$block) {
+    return function ($receiver) {
+      closure$block($receiver);
+      return Unit;
+    };
+  }
+  function div$lambda_1($receiver) {
+    return Unit;
+  }
   function ListMaintainer(parent, elementCreator, comparator) {
     if (comparator === void 0) {
-      comparator = new Comparator$ObjectLiteral_1(ListMaintainer_init$lambda);
+      comparator = new Comparator$ObjectLiteral_2(ListMaintainer_init$lambda);
     }this.parent_0 = parent;
     this.elementCreator_0 = elementCreator;
     this.comparator = comparator;
@@ -1162,19 +1291,16 @@ if (typeof kotlin === 'undefined') {
     return Unit;
   }
   function ListMaintainer$createLoader$lambda$lambda($receiver) {
-    visitTag(new SPAN_init(attributesMapOf('class', 'sr-only'), $receiver.consumer), visit$lambda_0(ListMaintainer$createLoader$lambda$lambda$lambda));
+    visitTag(new SPAN_init(attributesMapOf('class', 'sr-only'), $receiver.consumer), visit$lambda_1(ListMaintainer$createLoader$lambda$lambda$lambda));
     return Unit;
   }
   function ListMaintainer$createLoader$lambda($receiver) {
-    visitTag(new DIV_init(attributesMapOf('class', 'spinner-grow'), $receiver.consumer), visit$lambda_1(ListMaintainer$createLoader$lambda$lambda));
+    visitTag(new DIV_init(attributesMapOf('class', 'spinner-grow'), $receiver.consumer), visit$lambda_2(ListMaintainer$createLoader$lambda$lambda));
     return Unit;
   }
   ListMaintainer.prototype.createLoader_0 = function () {
     var $receiver = get_create(document);
     return visitTagAndFinalize(new DIV_init(attributesMapOf('class', 'd-flex justify-content-center my-5'), $receiver), $receiver, visitAndFinalize$lambda_1(ListMaintainer$createLoader$lambda));
-  };
-  ListMaintainer.prototype.shouldBeRemoved_0 = function ($receiver) {
-    return !(Kotlin.isType($receiver, HTMLFormElement) || $receiver.classList.contains('gr-always-there'));
   };
   ListMaintainer.prototype.removeChildren_0 = function ($receiver) {
     var $receiver_0 = downTo($receiver.childElementCount, 0);
@@ -1506,13 +1632,13 @@ if (typeof kotlin === 'undefined') {
   }
   UiController.prototype.selectCodeDescriptionProvider_ecttm8$ = function (provider) {
     this.view_0.selectCodeDescriptionProvider_ecttm8$(provider);
-    this.view_0.setContent_848m2z$(null);
+    this.view_0.showCodeDescription_848m2z$(null);
     this.view_0.showCodeDescriptionLocations_koqndk$(null);
     launch(coroutines.GlobalScope, void 0, void 0, UiController$selectCodeDescriptionProvider$lambda(this, provider));
   };
   UiController.prototype.selectCodeDescriptionLocation_8witqk$ = function (location) {
     this.view_0.selectCodeDescriptionLocation_8witqk$(location);
-    this.view_0.setContent_848m2z$(location);
+    this.view_0.showCodeDescription_848m2z$(location);
   };
   UiController.$metadata$ = {
     kind: Kind_CLASS,
@@ -1535,13 +1661,18 @@ if (typeof kotlin === 'undefined') {
   $$importsForInline$$['ktor-ktor-client-core'] = $module$ktor_ktor_client_core;
   var package$codes = package$errorcodes.codes || (package$errorcodes.codes = {});
   package$codes.AbstractUrlCodeDescriptionProvider = AbstractUrlCodeDescriptionProvider;
+  package$codes.CodeDescription = CodeDescription;
+  package$codes.CodeDescriptionLocation = CodeDescriptionLocation;
+  CodeDescriptionProvider.Product = CodeDescriptionProvider$Product;
+  package$codes.CodeDescriptionProvider = CodeDescriptionProvider;
   package$codes.AbstractIbmUrlCodeDescriptionProvider = AbstractIbmUrlCodeDescriptionProvider;
   package$codes.Db2Zos10CodeDescriptionProvider = Db2Zos10CodeDescriptionProvider;
   package$codes.Db2Zos11CodeDescriptionProvider = Db2Zos11CodeDescriptionProvider;
+  package$codes.Db2Zos12CodeDescriptionProvider = Db2Zos12CodeDescriptionProvider;
+  Object.defineProperty(MQ8CodeDescriptionProvider, 'Companion', {
+    get: MQ8CodeDescriptionProvider$Companion_getInstance
+  });
   package$codes.MQ8CodeDescriptionProvider = MQ8CodeDescriptionProvider;
-  package$codes.CodeDescription = CodeDescription;
-  package$codes.CodeDescriptionLocation = CodeDescriptionLocation;
-  package$codes.CodeDescriptionProvider = CodeDescriptionProvider;
   $$importsForInline$$['kotlinx-html-js'] = $module$kotlinx_html_js;
   Object.defineProperty(HtmlView, 'Companion', {
     get: HtmlView$Companion_getInstance
@@ -1564,7 +1695,7 @@ if (typeof kotlin === 'undefined') {
   var package$ui = package$errorcodes.ui || (package$errorcodes.ui = {});
   package$ui.UiController = UiController;
   Object.defineProperty(AbstractUrlCodeDescriptionProvider.prototype, 'name', Object.getOwnPropertyDescriptor(CodeDescriptionProvider.prototype, 'name'));
-  codeDescriptionProviders = listOf([new Db2Zos10CodeDescriptionProvider(), new MQ8CodeDescriptionProvider()]);
+  codeDescriptionProviders = listOf([new Db2Zos10CodeDescriptionProvider(), new Db2Zos11CodeDescriptionProvider(), new Db2Zos12CodeDescriptionProvider(), new MQ8CodeDescriptionProvider()]);
   main();
   Kotlin.defineModule('error-codes-viewer', _);
   return _;
