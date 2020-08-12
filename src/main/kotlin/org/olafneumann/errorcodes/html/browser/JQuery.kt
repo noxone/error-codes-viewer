@@ -1,6 +1,5 @@
 package org.olafneumann.errorcodes.html.browser
 
-import org.w3c.dom.HTMLElement
 import org.w3c.dom.Node
 
 @JsName("$")

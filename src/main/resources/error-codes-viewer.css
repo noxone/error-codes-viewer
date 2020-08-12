@@ -6,7 +6,7 @@
   filter: blur(5px);
 }
 
-.ec-product-producer {
+.ec-product-vendor {
   margin-right: 0.5em;
 }
 
@@ -66,8 +66,18 @@ body {
   right: 1em;
   top: 2.45em;
   bottom: 1px;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
+}
+
+.ec-location-link {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ec-summary {
+  margin-left: 1em;
+  font-size: 0.75em;
 }
 
 .ec-overflow-link {
