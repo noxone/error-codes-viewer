@@ -8,9 +8,7 @@ import kotlin.js.Date
 import kotlin.math.absoluteValue
 
 abstract class AbstractUrlCodeDescriptionProvider(
-        override val producer: String,
-        override val title: String,
-        override val version: String
+    override val product: CodeDescriptionProvider.Product
 ) : CodeDescriptionProvider {
     companion object {
         private val client = HttpClient(Js)

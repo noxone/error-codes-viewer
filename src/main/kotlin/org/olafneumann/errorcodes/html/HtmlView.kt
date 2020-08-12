@@ -1,9 +1,7 @@
 package org.olafneumann.errorcodes.html
 
 import kotlinx.html.ButtonType
-import kotlinx.html.div
 import kotlinx.html.dom.create
-import kotlinx.html.js.a
 import kotlinx.html.js.button
 import kotlinx.html.js.onClickFunction
 import kotlinx.html.span
@@ -28,8 +26,8 @@ class HtmlView(
     private val divContentSource = HtmlHelper.getElementById<HTMLAnchorElement>(ID_CONTENT_SOURCE)
 
     init {
-        inputSearch.addEventListener("input", {
-            it.stopPropagation()
+        inputSearch.addEventListener("input", {event ->
+            event.stopPropagation()
             val lowerCaseFilter = inputSearch.value.toLowerCase()
             listCodes.filter { it.code.toLowerCase().contains(lowerCaseFilter) }
         })
@@ -69,9 +67,9 @@ class HtmlView(
                 .forEach { divContentHeader.removeChild(it) }
         if (location != null) {
             divContentHeader.appendChild(document.create.span(classes = "ec-code-header") {
-                span(classes = "ec-product-producer") { +location.provider.producer }
-                span(classes = "ec-product-title") { +location.provider.title }
-                span(classes = "ec-product-version") { +location.provider.version }
+                span(classes = "ec-product-vendor") { +location.provider.product.vendor }
+                span(classes = "ec-product-title") { +location.provider.product.title }
+                span(classes = "ec-product-version") { +location.provider.product.version }
                 +": "
                 span(classes = "font-weight-bold") { +location.code }
             })
@@ -92,9 +90,9 @@ class HtmlView(
                     jQuery(divListProducts.parentNode!!).dropdown("toggle")
                     controller.selectCodeDescriptionProvider(provider)
                 }
-                span("ec-product-producer") { +provider.producer }
-                span("ec-product-title") { +provider.title }
-                span("ec-product-version") { +provider.version }
+                span("ec-product-producer") { +provider.product.version }
+                span("ec-product-title") { +provider.product.title }
+                span("ec-product-version") { +provider.product.version }
             }
 
     private fun createCodeDescriptionLink(location: CodeDescriptionLocation): HTMLElement =

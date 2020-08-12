@@ -46,9 +46,6 @@ internal class ListMaintainer<T>(
             }
         }
 
-    private fun Element.shouldBeRemoved(): Boolean =
-        !(this is HTMLFormElement || this.classList.contains("gr-always-there"))
-
     private fun HTMLElement.removeChildren() =
         childElementCount
             .downTo(0)
