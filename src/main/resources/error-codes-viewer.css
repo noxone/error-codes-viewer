@@ -70,6 +70,16 @@ body {
   overflow-x: hidden;
 }
 
+.ec-location-link {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ec-summary {
+  margin-left: 1em;
+  font-size: 0.75em;
+}
+
 .ec-overflow-link {
   overflow: hidden;
   text-overflow: ellipsis;
