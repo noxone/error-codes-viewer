@@ -30,8 +30,8 @@ if (typeof kotlin === 'undefined') {
   var toList = Kotlin.kotlin.sequences.toList_veqyi0$;
   var kotlin_js_internal_StringCompanionObject = Kotlin.kotlin.js.internal.StringCompanionObject;
   var get_CASE_INSENSITIVE_ORDER = Kotlin.kotlin.text.get_CASE_INSENSITIVE_ORDER_6eet4j$;
-  var Kind_CLASS = Kotlin.Kind.CLASS;
   var Comparator = Kotlin.kotlin.Comparator;
+  var Kind_CLASS = Kotlin.Kind.CLASS;
   var Unit = Kotlin.kotlin.Unit;
   var takeFrom = $module$ktor_ktor_client_core.$$importsForInline$$['ktor-ktor-http'].io.ktor.http.takeFrom_wol2ee$;
   var utils = $module$ktor_ktor_client_core.io.ktor.client.utils;
@@ -81,7 +81,7 @@ if (typeof kotlin === 'undefined') {
   var collectionSizeOrDefault = Kotlin.kotlin.collections.collectionSizeOrDefault_ba2ldo$;
   var ArrayList_init_0 = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
   var mapNotNull = Kotlin.kotlin.sequences.mapNotNull_qpz9h9$;
-  var toBoolean = Kotlin.kotlin.text.toBoolean_pdl1vz$;
+  var toBoolean = Kotlin.kotlin.text.toBoolean_5cw0du$;
   var LinkedHashMap_init = Kotlin.kotlin.collections.LinkedHashMap_init_q3lmfv$;
   var defineInlineFunction = Kotlin.defineInlineFunction;
   var wrapFunction = Kotlin.wrapFunction;
@@ -150,6 +150,7 @@ if (typeof kotlin === 'undefined') {
     return this.readArrayToMutableList_0(JSON.parse((tmp$ = this.get_0(key)) != null ? tmp$ : defaultJson), ApplicationSettings$readConfigFromArray$lambda);
   };
   Object.defineProperty(ApplicationSettings.prototype, 'selectedGroupName', {
+    configurable: true,
     get: function () {
       var tmp$;
       return (tmp$ = this.get_0(this.KEY_CURRENT_GROUP_NAME_0)) != null ? tmp$ : this.VAL_DEFAULT_GROUP_NAME_0;
@@ -159,6 +160,7 @@ if (typeof kotlin === 'undefined') {
     }
   });
   Object.defineProperty(ApplicationSettings.prototype, 'currentPrefix', {
+    configurable: true,
     get: function () {
       var tmp$;
       return (tmp$ = this.get_0(this.KEY_CURRENT_PREFIX_0)) != null ? tmp$ : this.VAL_DEFAULT_PREFIX_8be2vx$;
@@ -168,6 +170,7 @@ if (typeof kotlin === 'undefined') {
     }
   });
   Object.defineProperty(ApplicationSettings.prototype, 'currentSeparator', {
+    configurable: true,
     get: function () {
       var tmp$;
       return (tmp$ = this.get_0(this.KEY_CURRENT_SEPARATOR_0)) != null ? tmp$ : this.VAL_DEFAULT_SEPARATOR_8be2vx$;
@@ -177,6 +180,7 @@ if (typeof kotlin === 'undefined') {
     }
   });
   Object.defineProperty(ApplicationSettings.prototype, 'currentPostfix', {
+    configurable: true,
     get: function () {
       var tmp$;
       return (tmp$ = this.get_0(this.KEY_CURRENT_POSTFIX_0)) != null ? tmp$ : this.VAL_DEFAULT_POSTFIX_8be2vx$;
@@ -186,6 +190,7 @@ if (typeof kotlin === 'undefined') {
     }
   });
   Object.defineProperty(ApplicationSettings.prototype, 'prefixes', {
+    configurable: true,
     get: function () {
       return this.readConfigFromArray_0(this.KEY_LIST_PREFIXES_0, this.VAL_DEFAULT_LIST_PREFIXES_0);
     },
@@ -194,6 +199,7 @@ if (typeof kotlin === 'undefined') {
     }
   });
   Object.defineProperty(ApplicationSettings.prototype, 'separators', {
+    configurable: true,
     get: function () {
       return this.readConfigFromArray_0(this.KEY_LIST_SEPARATORS_0, this.VAL_DEFAULT_LIST_SEPARATOR_0);
     },
@@ -202,6 +208,7 @@ if (typeof kotlin === 'undefined') {
     }
   });
   Object.defineProperty(ApplicationSettings.prototype, 'postfixes', {
+    configurable: true,
     get: function () {
       return this.readConfigFromArray_0(this.KEY_LIST_POSTFIXES_0, this.VAL_DEFAULT_LIST_POSTFIXES_0);
     },
@@ -257,20 +264,13 @@ if (typeof kotlin === 'undefined') {
     new UiController(codeDescriptionProviders);
     ApplicationSettings_getInstance().storeUserLastInfo();
   }
-  function Comparator$ObjectLiteral(closure$comparison) {
-    this.closure$comparison = closure$comparison;
-  }
-  Comparator$ObjectLiteral.prototype.compare = function (a, b) {
-    return this.closure$comparison(a, b);
-  };
-  Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
   function get$lambda($receiver) {
     return Unit;
   }
   function AbstractUrlCodeDescriptionProvider(product) {
     AbstractUrlCodeDescriptionProvider$Companion_getInstance();
     this.product_y3o8q2$_0 = product;
-    this.comparator_vztgfb$_0 = new Comparator$ObjectLiteral(AbstractUrlCodeDescriptionProvider$comparator$lambda);
+    this.comparator_vztgfb$_0 = new Comparator(AbstractUrlCodeDescriptionProvider$comparator$lambda);
   }
   Object.defineProperty(AbstractUrlCodeDescriptionProvider.prototype, 'product', {
     get: function () {
@@ -549,6 +549,7 @@ if (typeof kotlin === 'undefined') {
       return instance.doResume(null);
   };
   Object.defineProperty(AbstractUrlCodeDescriptionProvider.prototype, 'comparator', {
+    configurable: true,
     get: function () {
       return this.comparator_vztgfb$_0;
     }
@@ -652,6 +653,7 @@ if (typeof kotlin === 'undefined') {
   function CodeDescriptionProvider() {
   }
   Object.defineProperty(CodeDescriptionProvider.prototype, 'name', {
+    configurable: true,
     get: function () {
       return this.product.vendor + ' ' + this.product.title + ' ' + this.product.version;
     }
@@ -696,13 +698,6 @@ if (typeof kotlin === 'undefined') {
     simpleName: 'CodeDescriptionProvider',
     interfaces: []
   };
-  function Comparator$ObjectLiteral_0(closure$comparison) {
-    this.closure$comparison = closure$comparison;
-  }
-  Comparator$ObjectLiteral_0.prototype.compare = function (a, b) {
-    return this.closure$comparison(a, b);
-  };
-  Comparator$ObjectLiteral_0.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
   function AbstractIbmUrlCodeDescriptionProvider(product, version, indexUrl, codeDescriptionRegex, detailBaseUrlString, contentUrlAddition) {
     if (contentUrlAddition === void 0)
       contentUrlAddition = '?view=embed';
@@ -711,7 +706,7 @@ if (typeof kotlin === 'undefined') {
     this.codeDescriptionRegex_mgfvfd$_0 = codeDescriptionRegex;
     this.detailBaseUrlString = detailBaseUrlString;
     this.contentUrlAddition = contentUrlAddition;
-    this.comparator_wsjjr$_0 = new Comparator$ObjectLiteral_0(AbstractIbmUrlCodeDescriptionProvider$comparator$lambda);
+    this.comparator_wsjjr$_0 = new Comparator(AbstractIbmUrlCodeDescriptionProvider$comparator$lambda);
   }
   Object.defineProperty(AbstractIbmUrlCodeDescriptionProvider.prototype, 'indexUrl', {
     get: function () {
@@ -744,6 +739,7 @@ if (typeof kotlin === 'undefined') {
     return (tmp$_4 = (tmp$_3 = (tmp$_2 = (tmp$_1 = (tmp$_0 = tmp$_5) != null ? tmp$_0.toLowerCase() : null) != null ? splitToSequence(tmp$_1, Kotlin.charArrayOf(32)) : null) != null ? map(tmp$_2, AbstractIbmUrlCodeDescriptionProvider$editSummary$lambda) : null) != null ? joinToString(tmp$_3, ' ') : null) != null ? capitalize(tmp$_4) : null;
   };
   Object.defineProperty(AbstractIbmUrlCodeDescriptionProvider.prototype, 'comparator', {
+    configurable: true,
     get: function () {
       return this.comparator_wsjjr$_0;
     }
@@ -818,13 +814,6 @@ if (typeof kotlin === 'undefined') {
     simpleName: 'MQ8CodeDescriptionProvider',
     interfaces: [AbstractIbmUrlCodeDescriptionProvider]
   };
-  function Comparator$ObjectLiteral_1(closure$comparison) {
-    this.closure$comparison = closure$comparison;
-  }
-  Comparator$ObjectLiteral_1.prototype.compare = function (a, b) {
-    return this.closure$comparison(a, b);
-  };
-  Comparator$ObjectLiteral_1.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
   function visit$lambda(closure$block) {
     return function ($receiver) {
       closure$block($receiver);
@@ -961,7 +950,7 @@ if (typeof kotlin === 'undefined') {
     }
     this.divContentSource_0 = getElementById_359kph$result_6;
     this.inputSearch_0.addEventListener('input', HtmlView_init$lambda(this));
-    this.listProducts_0 = new ListMaintainer(this.divListProducts_0, HtmlView$listProducts$lambda(this), new Comparator$ObjectLiteral_1(HtmlView$listProducts$lambda_0));
+    this.listProducts_0 = new ListMaintainer(this.divListProducts_0, HtmlView$listProducts$lambda(this), new Comparator(HtmlView$listProducts$lambda_0));
     this.listCodes_0 = new ListMaintainer(this.divListCodes_0, HtmlView$listCodes$lambda(this));
   }
   HtmlView.prototype.showCodeDescriptionProviders_up4njv$ = function (providers) {
@@ -1211,13 +1200,6 @@ if (typeof kotlin === 'undefined') {
     simpleName: 'HtmlView',
     interfaces: [DisplayContract$View]
   };
-  function Comparator$ObjectLiteral_2(closure$comparison) {
-    this.closure$comparison = closure$comparison;
-  }
-  Comparator$ObjectLiteral_2.prototype.compare = function (a, b) {
-    return this.closure$comparison(a, b);
-  };
-  Comparator$ObjectLiteral_2.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
   function visit$lambda_1(closure$block) {
     return function ($receiver) {
       closure$block($receiver);
@@ -1246,9 +1228,9 @@ if (typeof kotlin === 'undefined') {
     return Unit;
   }
   function ListMaintainer(parent, elementCreator, comparator) {
-    if (comparator === void 0) {
-      comparator = new Comparator$ObjectLiteral_2(ListMaintainer_init$lambda);
-    }this.parent_0 = parent;
+    if (comparator === void 0)
+      comparator = new Comparator(ListMaintainer_init$lambda);
+    this.parent_0 = parent;
     this.elementCreator_0 = elementCreator;
     this.comparator = comparator;
     this.elements_0 = emptyMap();
@@ -1418,6 +1400,7 @@ if (typeof kotlin === 'undefined') {
     return JSON.parse($receiver);
   };
   Object.defineProperty(AbstractApplicationSettings.prototype, 'hasUserConsent', {
+    configurable: true,
     get: function () {
       var tmp$, tmp$_0;
       return (tmp$_0 = (tmp$ = this.get_0(AbstractApplicationSettings$Companion_getInstance().KEY_CONSENT_0)) != null ? toBoolean(tmp$) : null) != null ? tmp$_0 : false;
