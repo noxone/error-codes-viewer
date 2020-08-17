@@ -2,7 +2,7 @@ package org.olafneumann.errorcodes
 
 import org.olafneumann.errorcodes.codes.*
 import org.olafneumann.errorcodes.ui.UiController
-import kotlin.browser.window
+import kotlinx.browser.window
 
 fun main() {
     try {

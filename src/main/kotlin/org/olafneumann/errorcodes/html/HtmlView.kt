@@ -12,7 +12,7 @@ import org.olafneumann.errorcodes.codes.CodeDescriptionProvider
 import org.olafneumann.errorcodes.html.browser.HtmlHelper
 import org.olafneumann.errorcodes.html.browser.jQuery
 import org.w3c.dom.*
-import kotlin.browser.document
+import kotlinx.browser.document
 
 class HtmlView(
     private val controller: DisplayContract.Controller
