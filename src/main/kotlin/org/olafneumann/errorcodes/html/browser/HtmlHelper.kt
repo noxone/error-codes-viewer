@@ -2,7 +2,7 @@ package org.olafneumann.errorcodes.html.browser
 
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.get
-import kotlin.browser.document
+import kotlinx.browser.document
 
 internal object HtmlHelper {
     internal inline fun <reified T : HTMLElement> getElementById(id: String): T {

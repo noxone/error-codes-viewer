@@ -1,6 +1,6 @@
 package org.olafneumann.errorcodes.html.browser
 
-import kotlin.browser.localStorage
+import kotlinx.browser.localStorage
 import kotlin.collections.forEach
 import kotlin.collections.mutableMapOf
 import kotlin.collections.set

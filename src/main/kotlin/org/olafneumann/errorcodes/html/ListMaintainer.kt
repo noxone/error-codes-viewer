@@ -4,7 +4,7 @@ import kotlinx.html.div
 import kotlinx.html.dom.create
 import kotlinx.html.span
 import org.w3c.dom.*
-import kotlin.browser.document
+import kotlinx.browser.document
 
 internal class ListMaintainer<T>(
     private val parent: HTMLDivElement,
