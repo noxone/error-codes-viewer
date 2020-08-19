@@ -1,14 +1,14 @@
 if (typeof kotlin === 'undefined') {
   throw new Error("Error loading module 'error-codes-viewer'. Its dependency 'kotlin' was not found. Please, check whether 'kotlin' is loaded prior to 'error-codes-viewer'.");
-}if (typeof this['ktor-ktor-client-core'] === 'undefined') {
-  throw new Error("Error loading module 'error-codes-viewer'. Its dependency 'ktor-ktor-client-core' was not found. Please, check whether 'ktor-ktor-client-core' is loaded prior to 'error-codes-viewer'.");
-}if (typeof this['ktor-ktor-http'] === 'undefined') {
-  throw new Error("Error loading module 'error-codes-viewer'. Its dependency 'ktor-ktor-http' was not found. Please, check whether 'ktor-ktor-http' is loaded prior to 'error-codes-viewer'.");
+}if (typeof this['ktor-ktor-client-core-jsLegacy'] === 'undefined') {
+  throw new Error("Error loading module 'error-codes-viewer'. Its dependency 'ktor-ktor-client-core-jsLegacy' was not found. Please, check whether 'ktor-ktor-client-core-jsLegacy' is loaded prior to 'error-codes-viewer'.");
+}if (typeof this['ktor-ktor-http-jsLegacy'] === 'undefined') {
+  throw new Error("Error loading module 'error-codes-viewer'. Its dependency 'ktor-ktor-http-jsLegacy' was not found. Please, check whether 'ktor-ktor-http-jsLegacy' is loaded prior to 'error-codes-viewer'.");
 }if (typeof this['kotlinx-html-js'] === 'undefined') {
   throw new Error("Error loading module 'error-codes-viewer'. Its dependency 'kotlinx-html-js' was not found. Please, check whether 'kotlinx-html-js' is loaded prior to 'error-codes-viewer'.");
 }if (typeof this['kotlinx-coroutines-core'] === 'undefined') {
   throw new Error("Error loading module 'error-codes-viewer'. Its dependency 'kotlinx-coroutines-core' was not found. Please, check whether 'kotlinx-coroutines-core' is loaded prior to 'error-codes-viewer'.");
-}this['error-codes-viewer'] = function (_, Kotlin, $module$ktor_ktor_client_core, $module$ktor_ktor_http, $module$kotlinx_html_js, $module$kotlinx_coroutines_core) {
+}this['error-codes-viewer'] = function (_, Kotlin, $module$ktor_ktor_client_core_jsLegacy, $module$ktor_ktor_http_jsLegacy, $module$kotlinx_html_js, $module$kotlinx_coroutines_core) {
   'use strict';
   var $$importsForInline$$ = _.$$importsForInline$$ || (_.$$importsForInline$$ = {});
   var toIntOrNull = Kotlin.kotlin.text.toIntOrNull_pdl1vz$;
@@ -21,8 +21,8 @@ if (typeof kotlin === 'undefined') {
   var toString = Kotlin.toString;
   var Exception = Kotlin.kotlin.Exception;
   var listOf = Kotlin.kotlin.collections.listOf_i5x0yv$;
-  var js = $module$ktor_ktor_client_core.io.ktor.client.engine.js;
-  var HttpClient = $module$ktor_ktor_client_core.io.ktor.client.HttpClient_744i18$;
+  var js = $module$ktor_ktor_client_core_jsLegacy.io.ktor.client.engine.js;
+  var HttpClient = $module$ktor_ktor_client_core_jsLegacy.io.ktor.client.HttpClient_744i18$;
   var COROUTINE_SUSPENDED = Kotlin.kotlin.coroutines.intrinsics.COROUTINE_SUSPENDED;
   var CoroutineImpl = Kotlin.kotlin.coroutines.CoroutineImpl;
   var PrimitiveClasses$stringClass = Kotlin.kotlin.reflect.js.internal.PrimitiveClasses.stringClass;
@@ -33,20 +33,20 @@ if (typeof kotlin === 'undefined') {
   var Comparator = Kotlin.kotlin.Comparator;
   var Kind_CLASS = Kotlin.Kind.CLASS;
   var Unit = Kotlin.kotlin.Unit;
-  var takeFrom = $module$ktor_ktor_client_core.$$importsForInline$$['ktor-ktor-http'].io.ktor.http.takeFrom_wol2ee$;
-  var utils = $module$ktor_ktor_client_core.io.ktor.client.utils;
-  var url = $module$ktor_ktor_client_core.io.ktor.client.request.url_3rzbk2$;
-  var HttpMethod = $module$ktor_ktor_client_core.$$importsForInline$$['ktor-ktor-http'].io.ktor.http.HttpMethod;
-  var HttpRequestBuilder_init = $module$ktor_ktor_client_core.io.ktor.client.request.HttpRequestBuilder;
-  var HttpStatement_init = $module$ktor_ktor_client_core.io.ktor.client.statement.HttpStatement;
+  var takeFrom = $module$ktor_ktor_client_core_jsLegacy.$$importsForInline$$['ktor-ktor-http-jsLegacy'].io.ktor.http.takeFrom_wol2ee$;
+  var utils = $module$ktor_ktor_client_core_jsLegacy.io.ktor.client.utils;
+  var url = $module$ktor_ktor_client_core_jsLegacy.io.ktor.client.request.url_3rzbk2$;
+  var HttpMethod = $module$ktor_ktor_client_core_jsLegacy.$$importsForInline$$['ktor-ktor-http-jsLegacy'].io.ktor.http.HttpMethod;
+  var HttpRequestBuilder_init = $module$ktor_ktor_client_core_jsLegacy.io.ktor.client.request.HttpRequestBuilder;
+  var HttpStatement_init = $module$ktor_ktor_client_core_jsLegacy.io.ktor.client.statement.HttpStatement;
   var getKClass = Kotlin.getKClass;
   var throwCCE = Kotlin.throwCCE;
   var equals = Kotlin.equals;
-  var HttpResponse = $module$ktor_ktor_client_core.io.ktor.client.statement.HttpResponse;
-  var complete = $module$ktor_ktor_client_core.io.ktor.client.statement.complete_abn2de$;
-  var call = $module$ktor_ktor_client_core.io.ktor.client.call;
-  var TypeInfo_init = $module$ktor_ktor_client_core.io.ktor.client.call.TypeInfo;
-  var Url = $module$ktor_ktor_http.io.ktor.http.Url_61zpoe$;
+  var HttpResponse = $module$ktor_ktor_client_core_jsLegacy.io.ktor.client.statement.HttpResponse;
+  var complete = $module$ktor_ktor_client_core_jsLegacy.io.ktor.client.statement.complete_abn2de$;
+  var call = $module$ktor_ktor_client_core_jsLegacy.io.ktor.client.call;
+  var TypeInfo_init = $module$ktor_ktor_client_core_jsLegacy.io.ktor.client.call.TypeInfo;
+  var Url = $module$ktor_ktor_http_jsLegacy.io.ktor.http.Url_61zpoe$;
   var Regex_init = Kotlin.kotlin.text.Regex_init_61zpoe$;
   var splitToSequence = Kotlin.kotlin.text.splitToSequence_o64adg$;
   var capitalize = Kotlin.kotlin.text.capitalize_pdl1vz$;
@@ -1641,7 +1641,7 @@ if (typeof kotlin === 'undefined') {
   Object.defineProperty(AbstractUrlCodeDescriptionProvider, 'Companion', {
     get: AbstractUrlCodeDescriptionProvider$Companion_getInstance
   });
-  $$importsForInline$$['ktor-ktor-client-core'] = $module$ktor_ktor_client_core;
+  $$importsForInline$$['ktor-ktor-client-core-jsLegacy'] = $module$ktor_ktor_client_core_jsLegacy;
   var package$codes = package$errorcodes.codes || (package$errorcodes.codes = {});
   package$codes.AbstractUrlCodeDescriptionProvider = AbstractUrlCodeDescriptionProvider;
   package$codes.CodeDescription = CodeDescription;
@@ -1682,6 +1682,6 @@ if (typeof kotlin === 'undefined') {
   main();
   Kotlin.defineModule('error-codes-viewer', _);
   return _;
-}(typeof this['error-codes-viewer'] === 'undefined' ? {} : this['error-codes-viewer'], kotlin, this['ktor-ktor-client-core'], this['ktor-ktor-http'], this['kotlinx-html-js'], this['kotlinx-coroutines-core']);
+}(typeof this['error-codes-viewer'] === 'undefined' ? {} : this['error-codes-viewer'], kotlin, this['ktor-ktor-client-core-jsLegacy'], this['ktor-ktor-http-jsLegacy'], this['kotlinx-html-js'], this['kotlinx-coroutines-core']);
 
 //# sourceMappingURL=error-codes-viewer.js.map
