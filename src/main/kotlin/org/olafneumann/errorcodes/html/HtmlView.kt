@@ -13,6 +13,8 @@ import org.olafneumann.errorcodes.html.browser.HtmlHelper
 import org.olafneumann.errorcodes.html.browser.jQuery
 import org.w3c.dom.*
 import kotlinx.browser.document
+import kotlinx.serialization.Serializable
+import org.olafneumann.errorcodes.html.browser.StateContainer
 
 class HtmlView(
     private val controller: DisplayContract.Controller
@@ -26,6 +28,8 @@ class HtmlView(
     private val divContentHeader = HtmlHelper.getElementById<HTMLHeadingElement>(ID_CONTENT_HEADER)
     private val divContentSource = HtmlHelper.getElementById<HTMLAnchorElement>(ID_CONTENT_SOURCE)
 
+    private val stateContainer = StateContainer(CodeLocationStateTransformer())
+
     init {
         inputSearch.addEventListener("input", { event ->
             event.stopPropagation()
@@ -37,7 +41,7 @@ class HtmlView(
     private val listProducts = ListMaintainer<CodeDescriptionProvider>(
         divListProducts,
         { createProductLink(it) },
-        Comparator { a, b -> String.CASE_INSENSITIVE_ORDER.compare(a.name, b.name) })
+        { a, b -> String.CASE_INSENSITIVE_ORDER.compare(a.name, b.name) })
     private val listCodes = ListMaintainer<CodeDescriptionLocation>(divListCodes, { createCodeDescriptionLink(it) })
 
     override fun showCodeDescriptionProviders(providers: List<CodeDescriptionProvider>) =
@@ -87,6 +91,7 @@ class HtmlView(
                 divContentFrame.src = location.url.toString()
                 divContentCode.innerHTML = ""
             }
+            stateContainer.push(CodeLocationState(location))
         } else {
             divContentSource.href = "#"
             divContentSource.innerText = "\u00A0"
@@ -128,4 +133,28 @@ class HtmlView(
         const val ID_CONTENT_HEADER = "ec_source_header"
         const val ID_CONTENT_SOURCE = "ec_source_link"
     }
+
+    @Serializable
+    private class CodeLocationState constructor(
+        val providerId: String,
+        val code: String
+    ) : StateContainer.State {
+        constructor(location: CodeDescriptionLocation) : this(location.provider.id, location.code)
+    }
+
+    private class CodeLocationStateTransformer : StateContainer.StateHandler<CodeLocationState> {
+        override fun fromHash(hash: String): CodeLocationState =
+            hash.split(delimiters = arrayOf("/"), ignoreCase = false, limit = 2)
+                .let { CodeLocationState(it[0], it[1]) }
+
+        override fun toHash(state: CodeLocationState): StateContainer.HashContainer =
+            StateContainer.HashContainer(
+                listOf(state.providerId, state.code).joinToString("/"),
+                "${state.providerId}: ${state.code}")
+
+        override fun handle(state: CodeLocationState) {
+            TODO("Not yet implemented")
+        }
+    }
+
 }

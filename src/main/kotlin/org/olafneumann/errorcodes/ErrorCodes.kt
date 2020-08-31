@@ -21,9 +21,22 @@ private val codeDescriptionProviders = listOf<CodeDescriptionProvider>(
 )
 
 private fun initErrorCodes() {
+    // check preconditions
+    val checkErrors = codeDescriptionProviders.flatMap { checkCodeDescriptionProvider(it) }
+    if (checkErrors.isNotEmpty()){
+        checkErrors.forEach { console.error(it) }
+        throw RuntimeException("ErrorCodeViewer could not be initialized because of init check errors.")
+    }
+
     // initialize presentation code
     UiController(codeDescriptionProviders)
 
     // store information, that we were already here
     ApplicationSettings.storeUserLastInfo()
+}
+
+private fun checkCodeDescriptionProvider(codeDescriptionProvider: CodeDescriptionProvider): List<String> {
+    if (codeDescriptionProvider.id.contains("/"))
+        return listOf("The ID '${codeDescriptionProvider.id}' contains a slash '/'. This is not allowed.")
+    return emptyList()
 }

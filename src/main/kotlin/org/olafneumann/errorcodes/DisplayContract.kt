@@ -14,5 +14,6 @@ interface DisplayContract {
     interface Controller {
         fun selectCodeDescriptionProvider(provider: CodeDescriptionProvider)
         fun selectCodeDescriptionLocation(location: CodeDescriptionLocation)
+        fun selectCodeDescriptionLocation(codeDescriptionProviderId: String, code: String)
     }
 }

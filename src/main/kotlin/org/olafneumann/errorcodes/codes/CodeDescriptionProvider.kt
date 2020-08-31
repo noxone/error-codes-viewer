@@ -1,12 +1,14 @@
 package org.olafneumann.errorcodes.codes
 
 interface CodeDescriptionProvider {
+    val id: String
     val product: Product
     val name: String
         get() = "${product.vendor} ${product.title} ${product.version}"
     val comparator: Comparator<CodeDescriptionLocation>
     suspend fun loadLocationList(): List<CodeDescriptionLocation>
     suspend fun loadCodeDescription(location: CodeDescriptionLocation): CodeDescription
+    suspend fun getLocationByCode(code: String): CodeDescriptionLocation?
 
     data class Product(
         val vendor: String,

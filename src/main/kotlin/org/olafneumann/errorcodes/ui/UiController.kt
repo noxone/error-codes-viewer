@@ -8,22 +8,29 @@ import org.olafneumann.errorcodes.codes.CodeDescriptionProvider
 import org.olafneumann.errorcodes.html.HtmlView
 
 class UiController(
-        codeDescriptionProviders: List<CodeDescriptionProvider>
+    private val codeDescriptionProviders: List<CodeDescriptionProvider>
 ) : DisplayContract.Controller {
     private val view: DisplayContract.View = HtmlView(this)
 
+    private var selectedCodeDescriptionProvider = codeDescriptionProviders.first()
+
     init {
         view.showCodeDescriptionProviders(codeDescriptionProviders)
-        selectCodeDescriptionProvider(codeDescriptionProviders.first())
+        selectCodeDescriptionProvider(selectedCodeDescriptionProvider)
     }
 
     override fun selectCodeDescriptionProvider(provider: CodeDescriptionProvider) {
-        // TODO show loading state
-        view.selectCodeDescriptionProvider(provider)
+        selectCodeDescriptionProvider(provider) {}
+    }
+
+    private fun selectCodeDescriptionProvider(provider: CodeDescriptionProvider, andThen: () -> Unit) {
+        selectedCodeDescriptionProvider = provider
+        view.selectCodeDescriptionProvider(selectedCodeDescriptionProvider)
         view.showCodeDescription(null)
         view.showCodeDescriptionLocations(null)
         GlobalScope.launch {
-            view.showCodeDescriptionLocations(provider.loadLocationList())
+            view.showCodeDescriptionLocations(selectedCodeDescriptionProvider.loadLocationList())
+            andThen.invoke()
         }
     }
 
@@ -34,5 +41,19 @@ class UiController(
             view.setContent(location, description.content)
         }*/
         view.showCodeDescription(location)
+    }
+
+    override fun selectCodeDescriptionLocation(codeDescriptionProviderId: String, code: String) {
+        if (selectedCodeDescriptionProvider.id != codeDescriptionProviderId) {
+            codeDescriptionProviders.firstOrNull { it.id == codeDescriptionProviderId }
+                ?.let {
+                    selectCodeDescriptionProvider(it) { selectCodeDescriptionLocation(codeDescriptionProviderId, code) }
+                }
+        } else {
+            GlobalScope.launch {
+                selectedCodeDescriptionProvider.getLocationByCode(code)
+                    ?.let { selectCodeDescriptionLocation(it) }
+            }
+        }
     }
 }
