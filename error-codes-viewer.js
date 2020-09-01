@@ -6,9 +6,11 @@ if (typeof kotlin === 'undefined') {
   throw new Error("Error loading module 'error-codes-viewer'. Its dependency 'ktor-ktor-http-jsLegacy' was not found. Please, check whether 'ktor-ktor-http-jsLegacy' is loaded prior to 'error-codes-viewer'.");
 }if (typeof this['kotlinx-html-js'] === 'undefined') {
   throw new Error("Error loading module 'error-codes-viewer'. Its dependency 'kotlinx-html-js' was not found. Please, check whether 'kotlinx-html-js' is loaded prior to 'error-codes-viewer'.");
+}if (typeof this['kotlinx-serialization-kotlinx-serialization-core-jsLegacy'] === 'undefined') {
+  throw new Error("Error loading module 'error-codes-viewer'. Its dependency 'kotlinx-serialization-kotlinx-serialization-core-jsLegacy' was not found. Please, check whether 'kotlinx-serialization-kotlinx-serialization-core-jsLegacy' is loaded prior to 'error-codes-viewer'.");
 }if (typeof this['kotlinx-coroutines-core'] === 'undefined') {
   throw new Error("Error loading module 'error-codes-viewer'. Its dependency 'kotlinx-coroutines-core' was not found. Please, check whether 'kotlinx-coroutines-core' is loaded prior to 'error-codes-viewer'.");
-}this['error-codes-viewer'] = function (_, Kotlin, $module$ktor_ktor_client_core_jsLegacy, $module$ktor_ktor_http_jsLegacy, $module$kotlinx_html_js, $module$kotlinx_coroutines_core) {
+}this['error-codes-viewer'] = function (_, Kotlin, $module$ktor_ktor_client_core_jsLegacy, $module$ktor_ktor_http_jsLegacy, $module$kotlinx_html_js, $module$kotlinx_serialization_kotlinx_serialization_core_jsLegacy, $module$kotlinx_coroutines_core) {
   'use strict';
   var $$importsForInline$$ = _.$$importsForInline$$ || (_.$$importsForInline$$ = {});
   var toIntOrNull = Kotlin.kotlin.text.toIntOrNull_pdl1vz$;
@@ -21,6 +23,12 @@ if (typeof kotlin === 'undefined') {
   var toString = Kotlin.toString;
   var Exception = Kotlin.kotlin.Exception;
   var listOf = Kotlin.kotlin.collections.listOf_i5x0yv$;
+  var RuntimeException_init = Kotlin.kotlin.RuntimeException_init_pdl1vj$;
+  var contains = Kotlin.kotlin.text.contains_li3zpu$;
+  var listOf_0 = Kotlin.kotlin.collections.listOf_mh5how$;
+  var emptyList = Kotlin.kotlin.collections.emptyList_287e2$;
+  var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_287e2$;
+  var addAll = Kotlin.kotlin.collections.addAll_ipc267$;
   var js = $module$ktor_ktor_client_core_jsLegacy.io.ktor.client.engine.js;
   var HttpClient = $module$ktor_ktor_client_core_jsLegacy.io.ktor.client.HttpClient_744i18$;
   var COROUTINE_SUSPENDED = Kotlin.kotlin.coroutines.intrinsics.COROUTINE_SUSPENDED;
@@ -28,6 +36,8 @@ if (typeof kotlin === 'undefined') {
   var PrimitiveClasses$stringClass = Kotlin.kotlin.reflect.js.internal.PrimitiveClasses.stringClass;
   var createKType = Kotlin.createKType;
   var toList = Kotlin.kotlin.sequences.toList_veqyi0$;
+  var ensureNotNull = Kotlin.ensureNotNull;
+  var equals = Kotlin.equals;
   var kotlin_js_internal_StringCompanionObject = Kotlin.kotlin.js.internal.StringCompanionObject;
   var get_CASE_INSENSITIVE_ORDER = Kotlin.kotlin.text.get_CASE_INSENSITIVE_ORDER_6eet4j$;
   var Comparator = Kotlin.kotlin.Comparator;
@@ -41,7 +51,6 @@ if (typeof kotlin === 'undefined') {
   var HttpStatement_init = $module$ktor_ktor_client_core_jsLegacy.io.ktor.client.statement.HttpStatement;
   var getKClass = Kotlin.getKClass;
   var throwCCE = Kotlin.throwCCE;
-  var equals = Kotlin.equals;
   var HttpResponse = $module$ktor_ktor_client_core_jsLegacy.io.ktor.client.statement.HttpResponse;
   var complete = $module$ktor_ktor_client_core_jsLegacy.io.ktor.client.statement.complete_abn2de$;
   var call = $module$ktor_ktor_client_core_jsLegacy.io.ktor.client.call;
@@ -58,15 +67,19 @@ if (typeof kotlin === 'undefined') {
   var downTo = Kotlin.kotlin.ranges.downTo_dqglrj$;
   var get_create = $module$kotlinx_html_js.kotlinx.html.dom.get_create_4wc2mh$;
   var ButtonType = $module$kotlinx_html_js.kotlinx.html.ButtonType;
-  var ensureNotNull = Kotlin.ensureNotNull;
   var set_onClickFunction = $module$kotlinx_html_js.kotlinx.html.js.set_onClickFunction_pszlq2$;
-  var contains = Kotlin.kotlin.text.contains_li3zpu$;
-  var RuntimeException_init = Kotlin.kotlin.RuntimeException;
+  var PluginGeneratedSerialDescriptor = $module$kotlinx_serialization_kotlinx_serialization_core_jsLegacy.kotlinx.serialization.internal.PluginGeneratedSerialDescriptor;
+  var UnknownFieldException = $module$kotlinx_serialization_kotlinx_serialization_core_jsLegacy.kotlinx.serialization.UnknownFieldException;
+  var internal = $module$kotlinx_serialization_kotlinx_serialization_core_jsLegacy.kotlinx.serialization.internal;
+  var GeneratedSerializer = $module$kotlinx_serialization_kotlinx_serialization_core_jsLegacy.kotlinx.serialization.internal.GeneratedSerializer;
+  var MissingFieldException = $module$kotlinx_serialization_kotlinx_serialization_core_jsLegacy.kotlinx.serialization.MissingFieldException;
+  var split = Kotlin.kotlin.text.split_ip8yn$;
+  var joinToString_0 = Kotlin.kotlin.collections.joinToString_fmv235$;
+  var RuntimeException_init_0 = Kotlin.kotlin.RuntimeException;
   var ClassCastException = Kotlin.kotlin.ClassCastException;
   var attributesMapOf = $module$kotlinx_html_js.kotlinx.html.attributesMapOf_jyasbz$;
   var SPAN_init = $module$kotlinx_html_js.kotlinx.html.SPAN;
   var visitTag = $module$kotlinx_html_js.kotlinx.html.visitTag_xwv8ym$;
-  var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_287e2$;
   var visitTagAndFinalize = $module$kotlinx_html_js.kotlinx.html.visitTagAndFinalize_g9qte5$;
   var enumEncode = $module$kotlinx_html_js.kotlinx.html.attributes.enumEncode_m4whry$;
   var attributesMapOf_0 = $module$kotlinx_html_js.kotlinx.html.attributesMapOf_alerag$;
@@ -91,11 +104,13 @@ if (typeof kotlin === 'undefined') {
   ApplicationSettings.prototype.constructor = ApplicationSettings;
   AbstractIbmUrlCodeDescriptionProvider.prototype = Object.create(AbstractUrlCodeDescriptionProvider.prototype);
   AbstractIbmUrlCodeDescriptionProvider.prototype.constructor = AbstractIbmUrlCodeDescriptionProvider;
-  Db2Zos10CodeDescriptionProvider.prototype = Object.create(AbstractIbmUrlCodeDescriptionProvider.prototype);
+  SqlCodeDescriptionProvider.prototype = Object.create(AbstractIbmUrlCodeDescriptionProvider.prototype);
+  SqlCodeDescriptionProvider.prototype.constructor = SqlCodeDescriptionProvider;
+  Db2Zos10CodeDescriptionProvider.prototype = Object.create(SqlCodeDescriptionProvider.prototype);
   Db2Zos10CodeDescriptionProvider.prototype.constructor = Db2Zos10CodeDescriptionProvider;
-  Db2Zos11CodeDescriptionProvider.prototype = Object.create(AbstractIbmUrlCodeDescriptionProvider.prototype);
+  Db2Zos11CodeDescriptionProvider.prototype = Object.create(SqlCodeDescriptionProvider.prototype);
   Db2Zos11CodeDescriptionProvider.prototype.constructor = Db2Zos11CodeDescriptionProvider;
-  Db2Zos12CodeDescriptionProvider.prototype = Object.create(AbstractIbmUrlCodeDescriptionProvider.prototype);
+  Db2Zos12CodeDescriptionProvider.prototype = Object.create(SqlCodeDescriptionProvider.prototype);
   Db2Zos12CodeDescriptionProvider.prototype.constructor = Db2Zos12CodeDescriptionProvider;
   MQ8CodeDescriptionProvider.prototype = Object.create(AbstractIbmUrlCodeDescriptionProvider.prototype);
   MQ8CodeDescriptionProvider.prototype.constructor = MQ8CodeDescriptionProvider;
@@ -261,17 +276,47 @@ if (typeof kotlin === 'undefined') {
   }
   var codeDescriptionProviders;
   function initErrorCodes() {
-    new UiController(codeDescriptionProviders);
+    var $receiver = codeDescriptionProviders;
+    var destination = ArrayList_init();
+    var tmp$;
+    tmp$ = $receiver.iterator();
+    while (tmp$.hasNext()) {
+      var element = tmp$.next();
+      var list = checkCodeDescriptionProvider(element);
+      addAll(destination, list);
+    }
+    var checkErrors = destination;
+    if (!checkErrors.isEmpty()) {
+      var tmp$_0;
+      tmp$_0 = checkErrors.iterator();
+      while (tmp$_0.hasNext()) {
+        var element_0 = tmp$_0.next();
+        console.error(element_0);
+      }
+      throw RuntimeException_init('ErrorCodeViewer could not be initialized because of init check errors.');
+    }new UiController(codeDescriptionProviders);
     ApplicationSettings_getInstance().storeUserLastInfo();
+  }
+  function checkCodeDescriptionProvider(codeDescriptionProvider) {
+    if (contains(codeDescriptionProvider.id, '/'))
+      return listOf_0("The ID '" + codeDescriptionProvider.id + "' contains a slash '/'. This is not allowed.");
+    return emptyList();
   }
   function get$lambda($receiver) {
     return Unit;
   }
-  function AbstractUrlCodeDescriptionProvider(product) {
+  function AbstractUrlCodeDescriptionProvider(id, product) {
     AbstractUrlCodeDescriptionProvider$Companion_getInstance();
+    this.id_mjwnik$_0 = id;
     this.product_y3o8q2$_0 = product;
+    this.codes_32kbi7$_0 = null;
     this.comparator_vztgfb$_0 = new Comparator(AbstractUrlCodeDescriptionProvider$comparator$lambda);
   }
+  Object.defineProperty(AbstractUrlCodeDescriptionProvider.prototype, 'id', {
+    get: function () {
+      return this.id_mjwnik$_0;
+    }
+  });
   Object.defineProperty(AbstractUrlCodeDescriptionProvider.prototype, 'product', {
     get: function () {
       return this.product_y3o8q2$_0;
@@ -315,39 +360,44 @@ if (typeof kotlin === 'undefined') {
       try {
         switch (this.state_0) {
           case 0:
-            var $receiver_0 = AbstractUrlCodeDescriptionProvider$Companion_getInstance().client_0;
-            var url_0 = this.$this.indexUrl;
-            var host_0;
-            var body_0;
-            host_0 = 'localhost';
-            body_0 = utils.EmptyContent;
-            var $receiver_1 = new HttpRequestBuilder_init();
-            url($receiver_1, 'http', host_0, 0, '/');
-            $receiver_1.method = HttpMethod.Companion.Get;
-            $receiver_1.body = body_0;
-            takeFrom($receiver_1.url, url_0);
-            get$lambda($receiver_1);
-            var $this_0 = new HttpStatement_init($receiver_1, $receiver_0);
-            var tmp$_4, tmp$_5, tmp$_6;
-            tmp$_4 = PrimitiveClasses$stringClass;
-            if (equals(tmp$_4, getKClass(HttpStatement_init))) {
-              this.result_0 = typeof (tmp$_5 = $this_0) === 'string' ? tmp$_5 : throwCCE();
-              this.state_0 = 9;
-              continue;
-            } else {
-              if (equals(tmp$_4, getKClass(HttpResponse))) {
-                this.state_0 = 7;
-                this.result_0 = $this_0.execute(this);
-                if (this.result_0 === COROUTINE_SUSPENDED)
-                  return COROUTINE_SUSPENDED;
+            if (this.$this.codes_32kbi7$_0 == null) {
+              var $receiver_0 = AbstractUrlCodeDescriptionProvider$Companion_getInstance().client_0;
+              var url_0 = this.$this.indexUrl;
+              var host_0;
+              var body_0;
+              host_0 = 'localhost';
+              body_0 = utils.EmptyContent;
+              var $receiver_1 = new HttpRequestBuilder_init();
+              url($receiver_1, 'http', host_0, 0, '/');
+              $receiver_1.method = HttpMethod.Companion.Get;
+              $receiver_1.body = body_0;
+              takeFrom($receiver_1.url, url_0);
+              get$lambda($receiver_1);
+              var $this_0 = new HttpStatement_init($receiver_1, $receiver_0);
+              var tmp$_4, tmp$_5, tmp$_6;
+              tmp$_4 = PrimitiveClasses$stringClass;
+              if (equals(tmp$_4, getKClass(HttpStatement_init))) {
+                this.result_0 = typeof (tmp$_5 = $this_0) === 'string' ? tmp$_5 : throwCCE();
+                this.state_0 = 9;
                 continue;
               } else {
-                this.state_0 = 1;
-                this.result_0 = $this_0.executeUnsafe(this);
-                if (this.result_0 === COROUTINE_SUSPENDED)
-                  return COROUTINE_SUSPENDED;
-                continue;
+                if (equals(tmp$_4, getKClass(HttpResponse))) {
+                  this.state_0 = 7;
+                  this.result_0 = $this_0.execute(this);
+                  if (this.result_0 === COROUTINE_SUSPENDED)
+                    return COROUTINE_SUSPENDED;
+                  continue;
+                } else {
+                  this.state_0 = 1;
+                  this.result_0 = $this_0.executeUnsafe(this);
+                  if (this.result_0 === COROUTINE_SUSPENDED)
+                    return COROUTINE_SUSPENDED;
+                  continue;
+                }
               }
+            } else {
+              this.state_0 = 10;
+              continue;
             }
 
           case 1:
@@ -400,7 +450,11 @@ if (typeof kotlin === 'undefined') {
           case 9:
             this.result_0;
             var siteContent = this.result_0;
-            return toList(map(this.$this.codeDescriptionRegex.findAll_905azu$(siteContent), AbstractUrlCodeDescriptionProvider$loadLocationList$lambda(this.$this)));
+            this.$this.codes_32kbi7$_0 = toList(map(this.$this.codeDescriptionRegex.findAll_905azu$(siteContent), AbstractUrlCodeDescriptionProvider$loadLocationList$lambda(this.$this)));
+            this.state_0 = 10;
+            continue;
+          case 10:
+            return ensureNotNull(this.$this.codes_32kbi7$_0);
           default:this.state_0 = 6;
             throw new Error('State Machine Unreachable execution');
         }
@@ -543,6 +597,68 @@ if (typeof kotlin === 'undefined') {
   };
   AbstractUrlCodeDescriptionProvider.prototype.loadCodeDescription_8witqk$ = function (location_0, continuation_0, suspended) {
     var instance = new Coroutine$loadCodeDescription_8witqk$(this, location_0, continuation_0);
+    if (suspended)
+      return instance;
+    else
+      return instance.doResume(null);
+  };
+  function Coroutine$getLocationByCode_61zpoe$($this, code_0, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.exceptionState_0 = 1;
+    this.$this = $this;
+    this.local$code = code_0;
+  }
+  Coroutine$getLocationByCode_61zpoe$.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$getLocationByCode_61zpoe$.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$getLocationByCode_61zpoe$.prototype.constructor = Coroutine$getLocationByCode_61zpoe$;
+  Coroutine$getLocationByCode_61zpoe$.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.state_0 = 2;
+            this.result_0 = this.$this.loadLocationList(this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 1:
+            throw this.exception_0;
+          case 2:
+            var $receiver = this.result_0;
+            var firstOrNull$result;
+            firstOrNull$break: do {
+              var tmp$;
+              tmp$ = $receiver.iterator();
+              while (tmp$.hasNext()) {
+                var element = tmp$.next();
+                if (equals(element.code, this.local$code)) {
+                  firstOrNull$result = element;
+                  break firstOrNull$break;
+                }}
+              firstOrNull$result = null;
+            }
+             while (false);
+            return firstOrNull$result;
+          default:this.state_0 = 1;
+            throw new Error('State Machine Unreachable execution');
+        }
+      } catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        } else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  AbstractUrlCodeDescriptionProvider.prototype.getLocationByCode_61zpoe$ = function (code_0, continuation_0, suspended) {
+    var instance = new Coroutine$getLocationByCode_61zpoe$(this, code_0, continuation_0);
     if (suspended)
       return instance;
     else
@@ -698,16 +814,23 @@ if (typeof kotlin === 'undefined') {
     simpleName: 'CodeDescriptionProvider',
     interfaces: []
   };
-  function AbstractIbmUrlCodeDescriptionProvider(product, version, indexUrl, codeDescriptionRegex, detailBaseUrlString, contentUrlAddition) {
+  function AbstractIbmUrlCodeDescriptionProvider(id, product, version, indexUrl, codeDescriptionRegex, detailBaseUrlString, contentUrlAddition) {
+    AbstractIbmUrlCodeDescriptionProvider$Companion_getInstance();
     if (contentUrlAddition === void 0)
       contentUrlAddition = '?view=embed';
-    AbstractUrlCodeDescriptionProvider.call(this, new CodeDescriptionProvider$Product('IBM', product, version));
+    AbstractUrlCodeDescriptionProvider.call(this, id, new CodeDescriptionProvider$Product('IBM', product, version));
+    this.id_ghucf8$_0 = id;
     this.indexUrl_kta3pa$_0 = indexUrl;
     this.codeDescriptionRegex_mgfvfd$_0 = codeDescriptionRegex;
     this.detailBaseUrlString = detailBaseUrlString;
     this.contentUrlAddition = contentUrlAddition;
     this.comparator_wsjjr$_0 = new Comparator(AbstractIbmUrlCodeDescriptionProvider$comparator$lambda);
   }
+  Object.defineProperty(AbstractIbmUrlCodeDescriptionProvider.prototype, 'id', {
+    get: function () {
+      return this.id_ghucf8$_0;
+    }
+  });
   Object.defineProperty(AbstractIbmUrlCodeDescriptionProvider.prototype, 'indexUrl', {
     get: function () {
       return this.indexUrl_kta3pa$_0;
@@ -744,6 +867,25 @@ if (typeof kotlin === 'undefined') {
       return this.comparator_wsjjr$_0;
     }
   });
+  function AbstractIbmUrlCodeDescriptionProvider$Companion() {
+    AbstractIbmUrlCodeDescriptionProvider$Companion_instance = this;
+    this.REGEX_UNDERSCORE_8be2vx$ = Regex_init('^MQRC_|_');
+    this.REGEX_Q_8be2vx$ = Regex_init('\\b[q]\\b');
+    this.REGEX_Q_MGR_8be2vx$ = Regex_init('\\bQ\\s+mgr\\b');
+    this.REGEX_MSG_8be2vx$ = Regex_init('\\b[Mm]sg\\b');
+    this.REGEX_SQL_8be2vx$ = Regex_init('\\b[Ss][Qq][Ll]\\b');
+  }
+  AbstractIbmUrlCodeDescriptionProvider$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var AbstractIbmUrlCodeDescriptionProvider$Companion_instance = null;
+  function AbstractIbmUrlCodeDescriptionProvider$Companion_getInstance() {
+    if (AbstractIbmUrlCodeDescriptionProvider$Companion_instance === null) {
+      new AbstractIbmUrlCodeDescriptionProvider$Companion();
+    }return AbstractIbmUrlCodeDescriptionProvider$Companion_instance;
+  }
   function AbstractIbmUrlCodeDescriptionProvider$comparator$lambda(a, b) {
     return Kotlin.primitiveCompareTo(abs(toInt(a.code)), abs(toInt(b.code)));
   }
@@ -752,62 +894,57 @@ if (typeof kotlin === 'undefined') {
     simpleName: 'AbstractIbmUrlCodeDescriptionProvider',
     interfaces: [AbstractUrlCodeDescriptionProvider]
   };
+  function SqlCodeDescriptionProvider(id, product, version, indexUrl, codeDescriptionRegex, detailBaseUrlString, contentUrlAddition) {
+    if (contentUrlAddition === void 0)
+      contentUrlAddition = '?view=embed';
+    AbstractIbmUrlCodeDescriptionProvider.call(this, id, product, version, indexUrl, codeDescriptionRegex, detailBaseUrlString, contentUrlAddition);
+  }
+  SqlCodeDescriptionProvider.prototype.editSummary_pdl1vj$ = function (rawSummary) {
+    var tmp$;
+    return (tmp$ = AbstractIbmUrlCodeDescriptionProvider.prototype.editSummary_pdl1vj$.call(this, rawSummary)) != null ? AbstractIbmUrlCodeDescriptionProvider$Companion_getInstance().REGEX_SQL_8be2vx$.replace_x2uqeu$(tmp$, 'SQL') : null;
+  };
+  SqlCodeDescriptionProvider.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'SqlCodeDescriptionProvider',
+    interfaces: [AbstractIbmUrlCodeDescriptionProvider]
+  };
   function Db2Zos10CodeDescriptionProvider() {
-    AbstractIbmUrlCodeDescriptionProvider.call(this, 'Db2 for z/OS', '10.0.0', Url('https://www.ibm.com/support/knowledgecenter/SSEPEK_10.0.0/codes/src/tpc/db2z_n.html?view=embed'), Regex_init('<li class="ulchildlink"[^>]*>.*?<a\\s[^>]*href="([^"]+)"[^>]*>(-?[0-9]+)<\/a>((?:[^<]|<(?!/li))*?)<\/li>'), 'https://www.ibm.com/support/knowledgecenter/SSEPEK_10.0.0/codes/src/tpc/');
+    SqlCodeDescriptionProvider.call(this, 'ibm-db2-for-zos-10', 'Db2 for z/OS', '10.0.0', Url('https://www.ibm.com/support/knowledgecenter/SSEPEK_10.0.0/codes/src/tpc/db2z_n.html?view=embed'), Regex_init('<li class="ulchildlink"[^>]*>.*?<a\\s[^>]*href="([^"]+)"[^>]*>(-?[0-9]+)<\/a>((?:[^<]|<(?!/li))*?)<\/li>'), 'https://www.ibm.com/support/knowledgecenter/SSEPEK_10.0.0/codes/src/tpc/');
   }
   Db2Zos10CodeDescriptionProvider.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'Db2Zos10CodeDescriptionProvider',
-    interfaces: [AbstractIbmUrlCodeDescriptionProvider]
+    interfaces: [SqlCodeDescriptionProvider]
   };
   function Db2Zos11CodeDescriptionProvider() {
-    AbstractIbmUrlCodeDescriptionProvider.call(this, 'Db2 for z/OS', '11.0.0', Url('https://www.ibm.com/support/knowledgecenter/SSEPEK_11.0.0/codes/src/tpc/db2z_n.html?view=embed'), Regex_init('<li class="ulchildlink"[^>]*>.*?<a\\s[^>]*href="([^"]+)"[^>]*>(-?[0-9]+)<\/a>((?:[^<]|<(?!/li))*?)<\/li>'), 'https://www.ibm.com/support/knowledgecenter/SSEPEK_11.0.0/codes/src/tpc/');
+    SqlCodeDescriptionProvider.call(this, 'ibm-db2-for-zos-11', 'Db2 for z/OS', '11.0.0', Url('https://www.ibm.com/support/knowledgecenter/SSEPEK_11.0.0/codes/src/tpc/db2z_n.html?view=embed'), Regex_init('<li class="ulchildlink"[^>]*>.*?<a\\s[^>]*href="([^"]+)"[^>]*>(-?[0-9]+)<\/a>((?:[^<]|<(?!/li))*?)<\/li>'), 'https://www.ibm.com/support/knowledgecenter/SSEPEK_11.0.0/codes/src/tpc/');
   }
   Db2Zos11CodeDescriptionProvider.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'Db2Zos11CodeDescriptionProvider',
-    interfaces: [AbstractIbmUrlCodeDescriptionProvider]
+    interfaces: [SqlCodeDescriptionProvider]
   };
   function Db2Zos12CodeDescriptionProvider() {
-    AbstractIbmUrlCodeDescriptionProvider.call(this, 'Db2 for z/OS', '12.0.0', Url('https://www.ibm.com/support/knowledgecenter/SSEPEK_12.0.0/codes/src/tpc/db2z_n.html?view=embed'), Regex_init('<li class="ulchildlink"[^>]*>.*?<a\\s[^>]*href="([^"]+)"[^>]*>(-?[0-9]+)<\/a>((?:[^<]|<(?!/li))*?)<\/li>'), 'https://www.ibm.com/support/knowledgecenter/SSEPEK_12.0.0/codes/src/tpc/');
+    SqlCodeDescriptionProvider.call(this, 'ibm-db2-for-zos-12', 'Db2 for z/OS', '12.0.0', Url('https://www.ibm.com/support/knowledgecenter/SSEPEK_12.0.0/codes/src/tpc/db2z_n.html?view=embed'), Regex_init('<li class="ulchildlink"[^>]*>.*?<a\\s[^>]*href="([^"]+)"[^>]*>(-?[0-9]+)<\/a>((?:[^<]|<(?!/li))*?)<\/li>'), 'https://www.ibm.com/support/knowledgecenter/SSEPEK_12.0.0/codes/src/tpc/');
   }
   Db2Zos12CodeDescriptionProvider.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'Db2Zos12CodeDescriptionProvider',
-    interfaces: [AbstractIbmUrlCodeDescriptionProvider]
+    interfaces: [SqlCodeDescriptionProvider]
   };
   function MQ8CodeDescriptionProvider() {
-    MQ8CodeDescriptionProvider$Companion_getInstance();
-    AbstractIbmUrlCodeDescriptionProvider.call(this, 'MQ', '8.0.0', Url('https://www.ibm.com/support/knowledgecenter/SSFKSJ_8.0.0/com.ibm.mq.tro.doc/q040710_.htm?view=embed'), Regex_init('<li class="ulchildlink"[^>]*>.*?<a\\s[^>]*href="([^"]+)"[^>]*>(-?[0-9]+)[^:]*: ([^<]*)<\/a>'), 'https://www.ibm.com/support/knowledgecenter/SSFKSJ_8.0.0/com.ibm.mq.tro.doc/');
-  }
-  function MQ8CodeDescriptionProvider$Companion() {
-    MQ8CodeDescriptionProvider$Companion_instance = this;
-    this.REGEX_UNDERSCORE_0 = Regex_init('^MQRC_|_');
-    this.REGEX_Q_0 = Regex_init('\\b[q]\\b');
-    this.REGEX_Q_MGR_0 = Regex_init('\\bQ\\s+mgr\\b');
-    this.REGEX_MSG_0 = Regex_init('\\b[Mm]sg\\b');
-  }
-  MQ8CodeDescriptionProvider$Companion.$metadata$ = {
-    kind: Kind_OBJECT,
-    simpleName: 'Companion',
-    interfaces: []
-  };
-  var MQ8CodeDescriptionProvider$Companion_instance = null;
-  function MQ8CodeDescriptionProvider$Companion_getInstance() {
-    if (MQ8CodeDescriptionProvider$Companion_instance === null) {
-      new MQ8CodeDescriptionProvider$Companion();
-    }return MQ8CodeDescriptionProvider$Companion_instance;
+    AbstractIbmUrlCodeDescriptionProvider.call(this, 'ibm-mq-8', 'MQ', '8.0.0', Url('https://www.ibm.com/support/knowledgecenter/SSFKSJ_8.0.0/com.ibm.mq.tro.doc/q040710_.htm?view=embed'), Regex_init('<li class="ulchildlink"[^>]*>.*?<a\\s[^>]*href="([^"]+)"[^>]*>(-?[0-9]+)[^:]*: ([^<]*)<\/a>'), 'https://www.ibm.com/support/knowledgecenter/SSFKSJ_8.0.0/com.ibm.mq.tro.doc/');
   }
   MQ8CodeDescriptionProvider.prototype.editSummary_pdl1vj$ = function (rawSummary) {
     var tmp$, tmp$_0, tmp$_1;
     var tmp$_2;
-    if ((tmp$_0 = (tmp$ = AbstractIbmUrlCodeDescriptionProvider.prototype.editSummary_pdl1vj$.call(this, rawSummary != null ? MQ8CodeDescriptionProvider$Companion_getInstance().REGEX_UNDERSCORE_0.replace_x2uqeu$(rawSummary, ' ') : null)) != null ? MQ8CodeDescriptionProvider$Companion_getInstance().REGEX_Q_0.replace_x2uqeu$(tmp$, 'Q') : null) != null) {
-      var regex = MQ8CodeDescriptionProvider$Companion_getInstance().REGEX_Q_MGR_0;
+    if ((tmp$_0 = (tmp$ = AbstractIbmUrlCodeDescriptionProvider.prototype.editSummary_pdl1vj$.call(this, rawSummary != null ? AbstractIbmUrlCodeDescriptionProvider$Companion_getInstance().REGEX_UNDERSCORE_8be2vx$.replace_x2uqeu$(rawSummary, ' ') : null)) != null ? AbstractIbmUrlCodeDescriptionProvider$Companion_getInstance().REGEX_Q_8be2vx$.replace_x2uqeu$(tmp$, 'Q') : null) != null) {
+      var regex = AbstractIbmUrlCodeDescriptionProvider$Companion_getInstance().REGEX_Q_MGR_8be2vx$;
       var replacement = 'Q-Manager';
       tmp$_2 = regex.replace_x2uqeu$(tmp$_0, replacement);
     } else
       tmp$_2 = null;
-    return (tmp$_1 = tmp$_2) != null ? MQ8CodeDescriptionProvider$Companion_getInstance().REGEX_MSG_0.replace_x2uqeu$(tmp$_1, 'Message') : null;
+    return (tmp$_1 = tmp$_2) != null ? AbstractIbmUrlCodeDescriptionProvider$Companion_getInstance().REGEX_MSG_8be2vx$.replace_x2uqeu$(tmp$_1, 'Message') : null;
   };
   MQ8CodeDescriptionProvider.$metadata$ = {
     kind: Kind_CLASS,
@@ -860,7 +997,7 @@ if (typeof kotlin === 'undefined') {
       getElementById_359kph$result = Kotlin.isType(tmp$ = document.getElementById(id), HTMLElement) ? tmp$ : throwCCE();
     } catch (e) {
       if (Kotlin.isType(e, ClassCastException)) {
-        throw new RuntimeException_init("Unable to find element with id '" + id + "'.", e);
+        throw new RuntimeException_init_0("Unable to find element with id '" + id + "'.", e);
       } else
         throw e;
     }
@@ -872,7 +1009,7 @@ if (typeof kotlin === 'undefined') {
       getElementById_359kph$result_0 = Kotlin.isType(tmp$_0 = document.getElementById(id_0), HTMLDivElement) ? tmp$_0 : throwCCE();
     } catch (e_0) {
       if (Kotlin.isType(e_0, ClassCastException)) {
-        throw new RuntimeException_init("Unable to find element with id '" + id_0 + "'.", e_0);
+        throw new RuntimeException_init_0("Unable to find element with id '" + id_0 + "'.", e_0);
       } else
         throw e_0;
     }
@@ -884,7 +1021,7 @@ if (typeof kotlin === 'undefined') {
       getElementById_359kph$result_1 = Kotlin.isType(tmp$_1 = document.getElementById(id_1), HTMLDivElement) ? tmp$_1 : throwCCE();
     } catch (e_1) {
       if (Kotlin.isType(e_1, ClassCastException)) {
-        throw new RuntimeException_init("Unable to find element with id '" + id_1 + "'.", e_1);
+        throw new RuntimeException_init_0("Unable to find element with id '" + id_1 + "'.", e_1);
       } else
         throw e_1;
     }
@@ -896,7 +1033,7 @@ if (typeof kotlin === 'undefined') {
       getElementById_359kph$result_2 = Kotlin.isType(tmp$_2 = document.getElementById(id_2), HTMLInputElement) ? tmp$_2 : throwCCE();
     } catch (e_2) {
       if (Kotlin.isType(e_2, ClassCastException)) {
-        throw new RuntimeException_init("Unable to find element with id '" + id_2 + "'.", e_2);
+        throw new RuntimeException_init_0("Unable to find element with id '" + id_2 + "'.", e_2);
       } else
         throw e_2;
     }
@@ -908,7 +1045,7 @@ if (typeof kotlin === 'undefined') {
       getElementById_359kph$result_3 = Kotlin.isType(tmp$_3 = document.getElementById(id_3), HTMLDivElement) ? tmp$_3 : throwCCE();
     } catch (e_3) {
       if (Kotlin.isType(e_3, ClassCastException)) {
-        throw new RuntimeException_init("Unable to find element with id '" + id_3 + "'.", e_3);
+        throw new RuntimeException_init_0("Unable to find element with id '" + id_3 + "'.", e_3);
       } else
         throw e_3;
     }
@@ -920,7 +1057,7 @@ if (typeof kotlin === 'undefined') {
       getElementById_359kph$result_4 = Kotlin.isType(tmp$_4 = document.getElementById(id_4), HTMLIFrameElement) ? tmp$_4 : throwCCE();
     } catch (e_4) {
       if (Kotlin.isType(e_4, ClassCastException)) {
-        throw new RuntimeException_init("Unable to find element with id '" + id_4 + "'.", e_4);
+        throw new RuntimeException_init_0("Unable to find element with id '" + id_4 + "'.", e_4);
       } else
         throw e_4;
     }
@@ -932,7 +1069,7 @@ if (typeof kotlin === 'undefined') {
       getElementById_359kph$result_5 = Kotlin.isType(tmp$_5 = document.getElementById(id_5), HTMLHeadingElement) ? tmp$_5 : throwCCE();
     } catch (e_5) {
       if (Kotlin.isType(e_5, ClassCastException)) {
-        throw new RuntimeException_init("Unable to find element with id '" + id_5 + "'.", e_5);
+        throw new RuntimeException_init_0("Unable to find element with id '" + id_5 + "'.", e_5);
       } else
         throw e_5;
     }
@@ -944,15 +1081,22 @@ if (typeof kotlin === 'undefined') {
       getElementById_359kph$result_6 = Kotlin.isType(tmp$_6 = document.getElementById(id_6), HTMLAnchorElement) ? tmp$_6 : throwCCE();
     } catch (e_6) {
       if (Kotlin.isType(e_6, ClassCastException)) {
-        throw new RuntimeException_init("Unable to find element with id '" + id_6 + "'.", e_6);
+        throw new RuntimeException_init_0("Unable to find element with id '" + id_6 + "'.", e_6);
       } else
         throw e_6;
     }
     this.divContentSource_0 = getElementById_359kph$result_6;
+    this.stateContainer_0 = new StateContainer(new HtmlView$CodeLocationStateTransformer(this.controller_0), new HtmlView$CodeLocationStateComparator());
     this.inputSearch_0.addEventListener('input', HtmlView_init$lambda(this));
     this.listProducts_0 = new ListMaintainer(this.divListProducts_0, HtmlView$listProducts$lambda(this), new Comparator(HtmlView$listProducts$lambda_0));
     this.listCodes_0 = new ListMaintainer(this.divListCodes_0, HtmlView$listCodes$lambda(this));
+    this.currentLocation_0 = null;
   }
+  HtmlView.prototype.tryToSelectPreselectedErrorCode = function () {
+    var tmp$;
+    if ((tmp$ = this.stateContainer_0.getSelectedState()) != null) {
+      this.controller_0.selectCodeDescriptionLocation_puj7f4$(tmp$.providerId, tmp$.code);
+    }};
   HtmlView.prototype.showCodeDescriptionProviders_up4njv$ = function (providers) {
     this.listProducts_0.showItems_rmogi$(providers);
   };
@@ -1015,26 +1159,29 @@ if (typeof kotlin === 'undefined') {
     };
   }
   HtmlView.prototype.showCodeDescription_848m2z$ = function (location) {
-    var $receiver = downTo(this.divContentHeader_0.childElementCount, 0);
+    var tmp$, tmp$_0, tmp$_1;
+    if (location != null && !equals((tmp$ = this.currentLocation_0) != null ? tmp$.code : null, location.code)) {
+      this.stateContainer_0.push_i6pc9p$(HtmlView$HtmlView$CodeLocationState_init_0(location));
+    }var $receiver = downTo(this.divContentHeader_0.childElementCount, 0);
     var destination = ArrayList_init();
-    var tmp$;
-    tmp$ = $receiver.iterator();
-    while (tmp$.hasNext()) {
-      var element = tmp$.next();
-      var tmp$_0;
-      if ((tmp$_0 = this.divContentHeader_0.children[element]) != null) {
-        destination.add_11rb$(tmp$_0);
+    var tmp$_2;
+    tmp$_2 = $receiver.iterator();
+    while (tmp$_2.hasNext()) {
+      var element = tmp$_2.next();
+      var tmp$_0_0;
+      if ((tmp$_0_0 = this.divContentHeader_0.children[element]) != null) {
+        destination.add_11rb$(tmp$_0_0);
       }}
-    var tmp$_1;
-    tmp$_1 = destination.iterator();
-    while (tmp$_1.hasNext()) {
-      var element_0 = tmp$_1.next();
+    var tmp$_3;
+    tmp$_3 = destination.iterator();
+    while (tmp$_3.hasNext()) {
+      var element_0 = tmp$_3.next();
       this.divContentHeader_0.removeChild(element_0);
     }
     if (location != null) {
-      var tmp$_2 = this.divContentHeader_0;
+      var tmp$_4 = this.divContentHeader_0;
       var $receiver_0 = get_create(document);
-      tmp$_2.appendChild(visitTagAndFinalize(new SPAN_init(attributesMapOf('class', 'ec-code-header'), $receiver_0), $receiver_0, visitAndFinalize$lambda(HtmlView$showCodeDescription$lambda(location))));
+      tmp$_4.appendChild(visitTagAndFinalize(new SPAN_init(attributesMapOf('class', 'ec-code-header'), $receiver_0), $receiver_0, visitAndFinalize$lambda(HtmlView$showCodeDescription$lambda(location))));
       this.divContentSource_0.href = location.displayUrl.toString();
       this.divContentSource_0.innerText = location.displayUrl.toString();
       if (location.content != null) {
@@ -1045,7 +1192,7 @@ if (typeof kotlin === 'undefined') {
       } else {
         this.divContentFrame_0.classList.toggle('d-none', false);
         this.divContentCode_0.classList.toggle('d-none', true);
-        this.divContentFrame_0.src = location.url.toString();
+        (tmp$_1 = (tmp$_0 = this.divContentFrame_0.contentWindow) != null ? tmp$_0.location : null) != null ? (tmp$_1.replace(location.url.toString()), Unit) : null;
         this.divContentCode_0.innerHTML = '';
       }
     } else {
@@ -1053,6 +1200,7 @@ if (typeof kotlin === 'undefined') {
       this.divContentSource_0.innerText = '\xA0';
       this.divContentFrame_0.src = '';
     }
+    this.currentLocation_0 = location;
   };
   function HtmlView$createProductLink$lambda$lambda(this$HtmlView, closure$provider) {
     return function (it) {
@@ -1169,6 +1317,161 @@ if (typeof kotlin === 'undefined') {
       new HtmlView$Companion();
     }return HtmlView$Companion_instance;
   }
+  function HtmlView$CodeLocationState(providerId, code) {
+    HtmlView$CodeLocationState$Companion_getInstance();
+    this.providerId = providerId;
+    this.code = code;
+  }
+  function HtmlView$CodeLocationState$Companion() {
+    HtmlView$CodeLocationState$Companion_instance = this;
+  }
+  HtmlView$CodeLocationState$Companion.prototype.serializer = function () {
+    return HtmlView$CodeLocationState$$serializer_getInstance();
+  };
+  HtmlView$CodeLocationState$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var HtmlView$CodeLocationState$Companion_instance = null;
+  function HtmlView$CodeLocationState$Companion_getInstance() {
+    if (HtmlView$CodeLocationState$Companion_instance === null) {
+      new HtmlView$CodeLocationState$Companion();
+    }return HtmlView$CodeLocationState$Companion_instance;
+  }
+  function HtmlView$CodeLocationState$$serializer() {
+    this.descriptor_o7j4xb$_0 = new PluginGeneratedSerialDescriptor('org.olafneumann.errorcodes.html.HtmlView.CodeLocationState', this, 2);
+    this.descriptor.addElement_ivxn3r$('providerId', false);
+    this.descriptor.addElement_ivxn3r$('code', false);
+    HtmlView$CodeLocationState$$serializer_instance = this;
+  }
+  Object.defineProperty(HtmlView$CodeLocationState$$serializer.prototype, 'descriptor', {
+    configurable: true,
+    get: function () {
+      return this.descriptor_o7j4xb$_0;
+    }
+  });
+  HtmlView$CodeLocationState$$serializer.prototype.serialize_55azsf$ = function (encoder, value) {
+    var output = encoder.beginStructure_24f42q$(this.descriptor);
+    output.encodeStringElement_iij8qq$(this.descriptor, 0, value.providerId);
+    output.encodeStringElement_iij8qq$(this.descriptor, 1, value.code);
+    output.endStructure_24f42q$(this.descriptor);
+  };
+  HtmlView$CodeLocationState$$serializer.prototype.deserialize_bq71mq$ = function (decoder) {
+    var index;
+    var bitMask0 = 0;
+    var local0
+    , local1;
+    var input = decoder.beginStructure_24f42q$(this.descriptor);
+    loopLabel: while (true) {
+      index = input.decodeElementIndex_24f42q$(this.descriptor);
+      switch (index) {
+        case 0:
+          local0 = input.decodeStringElement_szpzho$(this.descriptor, 0);
+          bitMask0 |= 1;
+          break;
+        case 1:
+          local1 = input.decodeStringElement_szpzho$(this.descriptor, 1);
+          bitMask0 |= 2;
+          break;
+        case -1:
+          break loopLabel;
+        default:throw new UnknownFieldException(index);
+      }
+    }
+    input.endStructure_24f42q$(this.descriptor);
+    return HtmlView$HtmlView$CodeLocationState_init(bitMask0, local0, local1, null);
+  };
+  HtmlView$CodeLocationState$$serializer.prototype.childSerializers = function () {
+    return [internal.StringSerializer, internal.StringSerializer];
+  };
+  HtmlView$CodeLocationState$$serializer.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: '$serializer',
+    interfaces: [GeneratedSerializer]
+  };
+  var HtmlView$CodeLocationState$$serializer_instance = null;
+  function HtmlView$CodeLocationState$$serializer_getInstance() {
+    if (HtmlView$CodeLocationState$$serializer_instance === null) {
+      new HtmlView$CodeLocationState$$serializer();
+    }return HtmlView$CodeLocationState$$serializer_instance;
+  }
+  function HtmlView$HtmlView$CodeLocationState_init(seen1, providerId, code, serializationConstructorMarker) {
+    var $this = serializationConstructorMarker || Object.create(HtmlView$CodeLocationState.prototype);
+    if ((seen1 & 1) === 0)
+      throw new MissingFieldException('providerId');
+    else
+      $this.providerId = providerId;
+    if ((seen1 & 2) === 0)
+      throw new MissingFieldException('code');
+    else
+      $this.code = code;
+    return $this;
+  }
+  HtmlView$CodeLocationState.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'CodeLocationState',
+    interfaces: [StateContainer$State]
+  };
+  function HtmlView$HtmlView$CodeLocationState_init_0(location, $this) {
+    $this = $this || Object.create(HtmlView$CodeLocationState.prototype);
+    HtmlView$CodeLocationState.call($this, location.provider.id, location.code);
+    return $this;
+  }
+  HtmlView$CodeLocationState.prototype.component1 = function () {
+    return this.providerId;
+  };
+  HtmlView$CodeLocationState.prototype.component2 = function () {
+    return this.code;
+  };
+  HtmlView$CodeLocationState.prototype.copy_puj7f4$ = function (providerId, code) {
+    return new HtmlView$CodeLocationState(providerId === void 0 ? this.providerId : providerId, code === void 0 ? this.code : code);
+  };
+  HtmlView$CodeLocationState.prototype.toString = function () {
+    return 'CodeLocationState(providerId=' + Kotlin.toString(this.providerId) + (', code=' + Kotlin.toString(this.code)) + ')';
+  };
+  HtmlView$CodeLocationState.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.providerId) | 0;
+    result = result * 31 + Kotlin.hashCode(this.code) | 0;
+    return result;
+  };
+  HtmlView$CodeLocationState.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.providerId, other.providerId) && Kotlin.equals(this.code, other.code)))));
+  };
+  function HtmlView$CodeLocationStateTransformer(controller) {
+    this.controller_0 = controller;
+  }
+  HtmlView$CodeLocationStateTransformer.prototype.fromHash_61zpoe$ = function (hash) {
+    var it = split(hash, [['/']], false, 2);
+    return new HtmlView$CodeLocationState(it.get_za3lpa$(0), it.get_za3lpa$(1));
+  };
+  HtmlView$CodeLocationStateTransformer.prototype.toHash_11rb$ = function (state) {
+    return new StateContainer$HashContainer(joinToString_0(listOf([state.providerId, state.code]), '/'), state.providerId + ': ' + state.code);
+  };
+  HtmlView$CodeLocationStateTransformer.prototype.handle_za3rmp$ = function (state) {
+    var tmp$, tmp$_0;
+    var dyn = state;
+    this.controller_0.selectCodeDescriptionLocation_puj7f4$(typeof (tmp$ = dyn.providerId) === 'string' ? tmp$ : throwCCE(), typeof (tmp$_0 = dyn.code) === 'string' ? tmp$_0 : throwCCE());
+  };
+  HtmlView$CodeLocationStateTransformer.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'CodeLocationStateTransformer',
+    interfaces: [StateContainer$StateHandler]
+  };
+  function HtmlView$CodeLocationStateComparator() {
+  }
+  HtmlView$CodeLocationStateComparator.prototype.compare = function (a, b) {
+    var tmp$, tmp$_0;
+    var da = a;
+    var db = b;
+    return Kotlin.compareTo(typeof (tmp$ = da.code) === 'string' ? tmp$ : throwCCE(), typeof (tmp$_0 = db.code) === 'string' ? tmp$_0 : throwCCE());
+  };
+  HtmlView$CodeLocationStateComparator.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'CodeLocationStateComparator',
+    interfaces: [Comparator]
+  };
   function HtmlView_init$lambda$lambda(closure$lowerCaseFilter) {
     return function (it) {
       return contains(it.code.toLowerCase(), closure$lowerCaseFilter);
@@ -1431,7 +1734,7 @@ if (typeof kotlin === 'undefined') {
       getElementById_359kph$result = Kotlin.isType(tmp$ = document.getElementById(id), HTMLDivElement) ? tmp$ : throwCCE();
     } catch (e) {
       if (Kotlin.isType(e, ClassCastException)) {
-        throw new RuntimeException_init("Unable to find element with id '" + id + "'.", e);
+        throw new RuntimeException_init_0("Unable to find element with id '" + id + "'.", e);
       } else
         throw e;
     }
@@ -1461,7 +1764,7 @@ if (typeof kotlin === 'undefined') {
         getElementById_359kph$result = Kotlin.isType(tmp$ = document.getElementById(id), HTMLButtonElement) ? tmp$ : throwCCE();
       } catch (e) {
         if (Kotlin.isType(e, ClassCastException)) {
-          throw new RuntimeException_init("Unable to find element with id '" + id + "'.", e);
+          throw new RuntimeException_init_0("Unable to find element with id '" + id + "'.", e);
         } else
           throw e;
       }
@@ -1473,7 +1776,7 @@ if (typeof kotlin === 'undefined') {
         getElementById_359kph$result_0 = Kotlin.isType(tmp$_0 = document.getElementById(id_0), HTMLButtonElement) ? tmp$_0 : throwCCE();
       } catch (e_0) {
         if (Kotlin.isType(e_0, ClassCastException)) {
-          throw new RuntimeException_init("Unable to find element with id '" + id_0 + "'.", e_0);
+          throw new RuntimeException_init_0("Unable to find element with id '" + id_0 + "'.", e_0);
         } else
           throw e_0;
       }
@@ -1555,17 +1858,140 @@ if (typeof kotlin === 'undefined') {
       new HtmlHelper();
     }return HtmlHelper_instance;
   }
-  function UiController(codeDescriptionProviders) {
-    this.view_0 = new HtmlView(this);
-    this.view_0.showCodeDescriptionProviders_up4njv$(codeDescriptionProviders);
-    this.selectCodeDescriptionProvider_ecttm8$(first(codeDescriptionProviders));
+  function StateContainer(transformer, comparator) {
+    StateContainer$Companion_getInstance();
+    if (comparator === void 0)
+      comparator = new Comparator(StateContainer_init$lambda);
+    this.transformer_0 = transformer;
+    this.comparator_0 = comparator;
+    window.addEventListener(StateContainer$Companion_getInstance().EVENT_POPSTATE_0, StateContainer_init$lambda_0(this));
   }
-  function Coroutine$UiController$selectCodeDescriptionProvider$lambda(this$UiController_0, closure$provider_0, $receiver_0, controller, continuation_0) {
+  StateContainer.prototype.push_i6pc9p$ = function (state, replaceCurrentState) {
+    if (replaceCurrentState === void 0)
+      replaceCurrentState = false;
+    var tmp$;
+    var hash = this.transformer_0.toHash_11rb$(state);
+    if (((tmp$ = window.history.state) != null ? this.comparator_0.compare(tmp$, state) : null) !== 0) {
+      if (!replaceCurrentState) {
+        window.history.pushState(state, hash.display, '#' + encodeURIComponent(hash.hash));
+      } else {
+        window.history.replaceState(state, hash.display, '#' + encodeURIComponent(hash.hash));
+      }
+    }};
+  StateContainer.prototype.getSelectedState = function () {
+    var url = new URL(document.URL);
+    if (url.hash.length > 1) {
+      var hash = decodeURIComponent(url.hash.substring(1));
+      return this.transformer_0.fromHash_61zpoe$(hash);
+    }return null;
+  };
+  StateContainer.prototype.handle_0 = function (event) {
+    if (event.state == null) {
+      console.log('State popped with no state attached.');
+      return;
+    }try {
+      this.transformer_0.handle_za3rmp$(ensureNotNull(event.state));
+    } catch (e) {
+      if (Kotlin.isType(e, ClassCastException)) {
+        console.log(e);
+      } else
+        throw e;
+    }
+  };
+  function StateContainer$Companion() {
+    StateContainer$Companion_instance = this;
+    this.EVENT_POPSTATE_0 = 'popstate';
+  }
+  StateContainer$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var StateContainer$Companion_instance = null;
+  function StateContainer$Companion_getInstance() {
+    if (StateContainer$Companion_instance === null) {
+      new StateContainer$Companion();
+    }return StateContainer$Companion_instance;
+  }
+  function StateContainer$State() {
+  }
+  StateContainer$State.$metadata$ = {
+    kind: Kind_INTERFACE,
+    simpleName: 'State',
+    interfaces: []
+  };
+  function StateContainer$StateHandler() {
+  }
+  StateContainer$StateHandler.$metadata$ = {
+    kind: Kind_INTERFACE,
+    simpleName: 'StateHandler',
+    interfaces: []
+  };
+  function StateContainer$HashContainer(hash, display) {
+    this.hash = hash;
+    this.display = display;
+  }
+  StateContainer$HashContainer.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'HashContainer',
+    interfaces: []
+  };
+  StateContainer$HashContainer.prototype.component1 = function () {
+    return this.hash;
+  };
+  StateContainer$HashContainer.prototype.component2 = function () {
+    return this.display;
+  };
+  StateContainer$HashContainer.prototype.copy_puj7f4$ = function (hash, display) {
+    return new StateContainer$HashContainer(hash === void 0 ? this.hash : hash, display === void 0 ? this.display : display);
+  };
+  StateContainer$HashContainer.prototype.toString = function () {
+    return 'HashContainer(hash=' + Kotlin.toString(this.hash) + (', display=' + Kotlin.toString(this.display)) + ')';
+  };
+  StateContainer$HashContainer.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.hash) | 0;
+    result = result * 31 + Kotlin.hashCode(this.display) | 0;
+    return result;
+  };
+  StateContainer$HashContainer.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.hash, other.hash) && Kotlin.equals(this.display, other.display)))));
+  };
+  function StateContainer_init$lambda(f, f_0) {
+    return 1;
+  }
+  function StateContainer_init$lambda_0(this$StateContainer) {
+    return function (it) {
+      if (Kotlin.isType(it, PopStateEvent)) {
+        this$StateContainer.handle_0(it);
+      }return Unit;
+    };
+  }
+  StateContainer.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'StateContainer',
+    interfaces: []
+  };
+  function UiController(codeDescriptionProviders) {
+    this.codeDescriptionProviders_0 = codeDescriptionProviders;
+    this.view_0 = new HtmlView(this);
+    this.selectedCodeDescriptionProvider_0 = first(this.codeDescriptionProviders_0);
+    this.view_0.showCodeDescriptionProviders_up4njv$(this.codeDescriptionProviders_0);
+    this.selectCodeDescriptionProvider_ecttm8$(this.selectedCodeDescriptionProvider_0);
+    this.view_0.tryToSelectPreselectedErrorCode();
+  }
+  function UiController$selectCodeDescriptionProvider$lambda() {
+    return Unit;
+  }
+  UiController.prototype.selectCodeDescriptionProvider_ecttm8$ = function (provider) {
+    this.selectCodeDescriptionProvider_0(provider, UiController$selectCodeDescriptionProvider$lambda);
+  };
+  function Coroutine$UiController$selectCodeDescriptionProvider$lambda(this$UiController_0, closure$andThen_0, $receiver_0, controller, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.$controller = controller;
     this.exceptionState_0 = 1;
     this.local$this$UiController = this$UiController_0;
-    this.local$closure$provider = closure$provider_0;
+    this.local$closure$andThen = closure$andThen_0;
     this.local$tmp$ = void 0;
   }
   Coroutine$UiController$selectCodeDescriptionProvider$lambda.$metadata$ = {
@@ -1582,14 +2008,15 @@ if (typeof kotlin === 'undefined') {
           case 0:
             this.local$tmp$ = this.local$this$UiController.view_0;
             this.state_0 = 2;
-            this.result_0 = this.local$closure$provider.loadLocationList(this);
+            this.result_0 = this.local$this$UiController.selectedCodeDescriptionProvider_0.loadLocationList(this);
             if (this.result_0 === COROUTINE_SUSPENDED)
               return COROUTINE_SUSPENDED;
             continue;
           case 1:
             throw this.exception_0;
           case 2:
-            return this.local$tmp$.showCodeDescriptionLocations_koqndk$(this.result_0), Unit;
+            this.local$tmp$.showCodeDescriptionLocations_koqndk$(this.result_0);
+            return this.local$closure$andThen();
           default:this.state_0 = 1;
             throw new Error('State Machine Unreachable execution');
         }
@@ -1604,24 +2031,112 @@ if (typeof kotlin === 'undefined') {
       }
      while (true);
   };
-  function UiController$selectCodeDescriptionProvider$lambda(this$UiController_0, closure$provider_0) {
+  function UiController$selectCodeDescriptionProvider$lambda_0(this$UiController_0, closure$andThen_0) {
     return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$UiController$selectCodeDescriptionProvider$lambda(this$UiController_0, closure$provider_0, $receiver_0, this, continuation_0);
+      var instance = new Coroutine$UiController$selectCodeDescriptionProvider$lambda(this$UiController_0, closure$andThen_0, $receiver_0, this, continuation_0);
       if (suspended)
         return instance;
       else
         return instance.doResume(null);
     };
   }
-  UiController.prototype.selectCodeDescriptionProvider_ecttm8$ = function (provider) {
-    this.view_0.selectCodeDescriptionProvider_ecttm8$(provider);
+  UiController.prototype.selectCodeDescriptionProvider_0 = function (provider, andThen) {
+    this.selectedCodeDescriptionProvider_0 = provider;
+    this.view_0.selectCodeDescriptionProvider_ecttm8$(this.selectedCodeDescriptionProvider_0);
     this.view_0.showCodeDescription_848m2z$(null);
     this.view_0.showCodeDescriptionLocations_koqndk$(null);
-    launch(coroutines.GlobalScope, void 0, void 0, UiController$selectCodeDescriptionProvider$lambda(this, provider));
+    launch(coroutines.GlobalScope, void 0, void 0, UiController$selectCodeDescriptionProvider$lambda_0(this, andThen));
   };
   UiController.prototype.selectCodeDescriptionLocation_8witqk$ = function (location) {
     this.view_0.selectCodeDescriptionLocation_8witqk$(location);
     this.view_0.showCodeDescription_848m2z$(location);
+  };
+  function UiController$selectCodeDescriptionLocation$lambda$lambda(closure$codeDescriptionProviderId, closure$code, this$UiController) {
+    return function () {
+      this$UiController.selectCodeDescriptionLocation_puj7f4$(closure$codeDescriptionProviderId, closure$code);
+      return Unit;
+    };
+  }
+  function Coroutine$UiController$selectCodeDescriptionLocation$lambda(this$UiController_0, closure$code_0, $receiver_0, controller, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.$controller = controller;
+    this.exceptionState_0 = 1;
+    this.local$this$UiController = this$UiController_0;
+    this.local$closure$code = closure$code_0;
+  }
+  Coroutine$UiController$selectCodeDescriptionLocation$lambda.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$UiController$selectCodeDescriptionLocation$lambda.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$UiController$selectCodeDescriptionLocation$lambda.prototype.constructor = Coroutine$UiController$selectCodeDescriptionLocation$lambda;
+  Coroutine$UiController$selectCodeDescriptionLocation$lambda.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            var tmp$;
+            this.state_0 = 2;
+            this.result_0 = this.local$this$UiController.selectedCodeDescriptionProvider_0.getLocationByCode_61zpoe$(this.local$closure$code, this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 1:
+            throw this.exception_0;
+          case 2:
+            var tmp$_0;
+            if ((tmp$ = this.result_0) != null) {
+              this.local$this$UiController.selectCodeDescriptionLocation_8witqk$(tmp$);
+              tmp$_0 = Unit;
+            } else
+              tmp$_0 = null;
+            return tmp$_0;
+          default:this.state_0 = 1;
+            throw new Error('State Machine Unreachable execution');
+        }
+      } catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        } else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  function UiController$selectCodeDescriptionLocation$lambda(this$UiController_0, closure$code_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$UiController$selectCodeDescriptionLocation$lambda(this$UiController_0, closure$code_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  UiController.prototype.selectCodeDescriptionLocation_puj7f4$ = function (codeDescriptionProviderId, code) {
+    var tmp$;
+    if (!equals(this.selectedCodeDescriptionProvider_0.id, codeDescriptionProviderId)) {
+      var $receiver = this.codeDescriptionProviders_0;
+      var firstOrNull$result;
+      firstOrNull$break: do {
+        var tmp$_0;
+        tmp$_0 = $receiver.iterator();
+        while (tmp$_0.hasNext()) {
+          var element = tmp$_0.next();
+          if (equals(element.id, codeDescriptionProviderId)) {
+            firstOrNull$result = element;
+            break firstOrNull$break;
+          }}
+        firstOrNull$result = null;
+      }
+       while (false);
+      if ((tmp$ = firstOrNull$result) != null) {
+        this.selectCodeDescriptionProvider_0(tmp$, UiController$selectCodeDescriptionLocation$lambda$lambda(codeDescriptionProviderId, code, this));
+      }} else {
+      launch(coroutines.GlobalScope, void 0, void 0, UiController$selectCodeDescriptionLocation$lambda(this, code));
+    }
   };
   UiController.$metadata$ = {
     kind: Kind_CLASS,
@@ -1648,13 +2163,14 @@ if (typeof kotlin === 'undefined') {
   package$codes.CodeDescriptionLocation = CodeDescriptionLocation;
   CodeDescriptionProvider.Product = CodeDescriptionProvider$Product;
   package$codes.CodeDescriptionProvider = CodeDescriptionProvider;
+  Object.defineProperty(AbstractIbmUrlCodeDescriptionProvider, 'Companion', {
+    get: AbstractIbmUrlCodeDescriptionProvider$Companion_getInstance
+  });
   package$codes.AbstractIbmUrlCodeDescriptionProvider = AbstractIbmUrlCodeDescriptionProvider;
+  package$codes.SqlCodeDescriptionProvider = SqlCodeDescriptionProvider;
   package$codes.Db2Zos10CodeDescriptionProvider = Db2Zos10CodeDescriptionProvider;
   package$codes.Db2Zos11CodeDescriptionProvider = Db2Zos11CodeDescriptionProvider;
   package$codes.Db2Zos12CodeDescriptionProvider = Db2Zos12CodeDescriptionProvider;
-  Object.defineProperty(MQ8CodeDescriptionProvider, 'Companion', {
-    get: MQ8CodeDescriptionProvider$Companion_getInstance
-  });
   package$codes.MQ8CodeDescriptionProvider = MQ8CodeDescriptionProvider;
   $$importsForInline$$['kotlinx-html-js'] = $module$kotlinx_html_js;
   Object.defineProperty(HtmlView, 'Companion', {
@@ -1675,13 +2191,19 @@ if (typeof kotlin === 'undefined') {
   Object.defineProperty(package$browser, 'HtmlHelper', {
     get: HtmlHelper_getInstance
   });
+  StateContainer.State = StateContainer$State;
+  StateContainer.StateHandler = StateContainer$StateHandler;
+  StateContainer.HashContainer = StateContainer$HashContainer;
+  package$browser.StateContainer = StateContainer;
   var package$ui = package$errorcodes.ui || (package$errorcodes.ui = {});
   package$ui.UiController = UiController;
   Object.defineProperty(AbstractUrlCodeDescriptionProvider.prototype, 'name', Object.getOwnPropertyDescriptor(CodeDescriptionProvider.prototype, 'name'));
+  HtmlView$CodeLocationState$$serializer.prototype.patch_h7kg3r$ = GeneratedSerializer.prototype.patch_h7kg3r$;
+  HtmlView$CodeLocationState$$serializer.prototype.typeParametersSerializers = GeneratedSerializer.prototype.typeParametersSerializers;
   codeDescriptionProviders = listOf([new Db2Zos10CodeDescriptionProvider(), new Db2Zos11CodeDescriptionProvider(), new Db2Zos12CodeDescriptionProvider(), new MQ8CodeDescriptionProvider()]);
   main();
   Kotlin.defineModule('error-codes-viewer', _);
   return _;
-}(typeof this['error-codes-viewer'] === 'undefined' ? {} : this['error-codes-viewer'], kotlin, this['ktor-ktor-client-core-jsLegacy'], this['ktor-ktor-http-jsLegacy'], this['kotlinx-html-js'], this['kotlinx-coroutines-core']);
+}(typeof this['error-codes-viewer'] === 'undefined' ? {} : this['error-codes-viewer'], kotlin, this['ktor-ktor-client-core-jsLegacy'], this['ktor-ktor-http-jsLegacy'], this['kotlinx-html-js'], this['kotlinx-serialization-kotlinx-serialization-core-jsLegacy'], this['kotlinx-coroutines-core']);
 
 //# sourceMappingURL=error-codes-viewer.js.map
