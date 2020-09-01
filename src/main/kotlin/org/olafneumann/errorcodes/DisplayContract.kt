@@ -10,9 +10,11 @@ interface DisplayContract {
         fun selectCodeDescriptionProvider(provider: CodeDescriptionProvider)
         fun selectCodeDescriptionLocation(location: CodeDescriptionLocation)
         fun showCodeDescription(location: CodeDescriptionLocation?)
+        fun tryToSelectPreselectedErrorCode()
     }
     interface Controller {
         fun selectCodeDescriptionProvider(provider: CodeDescriptionProvider)
         fun selectCodeDescriptionLocation(location: CodeDescriptionLocation)
+        fun selectCodeDescriptionLocation(codeDescriptionProviderId: String, code: String)
     }
 }
