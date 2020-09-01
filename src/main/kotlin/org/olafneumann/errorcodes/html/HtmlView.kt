@@ -40,6 +40,11 @@ class HtmlView(
         })
     }
 
+    override fun tryToSelectPreselectedErrorCode() {
+        stateContainer.getSelectedState()
+            ?.let { controller.selectCodeDescriptionLocation(it.providerId, it.code) }
+    }
+
     private val listProducts = ListMaintainer<CodeDescriptionProvider>(
         divListProducts,
         { createProductLink(it) },

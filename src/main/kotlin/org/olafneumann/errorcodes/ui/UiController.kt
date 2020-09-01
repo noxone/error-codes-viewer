@@ -17,6 +17,8 @@ class UiController(
     init {
         view.showCodeDescriptionProviders(codeDescriptionProviders)
         selectCodeDescriptionProvider(selectedCodeDescriptionProvider)
+
+        view.tryToSelectPreselectedErrorCode()
     }
 
     override fun selectCodeDescriptionProvider(provider: CodeDescriptionProvider) {
