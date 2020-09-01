@@ -15,6 +15,8 @@ import org.w3c.dom.*
 import kotlinx.browser.document
 import kotlinx.serialization.Serializable
 import org.olafneumann.errorcodes.html.browser.StateContainer
+import org.olafneumann.errorcodes.ui.UiController
+import kotlin.reflect.KClass
 
 class HtmlView(
     private val controller: DisplayContract.Controller
@@ -28,7 +30,7 @@ class HtmlView(
     private val divContentHeader = HtmlHelper.getElementById<HTMLHeadingElement>(ID_CONTENT_HEADER)
     private val divContentSource = HtmlHelper.getElementById<HTMLAnchorElement>(ID_CONTENT_SOURCE)
 
-    private val stateContainer = StateContainer(CodeLocationStateTransformer())
+    private val stateContainer = StateContainer(CodeLocationStateTransformer(controller), CodeLocationStateComparator())
 
     init {
         inputSearch.addEventListener("input", { event ->
@@ -65,7 +67,13 @@ class HtmlView(
         listCodes.toggleActive(location)
     }
 
+    private var currentLocation: CodeDescriptionLocation? = null
+
     override fun showCodeDescription(location: CodeDescriptionLocation?) {
+        if (location != null && currentLocation?.code != location.code) {
+            stateContainer.push(CodeLocationState(location))
+        }
+
         divContentHeader.childElementCount
             .downTo(0)
             .mapNotNull { divContentHeader.children[it] }
@@ -88,15 +96,15 @@ class HtmlView(
             } else {
                 divContentFrame.classList.toggle("d-none", false)
                 divContentCode.classList.toggle("d-none", true)
-                divContentFrame.src = location.url.toString()
+                divContentFrame.contentWindow?.location?.replace(location.url.toString())
                 divContentCode.innerHTML = ""
             }
-            stateContainer.push(CodeLocationState(location))
         } else {
             divContentSource.href = "#"
             divContentSource.innerText = "\u00A0"
             divContentFrame.src = ""
         }
+        currentLocation = location
     }
 
     private fun createProductLink(provider: CodeDescriptionProvider): HTMLElement =
@@ -135,14 +143,16 @@ class HtmlView(
     }
 
     @Serializable
-    private class CodeLocationState constructor(
+    private data class CodeLocationState constructor(
         val providerId: String,
         val code: String
     ) : StateContainer.State {
         constructor(location: CodeDescriptionLocation) : this(location.provider.id, location.code)
     }
 
-    private class CodeLocationStateTransformer : StateContainer.StateHandler<CodeLocationState> {
+    private class CodeLocationStateTransformer(
+        private val controller: DisplayContract.Controller
+    ) : StateContainer.StateHandler<CodeLocationState> {
         override fun fromHash(hash: String): CodeLocationState =
             hash.split(delimiters = arrayOf("/"), ignoreCase = false, limit = 2)
                 .let { CodeLocationState(it[0], it[1]) }
@@ -152,9 +162,17 @@ class HtmlView(
                 listOf(state.providerId, state.code).joinToString("/"),
                 "${state.providerId}: ${state.code}")
 
-        override fun handle(state: CodeLocationState) {
-            TODO("Not yet implemented")
+        override fun handle(state: Any/*CodeLocationState*/) {
+            val dyn: dynamic = state
+            controller.selectCodeDescriptionLocation(dyn.providerId as String, dyn.code as String)
         }
     }
 
+    private class CodeLocationStateComparator : Comparator<Any> {
+        override fun compare(a: Any, b: Any): Int {
+            val da: dynamic = a
+            val db: dynamic = b
+            return (da.code as String).compareTo(db.code as String)
+        }
+    }
 }

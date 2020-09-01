@@ -6,7 +6,8 @@ import org.w3c.dom.PopStateEvent
 import org.w3c.dom.url.URL
 
 class StateContainer<T: StateContainer.State>(
-    private val transformer: StateHandler<T>
+    private val transformer: StateHandler<T>,
+    private val comparator: Comparator<Any> = Comparator { _, _ -> 1 }
 ) {
     init {
         window.addEventListener(EVENT_POPSTATE, {
@@ -16,9 +17,15 @@ class StateContainer<T: StateContainer.State>(
         })
     }
 
-    fun push(state: T) {
+    fun push(state: T, replaceCurrentState: Boolean = false) {
         val hash = transformer.toHash(state)
-        window.history.pushState(state, hash.display, "#${encodeURIComponent(hash.hash)}")
+        if (window.history.state?.let { comparator.compare(it, state) } != 0) {
+            if (!replaceCurrentState) {
+                window.history.pushState(state, hash.display, "#${encodeURIComponent(hash.hash)}")
+            } else {
+                window.history.replaceState(state, hash.display, "#${encodeURIComponent(hash.hash)}")
+            }
+        }
     }
 
     fun getSelectedState(): T? {
@@ -35,14 +42,11 @@ class StateContainer<T: StateContainer.State>(
             console.log("State popped with no state attached.")
             return
         }
-        if (event.state !is State) {
-            console.log("Popped state is not if expected 'State' type.", event.state)
-            return
+        try {
+            transformer.handle(event.state!!)
+        } catch (e: ClassCastException) {
+            console.log(e)
         }
-
-        // TODO better cast handling
-        val state: T = event.state as State as T
-        transformer.handle(state)
     }
 
     private companion object {
@@ -55,7 +59,7 @@ class StateContainer<T: StateContainer.State>(
     interface StateHandler<T> {
         fun toHash(state: T): HashContainer
         fun fromHash(hash: String): T
-        fun handle(state: T)
+        fun handle(state: Any)
     }
 
     data class HashContainer(
