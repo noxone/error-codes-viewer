@@ -9,7 +9,7 @@ import kotlin.math.absoluteValue
 
 abstract class AbstractUrlCodeDescriptionProvider(
     override val id: String,
-    override val product: CodeDescriptionProvider.Product
+    override val product: CodeDescriptionProvider.Product,
 ) : CodeDescriptionProvider {
     companion object {
         private val client = HttpClient(Js)
@@ -31,8 +31,8 @@ abstract class AbstractUrlCodeDescriptionProvider(
         return codes!!
     }
 
-    override suspend fun loadCodeDescription(location: CodeDescriptionLocation): CodeDescription {
-        val siteContent = client.get<String>(location.url)
+    override suspend fun loadCodeDescription(url: Url): CodeDescription {
+        val siteContent = client.get<String>(url)
         return CodeDescription(siteContent, Date())
     }
 
