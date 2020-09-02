@@ -30,17 +30,12 @@ object HtmlCleaner {
     fun stripTagExceptAllowed(html: String, allowedTagNames: List<String> = ALLOWED_TAGS): String {
         val matchResults = REGEX_TAG.findAll(html).toList()
         var changedCode = html
-        val allowedTags =
-            matchResults.filter { matchResult -> matchResult.groups[2] != null && allowedTagNames.contains(matchResult.groups[2]!!.value) }
-        val notAllowedTags =
-            matchResults.filter { matchResult -> matchResult.groups[2] == null || !allowedTagNames.contains(matchResult.groups[2]!!.value) }
-        console.log("allowed", allowedTags.map { it.groups[2]?.value })
-        console.log("not allowed", notAllowedTags.map { it.groups[2]?.value })
+        val allowedTags = matchResults
+            .filter { matchResult -> matchResult.groups[2] != null && allowedTagNames.contains(matchResult.groups[2]!!.value) }
+        val notAllowedTags = matchResults
+            .filter { matchResult -> matchResult.groups[2] == null || !allowedTagNames.contains(matchResult.groups[2]!!.value) }
         notAllowedTags
-            .forEach {
-                console.log(it.value)
-                changedCode = changedCode.replace(it.value, "")
-            }
+            .forEach { changedCode = changedCode.replace(it.value, "") }
         return changedCode
     }
 
