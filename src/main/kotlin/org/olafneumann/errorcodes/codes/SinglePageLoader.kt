@@ -34,8 +34,6 @@ class HttpCodeDescriptionProvider : AbstractUrlCodeDescriptionProvider(
         "<dl>" +
                 "<dt>Code<dt><dd>${code}</dd>" +
                 "<dt>Summary<dt><dd>${summary}</dd>" +
-                "<dt>Description<dt><dd>${description.stripHtmlTags()}</dd>" +
+                "<dt>Description<dt><dd>${HtmlCleaner.stripTagExceptAllowed(description)}</dd>" +
                 "</dl>"
-
-    private fun String.stripHtmlTags(): String = this // TODO implement
 }
