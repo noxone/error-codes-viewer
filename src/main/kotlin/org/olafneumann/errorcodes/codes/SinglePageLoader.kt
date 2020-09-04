@@ -4,7 +4,7 @@ import io.ktor.http.Url
 
 class HttpCodeDescriptionProvider : AbstractUrlCodeDescriptionProvider(
     id = "http",
-    product = CodeDescriptionProvider.Product("W3C", "HTTP", "1.1")
+    product = CodeDescriptionProvider.Product("W3C", "HTTP", "any")
 ) {
     private companion object {
         private const val INDEX_URL = "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status"
