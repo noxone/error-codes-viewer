@@ -1,5 +1,7 @@
 package org.olafneumann.errorcodes.codes
 
+import io.ktor.http.*
+
 interface CodeDescriptionProvider {
     val id: String
     val product: Product
@@ -7,7 +9,7 @@ interface CodeDescriptionProvider {
         get() = "${product.vendor} ${product.title} ${product.version}"
     val comparator: Comparator<CodeDescriptionLocation>
     suspend fun loadLocationList(): List<CodeDescriptionLocation>
-    suspend fun loadCodeDescription(location: CodeDescriptionLocation): CodeDescription
+    suspend fun loadCodeDescription(location: CodeDescriptionLocation): CodeDescription?
     suspend fun getLocationByCode(code: String): CodeDescriptionLocation?
 
     data class Product(

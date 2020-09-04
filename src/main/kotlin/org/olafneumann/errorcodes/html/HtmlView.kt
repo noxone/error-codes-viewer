@@ -91,13 +91,18 @@ class HtmlView(
                 +": "
                 span(classes = "font-weight-bold") { +location.code }
             })
-            divContentSource.href = location.displayUrl.toString()
-            divContentSource.innerText = location.displayUrl.toString()
+            if (location.displayUrl != null) {
+                divContentSource.href = location.displayUrl.toString()
+                divContentSource.innerText = location.displayUrl.toString()
+            } else {
+                divContentSource.href = "#"
+                divContentSource.innerText = ""
+            }
             if (location.content != null) {
                 divContentFrame.classList.toggle("d-none", true)
                 divContentCode.classList.toggle("d-none", false)
                 divContentFrame.src = ""
-                divContentCode.innerHTML = location.content.content
+                divContentCode.innerHTML = location.content?.content ?: "NO CONTENT"
             } else {
                 divContentFrame.classList.toggle("d-none", false)
                 divContentCode.classList.toggle("d-none", true)
