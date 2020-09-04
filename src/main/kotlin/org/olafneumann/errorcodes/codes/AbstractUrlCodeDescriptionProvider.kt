@@ -5,7 +5,6 @@ import io.ktor.client.engine.js.Js
 import io.ktor.client.request.get
 import io.ktor.http.Url
 import kotlin.js.Date
-import kotlin.math.absoluteValue
 
 abstract class AbstractUrlCodeDescriptionProvider(
     override val id: String,
@@ -31,13 +30,19 @@ abstract class AbstractUrlCodeDescriptionProvider(
         return codes!!
     }
 
-    override suspend fun loadCodeDescription(url: Url): CodeDescription {
-        val siteContent = client.get<String>(url)
-        return CodeDescription(siteContent, Date())
+    override suspend fun loadCodeDescription(location: CodeDescriptionLocation): CodeDescription? {
+        return location.url?.let { url ->
+            val siteContent = convertCodeDescriptionContent(client.get<String>(url))
+            CodeDescription(siteContent, Date())
+        }
     }
 
-    override suspend fun getLocationByCode(code: String): CodeDescriptionLocation? = loadLocationList().firstOrNull { it.code == code }
+    protected open suspend fun convertCodeDescriptionContent(downloadedContent: String) =
+        HtmlCleaner.stripTagsExceptAllowed(downloadedContent)
+
+    override suspend fun getLocationByCode(code: String): CodeDescriptionLocation? =
+        loadLocationList().firstOrNull { it.code == code }
 
     override val comparator: Comparator<CodeDescriptionLocation> =
-            Comparator { a, b -> String.CASE_INSENSITIVE_ORDER.compare(a.code, b.code) }
+        Comparator { a, b -> String.CASE_INSENSITIVE_ORDER.compare(a.code, b.code) }
 }

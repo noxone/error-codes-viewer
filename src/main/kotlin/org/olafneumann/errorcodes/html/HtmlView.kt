@@ -102,7 +102,7 @@ class HtmlView(
                 divContentFrame.classList.toggle("d-none", true)
                 divContentCode.classList.toggle("d-none", false)
                 divContentFrame.src = ""
-                divContentCode.innerHTML = location.content.content
+                divContentCode.innerHTML = location.content?.content ?: "NO CONTENT"
             } else {
                 divContentFrame.classList.toggle("d-none", false)
                 divContentCode.classList.toggle("d-none", true)
