@@ -65,7 +65,7 @@ abstract class SqlCodeDescriptionProvider(
 
 class Db2Zos10CodeDescriptionProvider : SqlCodeDescriptionProvider(
     "ibm-db2-for-zos-10",
-    "Db2 for z/OS",
+    "DB2 for z/OS",
     "10.0.0",
     Url("https://www.ibm.com/support/knowledgecenter/SSEPEK_10.0.0/codes/src/tpc/db2z_n.html?view=embed"),
     Regex("<li class=\"ulchildlink\"[^>]*>.*?<a\\s[^>]*href=\"([^\"]+)\"[^>]*>(-?[0-9]+)</a>((?:[^<]|<(?!/li))*?)</li>"),
@@ -74,7 +74,7 @@ class Db2Zos10CodeDescriptionProvider : SqlCodeDescriptionProvider(
 
 class Db2Zos11CodeDescriptionProvider : SqlCodeDescriptionProvider(
     "ibm-db2-for-zos-11",
-    "Db2 for z/OS",
+    "DB2 for z/OS",
     "11.0.0",
     Url("https://www.ibm.com/support/knowledgecenter/SSEPEK_11.0.0/codes/src/tpc/db2z_n.html?view=embed"),
     Regex("<li class=\"ulchildlink\"[^>]*>.*?<a\\s[^>]*href=\"([^\"]+)\"[^>]*>(-?[0-9]+)</a>((?:[^<]|<(?!/li))*?)</li>"),
@@ -83,7 +83,7 @@ class Db2Zos11CodeDescriptionProvider : SqlCodeDescriptionProvider(
 
 class Db2Zos12CodeDescriptionProvider : SqlCodeDescriptionProvider(
     "ibm-db2-for-zos-12",
-    "Db2 for z/OS",
+    "DB2 for z/OS",
     "12.0.0",
     Url("https://www.ibm.com/support/knowledgecenter/SSEPEK_12.0.0/codes/src/tpc/db2z_n.html?view=embed"),
     Regex("<li class=\"ulchildlink\"[^>]*>.*?<a\\s[^>]*href=\"([^\"]+)\"[^>]*>(-?[0-9]+)</a>((?:[^<]|<(?!/li))*?)</li>"),
