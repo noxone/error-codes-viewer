@@ -17,21 +17,17 @@ class StateContainer<T: StateContainer.State>(
         })
     }
 
-    fun push(state: T, replaceCurrentState: Boolean = false) {
+    fun push(state: T) {
         val hash = transformer.toHash(state)
         if (window.history.state?.let { comparator.compare(it, state) } != 0) {
-            if (!replaceCurrentState) {
-                window.history.pushState(state, hash.display, "#${encodeURIComponent(hash.hash)}")
-            } else {
-                window.history.replaceState(state, hash.display, "#${encodeURIComponent(hash.hash)}")
-            }
+            window.history.pushState(state, hash.display, "#${hash.hash}")
         }
     }
 
     fun getSelectedState(): T? {
         val url = URL(document.URL)
         if (url.hash.length > 1) {
-            val hash = decodeURIComponent(url.hash.substring(1))
+            val hash = url.hash.substring(1)
             return transformer.fromHash(hash)
         }
         return null
