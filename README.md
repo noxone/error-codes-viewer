@@ -6,6 +6,7 @@ An application to collect error codes of several widely used applications in one
 
 While still in development stage this application supports
 
+- Common **FTP** *any*
 - IBM **Db2 for z/OS** *10.0.0*
 - IBM **Db2 for z/OS** *11.0.0*
 - IBM **Db2 for z/OS** *12.0.0*
