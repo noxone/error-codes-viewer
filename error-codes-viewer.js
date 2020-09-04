@@ -64,6 +64,8 @@ if (typeof kotlin === 'undefined') {
   var toInt = Kotlin.kotlin.text.toInt_pdl1vz$;
   var trim = Kotlin.kotlin.text.trim_gw00vp$;
   var abs = Kotlin.kotlin.math.abs_za3lpa$;
+  var joinToString_0 = Kotlin.kotlin.collections.joinToString_cgipc5$;
+  var to = Kotlin.kotlin.to_ujzrz7$;
   var first = Kotlin.kotlin.collections.first_2p1efm$;
   var downTo = Kotlin.kotlin.ranges.downTo_dqglrj$;
   var get_create = $module$kotlinx_html_js.kotlinx.html.dom.get_create_4wc2mh$;
@@ -75,7 +77,7 @@ if (typeof kotlin === 'undefined') {
   var GeneratedSerializer = $module$kotlinx_serialization_kotlinx_serialization_core_jsLegacy.kotlinx.serialization.internal.GeneratedSerializer;
   var MissingFieldException = $module$kotlinx_serialization_kotlinx_serialization_core_jsLegacy.kotlinx.serialization.MissingFieldException;
   var split = Kotlin.kotlin.text.split_ip8yn$;
-  var joinToString_0 = Kotlin.kotlin.collections.joinToString_fmv235$;
+  var joinToString_1 = Kotlin.kotlin.collections.joinToString_fmv235$;
   var RuntimeException_init_0 = Kotlin.kotlin.RuntimeException;
   var ClassCastException = Kotlin.kotlin.ClassCastException;
   var attributesMapOf = $module$kotlinx_html_js.kotlinx.html.attributesMapOf_jyasbz$;
@@ -89,7 +91,6 @@ if (typeof kotlin === 'undefined') {
   var DIV_init = $module$kotlinx_html_js.kotlinx.html.DIV;
   var sortedWith = Kotlin.kotlin.collections.sortedWith_eknfly$;
   var reversed = Kotlin.kotlin.collections.reversed_7wnvza$;
-  var to = Kotlin.kotlin.to_ujzrz7$;
   var toMap = Kotlin.kotlin.collections.toMap_6hr0sd$;
   var emptyMap = Kotlin.kotlin.collections.emptyMap_q3lmfv$;
   var collectionSizeOrDefault = Kotlin.kotlin.collections.collectionSizeOrDefault_ba2ldo$;
@@ -115,8 +116,12 @@ if (typeof kotlin === 'undefined') {
   Db2Zos12CodeDescriptionProvider.prototype.constructor = Db2Zos12CodeDescriptionProvider;
   MQ8CodeDescriptionProvider.prototype = Object.create(AbstractIbmUrlCodeDescriptionProvider.prototype);
   MQ8CodeDescriptionProvider.prototype.constructor = MQ8CodeDescriptionProvider;
-  HttpCodeDescriptionProvider.prototype = Object.create(AbstractUrlCodeDescriptionProvider.prototype);
+  SinglePageCodeDescriptionProvider.prototype = Object.create(AbstractUrlCodeDescriptionProvider.prototype);
+  SinglePageCodeDescriptionProvider.prototype.constructor = SinglePageCodeDescriptionProvider;
+  HttpCodeDescriptionProvider.prototype = Object.create(SinglePageCodeDescriptionProvider.prototype);
   HttpCodeDescriptionProvider.prototype.constructor = HttpCodeDescriptionProvider;
+  FtpCodeDescriptionProvider.prototype = Object.create(SinglePageCodeDescriptionProvider.prototype);
+  FtpCodeDescriptionProvider.prototype.constructor = FtpCodeDescriptionProvider;
   function ApplicationSettings() {
     ApplicationSettings_instance = this;
     AbstractApplicationSettings.call(this);
@@ -1023,10 +1028,39 @@ if (typeof kotlin === 'undefined') {
     simpleName: 'MQ8CodeDescriptionProvider',
     interfaces: [AbstractIbmUrlCodeDescriptionProvider]
   };
+  function SinglePageCodeDescriptionProvider(id, product, indexUrl) {
+    AbstractUrlCodeDescriptionProvider.call(this, id, product);
+    this.indexUrl_d5al9k$_0 = indexUrl;
+    this.comparator_vuwrn3$_0 = new Comparator(SinglePageCodeDescriptionProvider$comparator$lambda);
+  }
+  Object.defineProperty(SinglePageCodeDescriptionProvider.prototype, 'indexUrl', {
+    get: function () {
+      return this.indexUrl_d5al9k$_0;
+    }
+  });
+  function SinglePageCodeDescriptionProvider$createContentString$lambda(it) {
+    return it.first + '<\/dt><dd>' + it.second;
+  }
+  SinglePageCodeDescriptionProvider.prototype.createContentString_9ih0sy$ = function (pairs) {
+    return '<dl><dt>' + joinToString_0(pairs, '<\/dd><dt>', void 0, void 0, void 0, void 0, SinglePageCodeDescriptionProvider$createContentString$lambda) + '<\/dd><\/dl>';
+  };
+  Object.defineProperty(SinglePageCodeDescriptionProvider.prototype, 'comparator', {
+    configurable: true,
+    get: function () {
+      return this.comparator_vuwrn3$_0;
+    }
+  });
+  function SinglePageCodeDescriptionProvider$comparator$lambda(a, b) {
+    return Kotlin.primitiveCompareTo(abs(toInt(a.code)), abs(toInt(b.code)));
+  }
+  SinglePageCodeDescriptionProvider.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'SinglePageCodeDescriptionProvider',
+    interfaces: [AbstractUrlCodeDescriptionProvider]
+  };
   function HttpCodeDescriptionProvider() {
     HttpCodeDescriptionProvider$Companion_getInstance();
-    AbstractUrlCodeDescriptionProvider.call(this, 'http', new CodeDescriptionProvider$Product('W3C', 'HTTP', '1.1'));
-    this.indexUrl_jymldj$_0 = Url(HttpCodeDescriptionProvider$Companion_getInstance().INDEX_URL_0);
+    SinglePageCodeDescriptionProvider.call(this, 'http', new CodeDescriptionProvider$Product('W3C', 'HTTP', 'any'), Url(HttpCodeDescriptionProvider$Companion_getInstance().INDEX_URL_0));
     this.codeDescriptionRegex_8ucg2s$_0 = Regex_init('<dt><a\\s[^>]*?href="([^"]+)"[^>]+><code>([0-9]+)\\s+([^<]+)<\/code><\/a>( \\()?(?:.|\\s)*?<dd>(.+?)<\/dd>');
     this.contentExtractionRegex_0 = Regex_init('<article[^>]*>((?:.|\\s)*?)<h2 id="Specifications">Specifications<\/h2>');
   }
@@ -1045,12 +1079,6 @@ if (typeof kotlin === 'undefined') {
       new HttpCodeDescriptionProvider$Companion();
     }return HttpCodeDescriptionProvider$Companion_instance;
   }
-  Object.defineProperty(HttpCodeDescriptionProvider.prototype, 'indexUrl', {
-    configurable: true,
-    get: function () {
-      return this.indexUrl_jymldj$_0;
-    }
-  });
   Object.defineProperty(HttpCodeDescriptionProvider.prototype, 'codeDescriptionRegex', {
     configurable: true,
     get: function () {
@@ -1065,20 +1093,63 @@ if (typeof kotlin === 'undefined') {
     var description = (tmp$_6 = (tmp$_5 = matchResult.groups.get_za3lpa$(5)) != null ? tmp$_5.value : null) != null ? tmp$_6 : 'NO DESCRIPTION';
     var linkAvailable = matchResult.groups.get_za3lpa$(4) == null;
     var url = linkAvailable ? Url('https://developer.mozilla.org' + link) : Url(HttpCodeDescriptionProvider$Companion_getInstance().INDEX_URL_0);
-    return new CodeDescriptionLocation(this, code, summary, url, url, true, !linkAvailable ? new CodeDescription(this.createContentString_0(code, summary, description)) : null);
+    return new CodeDescriptionLocation(this, code, summary, url, url, true, !linkAvailable ? new CodeDescription(this.createContentString_9ih0sy$([to('Code', code), to('Summary', summary), to('Description', description)])) : null);
   };
   HttpCodeDescriptionProvider.prototype.convertCodeDescriptionContent_61zpoe$ = function (downloadedContent, continuation) {
     var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
     tmp$_3 = (tmp$_2 = (tmp$_1 = (tmp$_0 = (tmp$ = this.contentExtractionRegex_0.find_905azu$(downloadedContent)) != null ? tmp$.groups : null) != null ? tmp$_0.get_za3lpa$(1) : null) != null ? tmp$_1.value : null) != null ? tmp$_2 : downloadedContent;
-    return AbstractUrlCodeDescriptionProvider.prototype.convertCodeDescriptionContent_61zpoe$.call(this, tmp$_3, continuation);
-  };
-  HttpCodeDescriptionProvider.prototype.createContentString_0 = function (code, summary, description) {
-    return '<dl>' + ('<dt>Code<dt><dd>' + code + '<\/dd>') + ('<dt>Summary<dt><dd>' + summary + '<\/dd>') + ('<dt>Description<dt><dd>' + HtmlCleaner_getInstance().stripTagsExceptAllowed_kwv3np$(description) + '<\/dd>') + '<\/dl>';
+    return SinglePageCodeDescriptionProvider.prototype.convertCodeDescriptionContent_61zpoe$.call(this, tmp$_3, continuation);
   };
   HttpCodeDescriptionProvider.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'HttpCodeDescriptionProvider',
-    interfaces: [AbstractUrlCodeDescriptionProvider]
+    interfaces: [SinglePageCodeDescriptionProvider]
+  };
+  function FtpCodeDescriptionProvider() {
+    FtpCodeDescriptionProvider$Companion_getInstance();
+    SinglePageCodeDescriptionProvider.call(this, 'ftp', new CodeDescriptionProvider$Product('Common', 'FTP', 'any'), Url(FtpCodeDescriptionProvider$Companion_getInstance().INDEX_URL_0));
+    this.indexUrl_ihx01p$_0 = Url(FtpCodeDescriptionProvider$Companion_getInstance().INDEX_URL_0);
+    this.codeDescriptionRegex_hpj5i6$_0 = Regex_init('<tr>\\s*<td>\\s*<code>(\\d+)<\/code>\\s*<\/td>\\s*<td>((.|\\s)*?)<\/td>\\s*<\/tr>');
+  }
+  function FtpCodeDescriptionProvider$Companion() {
+    FtpCodeDescriptionProvider$Companion_instance = this;
+    this.DISPLAY_URL_0 = 'https://en.wikipedia.org/wiki/List_of_FTP_server_return_codes';
+    this.INDEX_URL_0 = 'https://cors-anywhere.herokuapp.com/https://en.wikipedia.org/wiki/List_of_FTP_server_return_codes';
+  }
+  FtpCodeDescriptionProvider$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var FtpCodeDescriptionProvider$Companion_instance = null;
+  function FtpCodeDescriptionProvider$Companion_getInstance() {
+    if (FtpCodeDescriptionProvider$Companion_instance === null) {
+      new FtpCodeDescriptionProvider$Companion();
+    }return FtpCodeDescriptionProvider$Companion_instance;
+  }
+  Object.defineProperty(FtpCodeDescriptionProvider.prototype, 'indexUrl', {
+    configurable: true,
+    get: function () {
+      return this.indexUrl_ihx01p$_0;
+    }
+  });
+  Object.defineProperty(FtpCodeDescriptionProvider.prototype, 'codeDescriptionRegex', {
+    configurable: true,
+    get: function () {
+      return this.codeDescriptionRegex_hpj5i6$_0;
+    }
+  });
+  FtpCodeDescriptionProvider.prototype.convertMatchToCodeDescriptionLocation_bl4kwi$ = function (matchResult) {
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
+    var code = (tmp$_0 = (tmp$ = matchResult.groups.get_za3lpa$(1)) != null ? tmp$.value : null) != null ? tmp$_0 : 'NO CODE';
+    var description = (tmp$_2 = (tmp$_1 = matchResult.groups.get_za3lpa$(2)) != null ? tmp$_1.value : null) != null ? tmp$_2 : 'NO DESCRIPTION';
+    tmp$_3 = new CodeDescription(this.createContentString_9ih0sy$([to('Code', code), to('Description', description)]));
+    return new CodeDescriptionLocation(this, code, void 0, Url(FtpCodeDescriptionProvider$Companion_getInstance().DISPLAY_URL_0), void 0, void 0, tmp$_3);
+  };
+  FtpCodeDescriptionProvider.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'FtpCodeDescriptionProvider',
+    interfaces: [SinglePageCodeDescriptionProvider]
   };
   function visit$lambda(closure$block) {
     return function ($receiver) {
@@ -1214,9 +1285,21 @@ if (typeof kotlin === 'undefined') {
       } else
         throw e_6;
     }
-    this.divContentSource_0 = getElementById_359kph$result_6;
+    this.linkContentSource_0 = getElementById_359kph$result_6;
     this.stateContainer_0 = new StateContainer(new HtmlView$CodeLocationStateTransformer(this.controller_0), new HtmlView$CodeLocationStateComparator());
     this.inputSearch_0.addEventListener('input', HtmlView_init$lambda(this));
+    var id_7 = HtmlView$Companion_getInstance().ID_CONTENT_SOURCE_COPY;
+    var getElementById_359kph$result_7;
+    var tmp$_7;
+    try {
+      getElementById_359kph$result_7 = Kotlin.isType(tmp$_7 = document.getElementById(id_7), HTMLElement) ? tmp$_7 : throwCCE();
+    } catch (e_7) {
+      if (Kotlin.isType(e_7, ClassCastException)) {
+        throw new RuntimeException_init_0("Unable to find element with id '" + id_7 + "'.", e_7);
+      } else
+        throw e_7;
+    }
+    getElementById_359kph$result_7.addEventListener('click', HtmlView_init$lambda_0(this));
     this.listProducts_0 = new ListMaintainer(this.divListProducts_0, HtmlView$listProducts$lambda(this), new Comparator(HtmlView$listProducts$lambda_0));
     this.listCodes_0 = new ListMaintainer(this.divListCodes_0, HtmlView$listCodes$lambda(this));
     this.currentLocation_0 = null;
@@ -1290,7 +1373,7 @@ if (typeof kotlin === 'undefined') {
   HtmlView.prototype.showCodeDescription_848m2z$ = function (location) {
     var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
     if (location != null && !equals((tmp$ = this.currentLocation_0) != null ? tmp$.code : null, location.code)) {
-      this.stateContainer_0.push_i6pc9p$(HtmlView$HtmlView$CodeLocationState_init_0(location));
+      this.stateContainer_0.push_etlf2c$(HtmlView$HtmlView$CodeLocationState_init_0(location));
     }var $receiver = downTo(this.divContentHeader_0.childElementCount, 0);
     var destination = ArrayList_init();
     var tmp$_4;
@@ -1312,11 +1395,11 @@ if (typeof kotlin === 'undefined') {
       var $receiver_0 = get_create(document);
       tmp$_6.appendChild(visitTagAndFinalize(new SPAN_init(attributesMapOf('class', 'ec-code-header'), $receiver_0), $receiver_0, visitAndFinalize$lambda(HtmlView$showCodeDescription$lambda(location))));
       if (location.displayUrl != null) {
-        this.divContentSource_0.href = location.displayUrl.toString();
-        this.divContentSource_0.innerText = location.displayUrl.toString();
+        this.linkContentSource_0.href = location.displayUrl.toString();
+        this.linkContentSource_0.innerText = location.displayUrl.toString();
       } else {
-        this.divContentSource_0.href = '#';
-        this.divContentSource_0.innerText = '';
+        this.linkContentSource_0.href = '#';
+        this.linkContentSource_0.innerText = '';
       }
       if (location.content != null) {
         this.divContentFrame_0.classList.toggle('d-none', true);
@@ -1330,9 +1413,10 @@ if (typeof kotlin === 'undefined') {
         this.divContentCode_0.innerHTML = '';
       }
     } else {
-      this.divContentSource_0.href = '#';
-      this.divContentSource_0.innerText = '\xA0';
+      this.linkContentSource_0.href = '#';
+      this.linkContentSource_0.innerText = '\xA0';
       this.divContentFrame_0.src = '';
+      this.divContentCode_0.innerHTML = '';
     }
     this.currentLocation_0 = location;
   };
@@ -1439,6 +1523,7 @@ if (typeof kotlin === 'undefined') {
     this.ID_CONTENT_FRAME = 'ec_content_frame';
     this.ID_CONTENT_HEADER = 'ec_source_header';
     this.ID_CONTENT_SOURCE = 'ec_source_link';
+    this.ID_CONTENT_SOURCE_COPY = 'ec_source_link_copy';
   }
   HtmlView$Companion.$metadata$ = {
     kind: Kind_OBJECT,
@@ -1581,7 +1666,7 @@ if (typeof kotlin === 'undefined') {
     return new HtmlView$CodeLocationState(it.get_za3lpa$(0), it.get_za3lpa$(1));
   };
   HtmlView$CodeLocationStateTransformer.prototype.toHash_11rb$ = function (state) {
-    return new StateContainer$HashContainer(joinToString_0(listOf([state.providerId, state.code]), '/'), state.providerId + ': ' + state.code);
+    return new StateContainer$HashContainer(joinToString_1(listOf([state.providerId, state.code]), '/'), state.providerId + ': ' + state.code);
   };
   HtmlView$CodeLocationStateTransformer.prototype.handle_za3rmp$ = function (state) {
     var tmp$, tmp$_0;
@@ -1616,6 +1701,13 @@ if (typeof kotlin === 'undefined') {
       event.stopPropagation();
       var lowerCaseFilter = this$HtmlView.inputSearch_0.value.toLowerCase();
       this$HtmlView.listCodes_0.filter_ioxh9z$(HtmlView_init$lambda$lambda(lowerCaseFilter));
+      return Unit;
+    };
+  }
+  function HtmlView_init$lambda_0(this$HtmlView) {
+    return function (event) {
+      event.stopPropagation();
+      navigator.clipboard.writeText(this$HtmlView.linkContentSource_0.href);
       return Unit;
     };
   }
@@ -2000,22 +2092,16 @@ if (typeof kotlin === 'undefined') {
     this.comparator_0 = comparator;
     window.addEventListener(StateContainer$Companion_getInstance().EVENT_POPSTATE_0, StateContainer_init$lambda_0(this));
   }
-  StateContainer.prototype.push_i6pc9p$ = function (state, replaceCurrentState) {
-    if (replaceCurrentState === void 0)
-      replaceCurrentState = false;
+  StateContainer.prototype.push_etlf2c$ = function (state) {
     var tmp$;
     var hash = this.transformer_0.toHash_11rb$(state);
     if (((tmp$ = window.history.state) != null ? this.comparator_0.compare(tmp$, state) : null) !== 0) {
-      if (!replaceCurrentState) {
-        window.history.pushState(state, hash.display, '#' + encodeURIComponent(hash.hash));
-      } else {
-        window.history.replaceState(state, hash.display, '#' + encodeURIComponent(hash.hash));
-      }
+      window.history.pushState(state, hash.display, '#' + hash.hash);
     }};
   StateContainer.prototype.getSelectedState = function () {
     var url = new URL(document.URL);
     if (url.hash.length > 1) {
-      var hash = decodeURIComponent(url.hash.substring(1));
+      var hash = url.hash.substring(1);
       return this.transformer_0.fromHash_61zpoe$(hash);
     }return null;
   };
@@ -2372,7 +2458,9 @@ if (typeof kotlin === 'undefined') {
   package$codes.Db2Zos11CodeDescriptionProvider = Db2Zos11CodeDescriptionProvider;
   package$codes.Db2Zos12CodeDescriptionProvider = Db2Zos12CodeDescriptionProvider;
   package$codes.MQ8CodeDescriptionProvider = MQ8CodeDescriptionProvider;
+  package$codes.SinglePageCodeDescriptionProvider = SinglePageCodeDescriptionProvider;
   package$codes.HttpCodeDescriptionProvider = HttpCodeDescriptionProvider;
+  package$codes.FtpCodeDescriptionProvider = FtpCodeDescriptionProvider;
   $$importsForInline$$['kotlinx-html-js'] = $module$kotlinx_html_js;
   Object.defineProperty(HtmlView, 'Companion', {
     get: HtmlView$Companion_getInstance
@@ -2401,7 +2489,7 @@ if (typeof kotlin === 'undefined') {
   Object.defineProperty(AbstractUrlCodeDescriptionProvider.prototype, 'name', Object.getOwnPropertyDescriptor(CodeDescriptionProvider.prototype, 'name'));
   HtmlView$CodeLocationState$$serializer.prototype.patch_h7kg3r$ = GeneratedSerializer.prototype.patch_h7kg3r$;
   HtmlView$CodeLocationState$$serializer.prototype.typeParametersSerializers = GeneratedSerializer.prototype.typeParametersSerializers;
-  codeDescriptionProviders = listOf([new Db2Zos10CodeDescriptionProvider(), new Db2Zos11CodeDescriptionProvider(), new Db2Zos12CodeDescriptionProvider(), new MQ8CodeDescriptionProvider(), new HttpCodeDescriptionProvider()]);
+  codeDescriptionProviders = listOf([new Db2Zos10CodeDescriptionProvider(), new Db2Zos11CodeDescriptionProvider(), new Db2Zos12CodeDescriptionProvider(), new MQ8CodeDescriptionProvider(), new HttpCodeDescriptionProvider(), new FtpCodeDescriptionProvider()]);
   main();
   Kotlin.defineModule('error-codes-viewer', _);
   return _;
