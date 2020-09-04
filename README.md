@@ -6,8 +6,11 @@ An application to collect error codes of several widely used applications in one
 
 While still in development stage this application supports
 
-- IBM **Db2 for z/OS** *10.0.0*
+- IBM **DB2 for z/OS** *10.0.0*
+- IBM **DB2 for z/OS** *11.0.0*
+- IBM **DB2 for z/OS** *12.0.0*
 - IBM **MQ** *8.0.0*
+- W3C **HTTP** *1.1*
 
 Feel free to add support for more product from other vendors to we all don't need to use all our time searching for error codes.
 
