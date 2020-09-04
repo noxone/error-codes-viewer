@@ -15,8 +15,7 @@ import org.w3c.dom.*
 import kotlinx.browser.document
 import kotlinx.serialization.Serializable
 import org.olafneumann.errorcodes.html.browser.StateContainer
-import org.olafneumann.errorcodes.ui.UiController
-import kotlin.reflect.KClass
+import org.olafneumann.errorcodes.html.browser.navigator
 
 class HtmlView(
     private val controller: DisplayContract.Controller
@@ -28,7 +27,7 @@ class HtmlView(
     private val divContentCode = HtmlHelper.getElementById<HTMLDivElement>(ID_CONTENT_CODE)
     private val divContentFrame = HtmlHelper.getElementById<HTMLIFrameElement>(ID_CONTENT_FRAME)
     private val divContentHeader = HtmlHelper.getElementById<HTMLHeadingElement>(ID_CONTENT_HEADER)
-    private val divContentSource = HtmlHelper.getElementById<HTMLAnchorElement>(ID_CONTENT_SOURCE)
+    private val linkContentSource = HtmlHelper.getElementById<HTMLAnchorElement>(ID_CONTENT_SOURCE)
 
     private val stateContainer = StateContainer(CodeLocationStateTransformer(controller), CodeLocationStateComparator())
 
@@ -37,6 +36,11 @@ class HtmlView(
             event.stopPropagation()
             val lowerCaseFilter = inputSearch.value.toLowerCase()
             listCodes.filter { it.code.toLowerCase().contains(lowerCaseFilter) }
+        })
+        HtmlHelper.getElementById<HTMLElement>(ID_CONTENT_SOURCE_COPY).addEventListener("click", { event ->
+            event.stopPropagation()
+            navigator.clipboard.writeText(linkContentSource.href)
+            // TODO add popup when copy has finished
         })
     }
 
@@ -92,11 +96,11 @@ class HtmlView(
                 span(classes = "font-weight-bold") { +location.code }
             })
             if (location.displayUrl != null) {
-                divContentSource.href = location.displayUrl.toString()
-                divContentSource.innerText = location.displayUrl.toString()
+                linkContentSource.href = location.displayUrl.toString()
+                linkContentSource.innerText = location.displayUrl.toString()
             } else {
-                divContentSource.href = "#"
-                divContentSource.innerText = ""
+                linkContentSource.href = "#"
+                linkContentSource.innerText = ""
             }
             if (location.content != null) {
                 divContentFrame.classList.toggle("d-none", true)
@@ -110,9 +114,10 @@ class HtmlView(
                 divContentCode.innerHTML = ""
             }
         } else {
-            divContentSource.href = "#"
-            divContentSource.innerText = "\u00A0"
+            linkContentSource.href = "#"
+            linkContentSource.innerText = "\u00A0"
             divContentFrame.src = ""
+            divContentCode.innerHTML = ""
         }
         currentLocation = location
     }
@@ -150,6 +155,7 @@ class HtmlView(
         const val ID_CONTENT_FRAME = "ec_content_frame"
         const val ID_CONTENT_HEADER = "ec_source_header"
         const val ID_CONTENT_SOURCE = "ec_source_link"
+        const val ID_CONTENT_SOURCE_COPY = "ec_source_link_copy"
     }
 
     @Serializable
