@@ -19,12 +19,19 @@ class HttpCodeDescriptionProvider : AbstractUrlCodeDescriptionProvider(
         val code = matchResult.groups[2]?.value ?: "NO CODE"
         val summary = matchResult.groups[3]?.value ?: "NO SUMMARY"
         val description = matchResult.groups[5]?.value ?: "NO DESCRIPTION"
-        val url = if (matchResult.groups[4] == null) Url("https://developer.mozilla.org${link}") else null
+        val linkAvailable = matchResult.groups[4] == null
+        val url = if (linkAvailable) Url("https://developer.mozilla.org${link}") else null
         return CodeDescriptionLocation(
             provider = this,
             code = code,
             summary = summary,
-            content = CodeDescription(content =  createContentString(code, summary, description)),
+            content = if (!linkAvailable) CodeDescription(
+                content = createContentString(
+                    code,
+                    summary,
+                    description
+                )
+            ) else null,
             url = url,
             displayUrl = url
         )
