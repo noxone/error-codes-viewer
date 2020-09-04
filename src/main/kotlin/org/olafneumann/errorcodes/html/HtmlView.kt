@@ -117,6 +117,7 @@ class HtmlView(
             linkContentSource.href = "#"
             linkContentSource.innerText = "\u00A0"
             divContentFrame.src = ""
+            divContentCode.innerHTML = ""
         }
         currentLocation = location
     }
