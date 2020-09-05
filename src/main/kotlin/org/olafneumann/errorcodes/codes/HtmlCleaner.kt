@@ -28,6 +28,8 @@ object HtmlCleaner {
 
     private val REGEX_TAG = Regex("<(/)?([-a-zA-Z0-9]+)(?:\\s+[-a-zA-Z0-9]+=(?:\"[^\"]*\"|'[^']*'|\\S*))*>")
 
+    fun clean(html: String): String = cleanHtmlElements(stripTagsExceptAllowed(html))
+
     fun stripTagsExceptAllowed(
         html: String,
         allowedTagNames: List<String> = ALLOWED_TAGS
