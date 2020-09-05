@@ -19,7 +19,8 @@ private val codeDescriptionProviders = listOf<CodeDescriptionProvider>(
     Db2Zos12CodeDescriptionProvider(),
     MQ8CodeDescriptionProvider(),
     HttpCodeDescriptionProvider(),
-    FtpCodeDescriptionProvider()
+    FtpCodeDescriptionProvider(),
+    SmtpCodeDescriptionProvider()
 )
 
 private fun initErrorCodes() {
