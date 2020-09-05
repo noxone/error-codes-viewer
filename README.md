@@ -15,7 +15,7 @@ While still in development stage this application supports
 - IBM **Db2 for z/OS** *12.0.0*
 - IBM **MQ** *8.0.0*
 
-Feel free to add support for more product from other vendors to we all don't need to use all our time searching for error codes.
+Feel free to add support for more product from other vendors, so we all don't need to use all our time searching for error codes.
 
 ## Try online
 
