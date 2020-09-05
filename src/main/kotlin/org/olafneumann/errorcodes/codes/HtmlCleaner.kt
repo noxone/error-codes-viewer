@@ -28,18 +28,40 @@ object HtmlCleaner {
 
     private val REGEX_TAG = Regex("<(/)?([-a-zA-Z0-9]+)(?:\\s+[-a-zA-Z0-9]+=(?:\"[^\"]*\"|'[^']*'|\\S*))*>")
 
-    fun stripAllTags(html: String): String = html.replace(REGEX_TAG, "")
+    fun stripTagsExceptAllowed(
+        html: String,
+        allowedTagNames: List<String> = ALLOWED_TAGS
+    ): String {
+        var changedHtml = html
 
-    fun stripTagsExceptAllowed(html: String, allowedTagNames: List<String> = ALLOWED_TAGS): String {
-        val matchResults = REGEX_TAG.findAll(html).toList()
-        var changedCode = html
-        //val allowedTags = matchResults
-        //    .filter { matchResult -> matchResult.groups[2] != null && allowedTagNames.contains(matchResult.groups[2]!!.value) }
-        val notAllowedTags = matchResults
-            .filter { matchResult -> matchResult.groups[2] == null || !allowedTagNames.contains(matchResult.groups[2]!!.value) }
-        notAllowedTags
-            .forEach { changedCode = changedCode.replace(it.value, "") }
-        return changedCode
+        REGEX_TAG.findAll(html) // find all tags
+            .filter { !it.containsAllowedTag(allowedTagNames) } // only work on NOT allowed tags
+            .forEach { changedHtml = changedHtml.replace(it.value, "") } // remove tags that are not allowed
+
+        return changedHtml
     }
 
+    fun cleanHtmlElements(
+        html: String,
+        allowedTagNames: List<String> = ALLOWED_TAGS,
+        classToAdd: String = CUSTOM_CLASS
+    ): String {
+        var changedHtml = html
+
+        REGEX_TAG.findAll(html) // find all tags
+            .filter { it.groups[1] == null } // ignore closing tags
+            .filter { it.containsAllowedTag(allowedTagNames) } // only work on allowed tags
+            .forEach { matchResult -> // replace tag by customized tag
+                val textToReplace = matchResult.groups[0]!!.value
+                val replacement = toCustomizedHtmlTag(matchResult.groups[2]!!.value, classToAdd)
+                changedHtml = changedHtml.replace(textToReplace, replacement)
+            }
+
+        return changedHtml
+    }
+
+    private fun toCustomizedHtmlTag(tagName: String, classToAdd: String) = "<${tagName} class=\"${classToAdd}\">"
+
+    private fun MatchResult.containsAllowedTag(allowedTagNames: List<String>): Boolean =
+        groups[2]?.value != null && allowedTagNames.contains(groups[2]!!.value)
 }
