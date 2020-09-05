@@ -37,7 +37,6 @@ class UiController(
     }
 
     override fun selectCodeDescriptionLocation(location: CodeDescriptionLocation) {
-        view.selectCodeDescriptionLocation(location)
         GlobalScope.launch {
             if (location.forceLoad && location.content == null) {
                 location.content = location.provider.loadCodeDescription(location)

@@ -62,6 +62,7 @@ class HtmlView(
         inputSearch.value = ""
         divLabelProducts.innerText = provider.name
         listProducts.toggleActive(provider)
+        stateContainer.cleanState()
     }
 
     override fun showCodeDescriptionLocations(locations: List<CodeDescriptionLocation>?) =
@@ -72,15 +73,11 @@ class HtmlView(
             listCodes.setLoading()
         }
 
-    override fun selectCodeDescriptionLocation(location: CodeDescriptionLocation) {
-        listCodes.toggleActive(location)
-    }
-
     private var currentLocation: CodeDescriptionLocation? = null
 
     override fun showCodeDescription(location: CodeDescriptionLocation?) {
         if (location != null && currentLocation?.code != location.code) {
-            stateContainer.push(CodeLocationState(location))
+            stateContainer.setState(CodeLocationState(location))
         }
 
         divContentHeader.childElementCount
@@ -88,6 +85,7 @@ class HtmlView(
             .mapNotNull { divContentHeader.children[it] }
             .forEach { divContentHeader.removeChild(it) }
         if (location != null) {
+            listCodes.toggleActive(location)
             divContentHeader.appendChild(document.create.span(classes = "ec-code-header") {
                 span(classes = "ec-product-vendor") { +location.provider.product.vendor }
                 span(classes = "ec-product-title") { +location.provider.product.title }

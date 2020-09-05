@@ -88,3 +88,35 @@ body {
   width: 100%;
   display: block;
 }
+
+
+/* override loaded styles */
+h1.ec-custom, h2.ec-custom, h3.ec-custom, h4.ec-custom, h5.ec-custom, h6.ec-custom {
+    color: #444;
+    font-weight: 500;
+}
+
+h1.ec-custom {
+    font-size: 1.7rem;
+}
+h2.ec-custom {
+    font-size: 1.5rem;
+}
+h3.ec-custom {
+    font-size: 1.4rem;
+}
+h4.ec-custom {
+    font-size: 1.3rem;
+}
+h5.ec-custom {
+    font-size: 1.2rem;
+}
+h6.ec-custom {
+    font-size: 1.1rem;
+}
+
+pre.ec-custom {
+    color: #26C;
+    border-left: 1px solid #dee2e6;
+    padding-left: 1em;
+}

@@ -5,7 +5,7 @@ import kotlinx.browser.window
 import org.w3c.dom.PopStateEvent
 import org.w3c.dom.url.URL
 
-class StateContainer<T: StateContainer.State>(
+class StateContainer<T : StateContainer.State>(
     private val transformer: StateHandler<T>,
     private val comparator: Comparator<Any> = Comparator { _, _ -> 1 }
 ) {
@@ -17,11 +17,15 @@ class StateContainer<T: StateContainer.State>(
         })
     }
 
-    fun push(state: T) {
+    fun setState(state: T) {
         val hash = transformer.toHash(state)
         if (window.history.state?.let { comparator.compare(it, state) } != 0) {
             window.history.pushState(state, hash.display, "#${hash.hash}")
         }
+    }
+
+    fun cleanState() {
+        window.history.pushState(null, document.title, window.location.pathname)
     }
 
     fun getSelectedState(): T? {

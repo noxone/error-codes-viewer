@@ -8,7 +8,6 @@ interface DisplayContract {
         fun showCodeDescriptionProviders(providers: List<CodeDescriptionProvider>)
         fun showCodeDescriptionLocations(locations: List<CodeDescriptionLocation>?)
         fun selectCodeDescriptionProvider(provider: CodeDescriptionProvider)
-        fun selectCodeDescriptionLocation(location: CodeDescriptionLocation)
         fun showCodeDescription(location: CodeDescriptionLocation?)
         fun tryToSelectPreselectedErrorCode()
     }

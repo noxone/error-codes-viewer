@@ -38,7 +38,7 @@ abstract class AbstractUrlCodeDescriptionProvider(
     }
 
     protected open suspend fun convertCodeDescriptionContent(downloadedContent: String) =
-        HtmlCleaner.stripTagsExceptAllowed(downloadedContent)
+        HtmlCleaner.clean(downloadedContent)
 
     override suspend fun getLocationByCode(code: String): CodeDescriptionLocation? =
         loadLocationList().firstOrNull { it.code == code }
