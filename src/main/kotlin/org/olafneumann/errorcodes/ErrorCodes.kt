@@ -20,7 +20,8 @@ private val codeDescriptionProviders = listOf<CodeDescriptionProvider>(
     MQ8CodeDescriptionProvider(),
     HttpCodeDescriptionProvider(),
     FtpCodeDescriptionProvider(),
-    SmtpCodeDescriptionProvider()
+    SmtpCodeDescriptionProvider(),
+    SipCodeDescriptionProvider()
 )
 
 private fun initErrorCodes() {

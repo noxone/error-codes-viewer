@@ -104,3 +104,29 @@ class SmtpCodeDescriptionProvider : SinglePageCodeDescriptionProvider(
         )
     }
 }
+
+class SipCodeDescriptionProvider : SinglePageCodeDescriptionProvider(
+    id = "sip",
+    product = CodeDescriptionProvider.Product("", "SIP", ""),
+    indexUrl = Url(INDEX_URL),
+    codeDescriptionRegex = Regex("<dt>\\s*<span[^>]*>\\s*</span>\\s*([0-9]+)\\s*([^<]*)</dt>\\s*<dd>((?:.|\\s)*?)</dd>")
+) {
+    private companion object {
+        private const val DISPLAY_URL = "https://en.wikipedia.org/wiki/List_of_SIP_response_codes"
+        private const val INDEX_URL =
+            "https://cors-anywhere.herokuapp.com/https://en.wikipedia.org/wiki/List_of_SIP_response_codes"
+    }
+
+    override fun convertMatchToCodeDescriptionLocation(matchResult: MatchResult): CodeDescriptionLocation {
+        val code = matchResult.groups[1]?.value ?: "NO CODE"
+        val summary = matchResult.groups[2]?.value ?: "NO SUMMARY"
+        val description = matchResult.groups[3]?.value ?: "NO DESCRIPTION"
+        return CodeDescriptionLocation(
+            provider = this,
+            code = code,
+            summary = summary,
+            content = CodeDescription(content = createContentString("Code" to code, "Summary" to summary, "Description" to HtmlCleaner.clean(description))),
+            url = Url(DISPLAY_URL)
+        )
+    }
+}
