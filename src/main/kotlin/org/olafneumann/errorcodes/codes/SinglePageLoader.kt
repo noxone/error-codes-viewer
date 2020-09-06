@@ -7,9 +7,9 @@ abstract class SinglePageCodeDescriptionProvider(
     id: String,
     product: CodeDescriptionProvider.Product,
     override val indexUrl: Url,
+    useCorsProxy: Boolean,
     override val codeDescriptionRegex: Regex
-) : AbstractUrlCodeDescriptionProvider(id, product) {
-
+) : AbstractUrlCodeDescriptionProvider(id = id, product = product, useCorsProxy = useCorsProxy) {
     protected fun createContentString(vararg pairs: Pair<String, String>) =
         "<dl><dt>" + pairs.joinToString(separator = "</dd><dt>") { "${it.first}</dt><dd>${it.second}" } + "</dd></dl>"
 
@@ -20,11 +20,12 @@ abstract class SinglePageCodeDescriptionProvider(
 class HttpCodeDescriptionProvider : SinglePageCodeDescriptionProvider(
     id = "http",
     product = CodeDescriptionProvider.Product("W3C", "HTTP", ""),
-    indexUrl = Url(INDEX_URL),
+    indexUrl = INDEX_URL,
+    useCorsProxy = false,
     codeDescriptionRegex = Regex("<dt><a\\s[^>]*?href=\"([^\"]+)\"[^>]+><code>([0-9]+)\\s+([^<]+)</code></a>( \\()?(?:.|\\s)*?<dd>(.+?)</dd>")
 ) {
     private companion object {
-        private const val INDEX_URL = "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status"
+        private val INDEX_URL = Url("https://developer.mozilla.org/en-US/docs/Web/HTTP/Status")
     }
 
     private val contentExtractionRegex =
@@ -36,7 +37,7 @@ class HttpCodeDescriptionProvider : SinglePageCodeDescriptionProvider(
         val summary = matchResult.groups[3]?.value ?: "NO SUMMARY"
         val description = matchResult.groups[5]?.value ?: "NO DESCRIPTION"
         val linkAvailable = matchResult.groups[4] == null
-        val url = if (linkAvailable) Url("https://developer.mozilla.org${link}") else Url(INDEX_URL)
+        val url: Url = if (linkAvailable) Url("https://developer.mozilla.org${link}") else INDEX_URL
         return CodeDescriptionLocation(
             provider = this,
             code = code,
@@ -60,13 +61,12 @@ class HttpCodeDescriptionProvider : SinglePageCodeDescriptionProvider(
 class FtpCodeDescriptionProvider : SinglePageCodeDescriptionProvider(
     id = "ftp",
     product = CodeDescriptionProvider.Product("", "FTP", ""),
-    indexUrl = Url(INDEX_URL),
-    codeDescriptionRegex = Regex("<tr>\\s*<td>\\s*<code>(\\d+)</code>\\s*</td>\\s*<td>((.|\\s)*?)</td>\\s*</tr>")
+    indexUrl = INDEX_URL,
+    useCorsProxy = true,
+    codeDescriptionRegex = Regex("<tr>\\s*<td>\\s*<code>(\\d+)</code>\\s*</td>\\s*<td>((.|\\s)*?)</td>\\s*</tr>"),
 ) {
     private companion object {
-        private const val DISPLAY_URL = "https://en.wikipedia.org/wiki/List_of_FTP_server_return_codes"
-        private const val INDEX_URL =
-            "https://cors-anywhere.herokuapp.com/https://en.wikipedia.org/wiki/List_of_FTP_server_return_codes"
+        private val INDEX_URL = Url("https://en.wikipedia.org/wiki/List_of_FTP_server_return_codes")
     }
 
     override fun convertMatchToCodeDescriptionLocation(matchResult: MatchResult): CodeDescriptionLocation {
@@ -76,7 +76,7 @@ class FtpCodeDescriptionProvider : SinglePageCodeDescriptionProvider(
             provider = this,
             code = code,
             content = CodeDescription(content = createContentString("Code" to code, "Description" to description)),
-            url = Url(DISPLAY_URL)
+            url = INDEX_URL
         )
     }
 }
@@ -84,13 +84,12 @@ class FtpCodeDescriptionProvider : SinglePageCodeDescriptionProvider(
 class SmtpCodeDescriptionProvider : SinglePageCodeDescriptionProvider(
     id = "smtp",
     product = CodeDescriptionProvider.Product("", "SMTP", ""),
-    indexUrl = Url(INDEX_URL),
+    indexUrl = INDEX_URL,
+    useCorsProxy = true,
     codeDescriptionRegex = Regex("<p>\\s*<b>\\s*([0-9]+)</b>\\s*<i>\\s*((?:.|\\s)*?)</i>")
 ) {
     private companion object {
-        private const val DISPLAY_URL = "https://en.wikipedia.org/wiki/List_of_SMTP_server_return_codes"
-        private const val INDEX_URL =
-            "https://cors-anywhere.herokuapp.com/https://en.wikipedia.org/wiki/List_of_SMTP_server_return_codes"
+        private val INDEX_URL = Url("https://en.wikipedia.org/wiki/List_of_SMTP_server_return_codes")
     }
 
     override fun convertMatchToCodeDescriptionLocation(matchResult: MatchResult): CodeDescriptionLocation {
@@ -100,7 +99,7 @@ class SmtpCodeDescriptionProvider : SinglePageCodeDescriptionProvider(
             provider = this,
             code = code,
             content = CodeDescription(content = createContentString("Code" to code, "Description" to description)),
-            url = Url(DISPLAY_URL)
+            url = INDEX_URL
         )
     }
 }
@@ -108,13 +107,12 @@ class SmtpCodeDescriptionProvider : SinglePageCodeDescriptionProvider(
 class SipCodeDescriptionProvider : SinglePageCodeDescriptionProvider(
     id = "sip",
     product = CodeDescriptionProvider.Product("", "SIP", ""),
-    indexUrl = Url(INDEX_URL),
+    indexUrl = INDEX_URL,
+    useCorsProxy = true,
     codeDescriptionRegex = Regex("<dt>\\s*<span[^>]*>\\s*</span>\\s*([0-9]+)\\s*([^<]*)</dt>\\s*<dd>((?:.|\\s)*?)</dd>")
 ) {
     private companion object {
-        private const val DISPLAY_URL = "https://en.wikipedia.org/wiki/List_of_SIP_response_codes"
-        private const val INDEX_URL =
-            "https://cors-anywhere.herokuapp.com/https://en.wikipedia.org/wiki/List_of_SIP_response_codes"
+        private  val INDEX_URL = Url("https://en.wikipedia.org/wiki/List_of_SIP_response_codes")
     }
 
     override fun convertMatchToCodeDescriptionLocation(matchResult: MatchResult): CodeDescriptionLocation {
@@ -125,8 +123,14 @@ class SipCodeDescriptionProvider : SinglePageCodeDescriptionProvider(
             provider = this,
             code = code,
             summary = summary,
-            content = CodeDescription(content = createContentString("Code" to code, "Summary" to summary, "Description" to HtmlCleaner.clean(description))),
-            url = Url(DISPLAY_URL)
+            content = CodeDescription(
+                content = createContentString(
+                    "Code" to code,
+                    "Summary" to summary,
+                    "Description" to HtmlCleaner.clean(description)
+                )
+            ),
+            url = INDEX_URL
         )
     }
 }

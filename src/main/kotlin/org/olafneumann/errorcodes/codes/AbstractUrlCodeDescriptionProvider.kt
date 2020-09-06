@@ -9,8 +9,10 @@ import kotlin.js.Date
 abstract class AbstractUrlCodeDescriptionProvider(
     override val id: String,
     override val product: CodeDescriptionProvider.Product,
+    private val useCorsProxy: Boolean = false
 ) : CodeDescriptionProvider {
     companion object {
+        private  const val CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
         private val client = HttpClient(Js)
     }
 
@@ -22,7 +24,7 @@ abstract class AbstractUrlCodeDescriptionProvider(
 
     override suspend fun loadLocationList(): List<CodeDescriptionLocation> {
         if (codes == null) {
-            val siteContent = client.get<String>(indexUrl)
+            val siteContent: String = client.get(indexUrl.addProxyIfRequired())
             codes = codeDescriptionRegex.findAll(siteContent)
                 .map { convertMatchToCodeDescriptionLocation(it) }
                 .toList()
@@ -32,7 +34,7 @@ abstract class AbstractUrlCodeDescriptionProvider(
 
     override suspend fun loadCodeDescription(location: CodeDescriptionLocation): CodeDescription? {
         return location.url?.let { url ->
-            val siteContent = convertCodeDescriptionContent(client.get<String>(url))
+            val siteContent: String = convertCodeDescriptionContent(client.get(url.addProxyIfRequired()))
             CodeDescription(siteContent, Date())
         }
     }
@@ -45,4 +47,6 @@ abstract class AbstractUrlCodeDescriptionProvider(
 
     override val comparator: Comparator<CodeDescriptionLocation> =
         Comparator { a, b -> String.CASE_INSENSITIVE_ORDER.compare(a.code, b.code) }
+
+    private fun Url.addProxyIfRequired() = if (useCorsProxy) Url("${CORS_PROXY}${toString()}") else this
 }
