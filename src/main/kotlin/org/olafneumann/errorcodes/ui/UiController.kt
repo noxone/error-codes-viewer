@@ -31,6 +31,7 @@ class UiController(
         view.showCodeDescription(null)
         view.showCodeDescriptionLocations(null)
         GlobalScope.launch {
+            view.selectCodeDescriptionProvider(selectedCodeDescriptionProvider) // if the download takes too long
             view.showCodeDescriptionLocations(selectedCodeDescriptionProvider.loadLocationList())
             andThen.invoke()
         }
