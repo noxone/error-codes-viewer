@@ -8,7 +8,7 @@ While still in development stage this application supports
 
 - **FTP**
 - **HTTP**
-- **SIPP**
+- **SIP**
 - **SMTP**
 - IBM **Db2 for z/OS** *10.0.0*
 - IBM **Db2 for z/OS** *11.0.0*
