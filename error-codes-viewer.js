@@ -1742,7 +1742,7 @@ if (typeof kotlin === 'undefined') {
     this.controller_0 = controller;
   }
   HtmlView$CodeLocationStateTransformer.prototype.fromHash_61zpoe$ = function (hash) {
-    var it = split(hash, [['/']], false, 2);
+    var it = split(hash, ['/'].slice(), false, 2);
     return new HtmlView$CodeLocationState(it.get_za3lpa$(0), it.get_za3lpa$(1));
   };
   HtmlView$CodeLocationStateTransformer.prototype.toHash_11rb$ = function (state) {
