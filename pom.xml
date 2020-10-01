@@ -48,7 +48,12 @@
         <dependency>
             <groupId>org.jetbrains.kotlinx</groupId>
             <artifactId>kotlinx-serialization-core-js</artifactId>
-            <version>1.0.0-RC</version>
+            <version>1.0.0-RC2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlinx</groupId>
+            <artifactId>kotlinx-serialization-json-js</artifactId>
+            <version>1.0.0-RC2</version>
         </dependency>
 
         <dependency>
@@ -300,6 +305,20 @@
                         </goals>
                         <configuration>
                             <includeArtifactIds>kotlinx-serialization-core-js</includeArtifactIds>
+                            <outputDirectory>${project.build.outputDirectory}/lib</outputDirectory>
+                            <includes>**\/*.js</includes>
+                            <excludes>**\/*.meta.js
+                            </excludes>                            <!-- we don't need meta.js files in runtime -->
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>extract-kotlinx-serialization-json-js</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>unpack-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <includeArtifactIds>kotlinx-serialization-json-js</includeArtifactIds>
                             <outputDirectory>${project.build.outputDirectory}/lib</outputDirectory>
                             <includes>**\/*.js</includes>
                             <excludes>**\/*.meta.js
