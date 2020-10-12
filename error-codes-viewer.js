@@ -2571,7 +2571,6 @@ if (typeof kotlin === 'undefined') {
   var package$ui = package$errorcodes.ui || (package$errorcodes.ui = {});
   package$ui.UiController = UiController;
   Object.defineProperty(AbstractUrlCodeDescriptionProvider.prototype, 'name', Object.getOwnPropertyDescriptor(CodeDescriptionProvider.prototype, 'name'));
-  HtmlView$CodeLocationState$$serializer.prototype.patch_h7kg3r$ = GeneratedSerializer.prototype.patch_h7kg3r$;
   HtmlView$CodeLocationState$$serializer.prototype.typeParametersSerializers = GeneratedSerializer.prototype.typeParametersSerializers;
   codeDescriptionProviders = listOf([new Db2Zos10CodeDescriptionProvider(), new Db2Zos11CodeDescriptionProvider(), new Db2Zos12CodeDescriptionProvider(), new MQ8CodeDescriptionProvider(), new HttpCodeDescriptionProvider(), new FtpCodeDescriptionProvider(), new SmtpCodeDescriptionProvider(), new SipCodeDescriptionProvider()]);
   main();
