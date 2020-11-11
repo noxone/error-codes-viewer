@@ -17,7 +17,7 @@
         <kotlin.code.style>official</kotlin.code.style>
         <kotlin.version>1.4.10</kotlin.version>
         <kotlinx.coroutines.version>1.4.1</kotlinx.coroutines.version>
-        <ktor.version>1.4.1</ktor.version>
+        <ktor.version>1.4.2</ktor.version>
         <junit.version>4.12</junit.version>
 
         <maven.compiler.source>1.8</maven.compiler.source>
