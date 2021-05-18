@@ -15,7 +15,7 @@
         <github.pages.cname>error-codes.olafneumann.org</github.pages.cname>
 
         <kotlin.code.style>official</kotlin.code.style>
-        <kotlin.version>1.4.21</kotlin.version>
+        <kotlin.version>1.5.0</kotlin.version>
         <kotlinx.coroutines.version>1.4.2</kotlinx.coroutines.version>
         <ktor.version>1.5.0</ktor.version>
         <junit.version>4.12</junit.version>
