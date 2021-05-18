@@ -1,3 +1,5 @@
+:warning: This project will not be continued. :scream: The effort to bypass CORS for certain pages is out of proportion to the benefit for me. If you like, you can clone the project and continue working on it.
+
 # Error Codes Viewer
 
 An application to collect error codes of several widely used applications in one place. Search for the number of the error code and immediately get the corresponding description.
